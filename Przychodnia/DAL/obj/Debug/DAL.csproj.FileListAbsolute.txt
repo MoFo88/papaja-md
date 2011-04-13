@@ -1,0 +1,6 @@
+C:\Users\yasio\Desktop\Przychodnia\trunk\Przychodnia\DAL\bin\Debug\DAL.dll.config
+C:\Users\yasio\Desktop\Przychodnia\trunk\Przychodnia\DAL\bin\Debug\DAL.dll
+C:\Users\yasio\Desktop\Przychodnia\trunk\Przychodnia\DAL\bin\Debug\DAL.pdb
+C:\Users\yasio\Desktop\Przychodnia\trunk\Przychodnia\DAL\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\yasio\Desktop\Przychodnia\trunk\Przychodnia\DAL\obj\Debug\DAL.dll
+C:\Users\yasio\Desktop\Przychodnia\trunk\Przychodnia\DAL\obj\Debug\DAL.pdb

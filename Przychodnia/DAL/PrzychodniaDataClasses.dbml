@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="yasio1_przychodniaDb" Class="PrzychodniaDataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=mssql3.webio.pl,2401;Initial Catalog=yasio1_przychodniaDb;Persist Security Info=True;User ID=yasio1_superuser" SettingsObjectName="DAL.Properties.Settings" SettingsPropertyName="yasio1_przychodniaDbConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Kod_jednostki" Member="Kod_jednostkis">
+    <Type Name="Kod_jednostki">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="kod" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="nazwa" Type="System.String" DbType="Char(100) NOT NULL" CanBeNull="false" />
+      <Column Name="grupa" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="podgrupa" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Association Name="Kod_jednostki_Wpis_kartotera" Member="Wpis_kartoteras" ThisKey="id" OtherKey="id_kod_jedn" Type="Wpis_kartotera" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Rejestracja" Member="Rejestracjas">
+    <Type Name="Rejestracja">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_pacj" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_typ" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="data_od" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="data_do" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Typ_rejestracja_Rejestracja" Member="Typ_rejestracja" ThisKey="id_typ" OtherKey="id" Type="Typ_rejestracja" IsForeignKey="true" />
+      <Association Name="Uzytkownik_Rejestracja" Member="Uzytkownik" ThisKey="id_pacj" OtherKey="id" Type="Uzytkownik" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Typ_rejestracja" Member="Typ_rejestracjas">
+    <Type Name="Typ_rejestracja">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nazwa" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Typ_rejestracja_Rejestracja" Member="Rejestracjas" ThisKey="id" OtherKey="id_typ" Type="Rejestracja" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Wpis_kartotera" Member="Wpis_kartoteras">
+    <Type Name="Wpis_kartotera">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_pacj" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_kod_jedn" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="wywiad_badania" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="recetpy" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="skierowania" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="zalecenie" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Kod_jednostki_Wpis_kartotera" Member="Kod_jednostki" ThisKey="id_kod_jedn" OtherKey="id" Type="Kod_jednostki" IsForeignKey="true" />
+      <Association Name="Uzytkownik_Wpis_kartotera" Member="Uzytkownik" ThisKey="id_pacj" OtherKey="id" Type="Uzytkownik" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="yasio1_superuser.Specjalizacja" Member="Specjalizacjas">
+    <Type Name="Specjalizacja">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nazwa" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Association Name="Specjalizacja_Specjalizacja_Lekarz" Member="Specjalizacja_Lekarzs" ThisKey="id" OtherKey="idSpecjalizacja" Type="Specjalizacja_Lekarz" />
+    </Type>
+  </Table>
+  <Table Name="yasio1_superuser.Specjalizacja_Lekarz" Member="Specjalizacja_Lekarzs">
+    <Type Name="Specjalizacja_Lekarz">
+      <Column Name="idUzytkownik" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idSpecjalizacja" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Association Name="Specjalizacja_Specjalizacja_Lekarz" Member="Specjalizacja" ThisKey="idSpecjalizacja" OtherKey="id" Type="Specjalizacja" IsForeignKey="true" />
+      <Association Name="Uzytkownik_Specjalizacja_Lekarz" Member="Uzytkownik" ThisKey="idUzytkownik" OtherKey="id" Type="Uzytkownik" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Uzytkownik" Member="Uzytkowniks">
+    <Type Name="Uzytkownik" InheritanceCode="0" IsInheritanceDefault="true">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="imie" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="nazwisko" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="pesel" Type="System.Decimal" DbType="Decimal(11,0)" CanBeNull="true" />
+      <Column Name="id_typ" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" IsDiscriminator="true" />
+      <Column Name="kod_pocztowy" Type="System.String" DbType="Char(6)" CanBeNull="true" />
+      <Column Name="miasto" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ulica" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="nr_domu" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="telefon" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="password" Type="System.String" DbType="Char(160)" CanBeNull="true" />
+      <Column Name="login" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Uzytkownik_Rejestracja" Member="Rejestracjas" ThisKey="id" OtherKey="id_pacj" Type="Rejestracja" />
+      <Association Name="Uzytkownik_Wpis_kartotera" Member="Wpis_kartoteras" ThisKey="id" OtherKey="id_pacj" Type="Wpis_kartotera" />
+      <Association Name="Uzytkownik_Specjalizacja_Lekarz" Member="Specjalizacja_Lekarzs" ThisKey="id" OtherKey="idUzytkownik" Type="Specjalizacja_Lekarz" />
+      <Association Name="Uzytkownik_Pacjent" Member="Pacjents" ThisKey="id" OtherKey="id_lek" Type="Pacjent" />
+      <Type Name="Administrator" InheritanceCode="3">
+        <Column Name="email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      </Type>
+      <Type Name="Lekarz" InheritanceCode="1">
+        <Column Name="email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      </Type>
+      <Type Name="Pacjent" InheritanceCode="2">
+        <Column Name="id_lek" Type="System.Int32" DbType="Int" CanBeNull="true" />
+        <Column Name="ubezpieczenie" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+        <Association Name="Uzytkownik_Pacjent" Member="Uzytkownik" ThisKey="id_lek" OtherKey="id" Type="Uzytkownik" IsForeignKey="true" />
+      </Type>
+    </Type>
+  </Table>
+</Database>
