@@ -1,0 +1,114 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using DAL;
+using System.Data.Linq;
+using System.Security.Cryptography;
+
+namespace BLL
+{
+    public class Repository
+    {
+        public static List<Lekarz> GetAllDoctors()
+        {
+
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+            var query = from u in ctx.Uzytkowniks.OfType<Lekarz>() select u;
+
+            return query.ToList();
+        }
+
+        public static List<Pacjent> GetAllPatients()
+        {
+
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+            var query = from u in ctx.Uzytkowniks.OfType<Pacjent>() select u;
+
+            return query.ToList();
+        }
+
+        public static List<Pacjent> GetAllDrPacients(int id)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+            var query = from c in ctx.Uzytkowniks.OfType<Lekarz>() where c.id == id select c;
+            Lekarz lek = query.First();          
+
+            return lek.Pacjents.ToList();
+        }
+
+        public static List<Specjalizacja> GetAllSpecjalizations()
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+
+            var query = from c in ctx.Specjalizacjas select c;
+            return query.ToList();
+        }
+
+        public static bool AddNewDoctor(String imie, String nazwisko, String email, String kodPocztowy, String miasto, string nrDomu, decimal pesel, string telefon, string ulica, int idSpecjalizacja, String login, String password)
+        {
+
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+
+
+            String p = Core.GetSh1(password);
+
+            Lekarz l = new Lekarz()
+            {
+                imie = imie,
+                nazwisko = nazwisko,
+                email = email,
+                kod_pocztowy = kodPocztowy,
+                miasto = miasto,
+                nr_domu = nrDomu,
+                pesel = pesel,
+                telefon = telefon,
+                ulica = ulica,
+                login = login,
+                password = password
+                
+            };
+
+
+            l.Specjalizacja_Lekarzs.Add(new Specjalizacja_Lekarz() { idSpecjalizacja = idSpecjalizacja });
+
+            ctx.Uzytkowniks.InsertOnSubmit(l);
+            ctx.SubmitChanges();
+
+            return true;
+        }
+
+        public static Specjalizacja GetSpecializationById(int id)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+
+            var query = from c in ctx.Specjalizacjas where c.id == id select c;
+
+            return query.First();
+        }
+
+        public static Uzytkownik UserAuth(string login, string pswd)
+        {
+            ASCIIEncoding ascii = new ASCIIEncoding();
+            SHA1 sha = new SHA1CryptoServiceProvider();
+
+            byte[] passwordHash = sha.ComputeHash(ascii.GetBytes(pswd));
+            
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+            
+            var query = from u in ctx.Uzytkowniks
+                        where u.login == login && u.password == pswd
+                        select u;
+            
+            Uzytkownik user = query.FirstOrDefault();
+
+
+            if (user != null)
+            {
+                return user;
+            }
+  
+            return null;
+        }
+    }
+}
