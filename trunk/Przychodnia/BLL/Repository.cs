@@ -87,28 +87,37 @@ namespace BLL
             return query.First();
         }
 
-        public static Uzytkownik UserAuth(string login, string pswd)
+        public static string CalculateSHA1(string text, Encoding enc)
         {
-            ASCIIEncoding ascii = new ASCIIEncoding();
-            SHA1 sha = new SHA1CryptoServiceProvider();
+            byte[] buffer = enc.GetBytes(text);
+            SHA1CryptoServiceProvider cryptoTransformSHA1 = new SHA1CryptoServiceProvider();           
+            string hash = BitConverter.ToString(cryptoTransformSHA1.ComputeHash(buffer)).ToLower().Replace("-", "");
+            return hash;
+        }
 
-            byte[] passwordHash = sha.ComputeHash(ascii.GetBytes(pswd));
-            
+
+        public static int UserAuth(string login, string pswd)
+        {
+            //ASCIIEncoding ascii = new ASCIIEncoding();
+            //SHA1 sha = new SHA1CryptoServiceProvider();
+            //byte[] passwordHash = sha.ComputeHash(ascii.GetBytes(pswd));
+            //String pass = Convert.ToBase64String(passwordHash);
+
+            String pass = CalculateSHA1(pswd, Encoding.ASCII);
             PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
             
             var query = from u in ctx.Uzytkowniks
-                        where u.login == login && u.password == pswd
+                        where u.login == login && u.password == pass
                         select u;
             
             Uzytkownik user = query.FirstOrDefault();
 
-
-            if (user != null)
+            if (user == null)
             {
-                return user;
+                throw new NoUserException("Nie odnaleziono użytkownika o podanym loginie");
             }
-  
-            return null;
+
+            return user.id;
         }
     }
 }
