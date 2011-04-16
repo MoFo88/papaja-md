@@ -30,7 +30,10 @@ public partial class SiteMaster : System.Web.UI.MasterPage
         {
 
         }
-
-        
+     
+    }
+    protected void HeadLoginStatus_LoggingOut(object sender, LoginCancelEventArgs e)
+    {
+        Session.Abandon();
     }
 }
