@@ -12,19 +12,28 @@ public partial class AddNewDoctor : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        if (Session["UserId"] == null)
+        {
+            Page.Response.Redirect("/PrzychodniaWeb/Account/Login.aspx");
+        }
+
         List<Specjalizacja> specjalizationList = Repository.GetAllSpecjalizations();
         Specjalizacja specialization = specjalizationList.First();
-        DropDownList1.DataSource = specjalizationList;
+        
+        DropDownList1.DataSource = specjalizationList; 
         DropDownList1.DataTextField = "nazwa";
+        DropDownList1.DataValueField = "id";
         DropDownList1.DataBind();
-
-        ViewState["SpecId"] = specialization.id;
+ 
     }
 
     protected void BtnSubmit_Click(object sender, EventArgs e)
     {
-        Specjalizacja specjalizacja = Repository.GetSpecializationById( Int32.Parse( ViewState["SpecId"].ToString() ));
 
+        int id = Int32.Parse( DropDownList1.SelectedValue.ToString() );
+
+        Specjalizacja specjalizacja = Repository.GetSpecializationById( id );
         decimal p = decimal.Parse(TbPesel.Text);
 
         Repository.AddNewDoctor
