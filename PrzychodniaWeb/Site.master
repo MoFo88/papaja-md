@@ -81,8 +81,7 @@
                         
                         
                     </AnonymousTemplate>
-                    <LoggedInTemplate>
-                        Jesteś zalogowany jako: <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!
+                    <LoggedInTemplate> Jesteś zalogowany jako: <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!
                         [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" 
                             LogoutText="Log Out" LogoutPageUrl="~/" 
                             onloggingout="HeadLoginStatus_LoggingOut"/> ]
