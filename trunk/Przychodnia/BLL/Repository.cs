@@ -45,6 +45,7 @@ namespace BLL
             return query.ToList();
         }
 
+       
         public static bool AddNewDoctor(String imie, String nazwisko, String email, String kodPocztowy, String miasto, string nrDomu, decimal pesel, string telefon, string ulica, int idSpecjalizacja, String login, String password)
         {
 
@@ -95,13 +96,15 @@ namespace BLL
             return hash;
         }
 
-
-        public static int UserAuth(string login, string pswd)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="login"></param>
+        /// <param name="pswd"></param>
+        /// <returns></returns>
+        /// <exception cref="NoUserException">NoUserException</exception>
+        public static Uzytkownik UserAuth(string login, string pswd)
         {
-            //ASCIIEncoding ascii = new ASCIIEncoding();
-            //SHA1 sha = new SHA1CryptoServiceProvider();
-            //byte[] passwordHash = sha.ComputeHash(ascii.GetBytes(pswd));
-            //String pass = Convert.ToBase64String(passwordHash);
 
             String pass = CalculateSHA1(pswd, Encoding.ASCII);
             PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
@@ -117,7 +120,7 @@ namespace BLL
                 throw new NoUserException("Nie odnaleziono użytkownika o podanym loginie");
             }
 
-            return user.id;
+            return user;
         }
     }
 }
