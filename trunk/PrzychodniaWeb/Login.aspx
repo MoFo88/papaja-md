@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="Log In" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
-    CodeFile="Login.aspx.cs" Inherits="Account_Login" %>
+    CodeFile="Login.aspx.cs" Inherits="Login" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
@@ -11,7 +11,7 @@
         Please enter your username and password.
         <asp:HyperLink ID="RegisterHyperLink" runat="server" EnableViewState="false">Register</asp:HyperLink> if you don't have an account.
     </p>
-    <asp:Login ID="LoginUser" runat="server" EnableViewState="false" RenderOuterTable="false">
+    <asp:Login ID="LoginUser" runat="server" onauthenticate="LoginUser_Authenticate">
         <LayoutTemplate>
             <span class="failureNotification">
                 <asp:Literal ID="FailureText" runat="server"></asp:Literal>
@@ -42,7 +42,7 @@
                 </fieldset>
                 <p class="submitButton">
                     <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text="Log In" 
-                        ValidationGroup="LoginUserValidationGroup" onclick="LoginButton_Click"/>
+                        ValidationGroup="LoginUserValidationGroup" />
                 </p>
             </div>
         </LayoutTemplate>

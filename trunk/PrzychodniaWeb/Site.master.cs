@@ -24,13 +24,13 @@ public partial class SiteMaster : System.Web.UI.MasterPage
 
             e.Authenticated = true;
             Session["userId"] = u.id;
-            Session["type"] = u.id_typ;          
+            Session["type"] = u.id_typ;
         }
-        catch(NoUserException ex)
+        catch (NoUserException ex)
         {
 
         }
-     
+
     }
     protected void HeadLoginStatus_LoggingOut(object sender, LoginCancelEventArgs e)
     {
