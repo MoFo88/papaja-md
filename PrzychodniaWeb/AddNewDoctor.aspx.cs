@@ -30,7 +30,7 @@ public partial class AddNewDoctor : System.Web.UI.Page
 
     protected void Page_PreRender(object sender, EventArgs e)
     {
-
+     
     }
 
     protected void BtnSubmit_Click(object sender, EventArgs e)
