@@ -15,7 +15,7 @@ public class Root
 		
 	}
 
-    private void ResetFormControlValues(Control parent)
+    public static void ResetFormControlValues(Control parent)
     {
         foreach (Control c in parent.Controls)
         {
