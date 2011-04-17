@@ -25,19 +25,24 @@ public class Root
             }
             else
             {
-                switch (c.GetType().ToString())
-                {
-                    case "System.Web.UI.WebControls.TextBox":
-                        ((TextBox)c).Text = "";
-                        break;
-                    case "System.Web.UI.WebControls.CheckBox":
-                        ((CheckBox)c).Checked = false;
-                        break;
-                    case "System.Web.UI.WebControls.RadioButton":
-                        ((RadioButton)c).Checked = false;
-                        break;
 
+                if (c is System.Web.UI.WebControls.TextBox)
+                {
+                    ((TextBox)c).Text = "";
+                    return;
                 }
+                if (c is System.Web.UI.WebControls.CheckBox)
+                {
+                    ((CheckBox)c).Checked = false;
+                    return;
+                }
+                if (c is System.Web.UI.WebControls.RadioButton)
+                {
+                    ((RadioButton)c).Checked = false;
+                    return;
+                }
+
+               
             }
         }
     }
