@@ -40,9 +40,7 @@ public class Root
                 {
                     ((RadioButton)c).Checked = false;
                     return;
-                }
-
-               
+                }            
             }
         }
     }

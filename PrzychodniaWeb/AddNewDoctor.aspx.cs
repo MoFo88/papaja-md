@@ -15,7 +15,7 @@ public partial class AddNewDoctor : System.Web.UI.Page
 
         if (Session["UserId"] == null)
         {
-            Page.Response.Redirect("/PrzychodniaWeb/Account/Login.aspx");
+            Page.Response.Redirect("/PrzychodniaWeb/Login.aspx");
         }
 
         List<Specjalizacja> specjalizationList = Repository.GetAllSpecjalizations();
@@ -26,6 +26,11 @@ public partial class AddNewDoctor : System.Web.UI.Page
         DropDownList1.DataValueField = "id";
         DropDownList1.DataBind();
  
+    }
+
+    protected void Page_PreRender(object sender, EventArgs e)
+    {
+
     }
 
     protected void BtnSubmit_Click(object sender, EventArgs e)
