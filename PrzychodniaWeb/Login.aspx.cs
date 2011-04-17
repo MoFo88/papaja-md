@@ -21,10 +21,8 @@ public partial class Login : System.Web.UI.Page
             Uzytkownik u = Repository.UserAuth(LoginUser.UserName, LoginUser.Password);
             Session["userId"] = u.id;
             Session["type"] = u.id_typ;
+            
             e.Authenticated = true;
-
-            Page.Response.Redirect("~/Default.aspx");
-
         }
         catch (NoUserException ex)
         {

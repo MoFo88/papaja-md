@@ -11,7 +11,7 @@
         Please enter your username and password.
         <asp:HyperLink ID="RegisterHyperLink" runat="server" EnableViewState="false">Register</asp:HyperLink> if you don't have an account.
     </p>
-    <asp:Login ID="LoginUser" runat="server" onauthenticate="LoginUser_Authenticate">
+    <asp:Login ID="LoginUser" DestinationPageUrl="~/Default.aspx" runat="server" onauthenticate="LoginUser_Authenticate">
         <LayoutTemplate>
             <span class="failureNotification">
                 <asp:Literal ID="FailureText" runat="server"></asp:Literal>
