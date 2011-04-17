@@ -18,7 +18,7 @@
                 </h1>
             </div>
             <div class="loginDisplay">
-                <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
+                <asp:LoginView ID="HeadLoginView" runat="server">
                     <AnonymousTemplate>
 
                         <asp:Login ID="LoginControl" runat="server" 
@@ -68,7 +68,7 @@
                                                     </td>
 
                                                     <td colspan="1" style="color:Red;">
-                                                        <asp:Literal ID="FailureText" runat="server" EnableViewState="False"></asp:Literal>
+                                                        <asp:Literal ID="FailureText" runat="server" ></asp:Literal>
                                                     </td>
                                                 </tr>
                                             </table>
