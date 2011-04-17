@@ -117,7 +117,7 @@ namespace BLL
 
             if (user == null)
             {
-                throw new NoUserException("Nie odnaleziono użytkownika o podanym loginie");
+                throw new NoUserException("Nie odnaleziono użytkownika o podanym loginie i haśle");
             }
 
             return user;
