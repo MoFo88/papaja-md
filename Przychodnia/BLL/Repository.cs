@@ -46,13 +46,13 @@ namespace BLL
         }
 
        
-        public static bool AddNewDoctor(String imie, String nazwisko, String email, String kodPocztowy, String miasto, string nrDomu, decimal pesel, string telefon, string ulica, int idSpecjalizacja, String login, String password)
+        public static bool AddNewDoctor(String imie, String nazwisko, String email, String kodPocztowy, String miasto, string nrDomu, decimal pesel, string telefon, string ulica, List<int> idsSpecjalizacja, String login, String password)
         {
 
             PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
 
 
-            String p = Core.GetSh1(password);
+            String passSHA1 = CalculateSHA1(password, Encoding.ASCII);
 
             Lekarz l = new Lekarz()
             {
@@ -66,17 +66,43 @@ namespace BLL
                 telefon = telefon,
                 ulica = ulica,
                 login = login,
-                password = password
+                password = passSHA1
                 
             };
 
+            List<Specjalizacja_Lekarz> list = new List<Specjalizacja_Lekarz>();
+            foreach (int i in idsSpecjalizacja)
+            {
+                Specjalizacja_Lekarz s = new Specjalizacja_Lekarz()
+                {
+                    idSpecjalizacja = i
+                };
+                list.Add(s);
 
-            l.Specjalizacja_Lekarzs.Add(new Specjalizacja_Lekarz() { idSpecjalizacja = idSpecjalizacja });
+            }
+
+            l.Specjalizacja_Lekarzs.AddRange(list);
+
 
             ctx.Uzytkowniks.InsertOnSubmit(l);
             ctx.SubmitChanges();
 
             return true;
+        }
+
+        public static bool AddNewSpecialization(string name)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+
+            Specjalizacja s = new Specjalizacja()
+            {
+                nazwa = name
+            };
+
+            ctx.Specjalizacjas.InsertOnSubmit(s);
+            ctx.SubmitChanges();
+
+            return true; 
         }
 
         public static Specjalizacja GetSpecializationById(int id)
