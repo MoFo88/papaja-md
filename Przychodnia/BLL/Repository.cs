@@ -12,23 +12,22 @@ namespace BLL
     {
         public static List<Lekarz> GetAllDoctors()
         {
-
             PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
             var query = from u in ctx.Uzytkowniks.OfType<Lekarz>() select u;
 
             return query.ToList();
         }
 
+
         public static List<Pacjent> GetAllPatients()
         {
-
             PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
             var query = from u in ctx.Uzytkowniks.OfType<Pacjent>() select u;
 
             return query.ToList();
         }
 
-        public static List<Pacjent> GetAllDrPacients(int id)
+        public static List<Pacjent> GetAllDrPatients(int id)
         {
             PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
             var query = from c in ctx.Uzytkowniks.OfType<Lekarz>() where c.id == id select c;
