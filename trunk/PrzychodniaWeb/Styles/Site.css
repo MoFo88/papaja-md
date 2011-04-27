@@ -145,7 +145,7 @@ first child of the left and right table columns */
 div.hideSkiplink
 {
     background-color:#3a4f63;
-    width:100%;
+    /*width:100%;*/
 }
 
 div.menu
