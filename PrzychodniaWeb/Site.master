@@ -14,7 +14,7 @@
         <div class="header">
             <div class="title">
                 <h1>
-                    My ASP.NET Application
+                    Przychodnia u Ryśka
                 </h1>
             </div>
             <div class="loginDisplay">
@@ -91,12 +91,10 @@
             <div class="clear hideSkiplink">
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
-                        <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
-                    </Items>
-                    <Items>
-                        <asp:MenuItem NavigateUrl="~/AddNewDoctor.aspx" Text="Dodaj Lekarza"/>
+                        <asp:MenuItem  NavigateUrl="~/Default.aspx" Text="Home"/>
                     </Items>
                 </asp:Menu>
+                
             </div>
         </div>
         <div class="main">

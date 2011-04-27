@@ -142,10 +142,21 @@ namespace BLL
 
             if (user == null)
             {
-                throw new NoUserException("Nie odnaleziono użytkownika o podanym loginie i haśle");
+                throw new NoUserException();
             }
 
             return user;
+        }
+
+        public static Uzytkownik GetUserByID(int id)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+
+            var query = from u in ctx.Uzytkowniks
+                        where u.id == id
+                        select u;
+
+            return query.SingleOrDefault();
         }
     }
 }
