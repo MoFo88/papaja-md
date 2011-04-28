@@ -3,7 +3,7 @@
 
 body   
 {
-    background: #b6b7bc;
+    background: #f1f1f1;
     font-size: .80em;
     font-family: "Helvetica Neue", "Lucida Grande", "Segoe UI", Arial, Helvetica, Verdana, sans-serif;
     margin: 0px;
@@ -321,3 +321,12 @@ div.accountInfo
 .panelMySpec table th
 {
     font-weight:bold;
+}
+
+.collapsePanel
+{
+    width: 640px;
+    height: 0px;
+    overflow: hidden;
+    border: 1px, solid, #fefefe;
+}
