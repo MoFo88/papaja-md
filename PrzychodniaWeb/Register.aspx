@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="Register" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
     CodeFile="Register.aspx.cs" Inherits="Account_Register" %>
+<%@ MasterType VirtualPath ="~/Site.master" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
