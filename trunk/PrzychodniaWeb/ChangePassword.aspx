@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="Change Password" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
     CodeFile="ChangePassword.aspx.cs" Inherits="Account_ChangePassword" %>
+<%@ MasterType VirtualPath ="~/Site.master" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
