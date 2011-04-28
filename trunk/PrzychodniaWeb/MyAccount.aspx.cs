@@ -10,8 +10,8 @@ using System.Drawing;
 
 public partial class MyAccount : System.Web.UI.Page
 {
-    private Uzytkownik user = null;
-    private Lekarz dr = null;
+    protected Uzytkownik user = null;
+    protected Lekarz dr = null;
 
     protected void InitializePanelspec()
     {
@@ -36,9 +36,30 @@ public partial class MyAccount : System.Web.UI.Page
             tc.Text = s.nazwa;
             tr.Cells.Add(tc);
             specTable.Rows.Add(tr);
+            
         }
 
         panelSpec.Controls.Add(specTable);
+    }
+
+    protected void InitializePanelEdit()
+    {
+        tbEditCity.Text = dr.miasto;
+        tbEditEmail.Text = dr.email;
+        tbEditPhone.Text = dr.telefon;
+        tbEditPostalCode.Text = dr.kod_pocztowy;
+        tbEditStreet.Text = dr.ulica;
+        tbEditStreetNr.Text = dr.nr_domu;
+
+        try
+        {
+            tbEditPesel.Text = dr.pesel.ToString();
+        }
+        catch (Exception ex)
+        {
+            tbEditPesel.Text = "";
+        }
+        
     }
 
     protected void Page_Load(object sender, EventArgs e)
@@ -59,7 +80,13 @@ public partial class MyAccount : System.Web.UI.Page
                     lblName.Text = lbl;
 
                     InitializePanelspec();
-                    
+
+                    lblPesel.Text = dr.pesel.ToString();
+                    lblEmail.Text = dr.email;
+                    lblPhone.Text = dr.telefon;
+                    lblAdres.Text = "ul. " + dr.ulica + " " + dr.nr_domu + ", " + dr.kod_pocztowy + " " + dr.miasto;
+
+                    InitializePanelEdit();
                 }
                 else
                 {
