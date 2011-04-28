@@ -47,6 +47,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="PrzychodniaDataClasses.cs">
+      <DependentUpon>PrzychodniaDataClasses.dbml</DependentUpon>
+    </Compile>
     <Compile Include="PrzychodniaDataClasses.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

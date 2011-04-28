@@ -75,6 +75,7 @@
       <Association Name="Uzytkownik_Wpis_kartotera" Member="Wpis_kartoteras" ThisKey="id" OtherKey="id_pacj" Type="Wpis_kartotera" />
       <Association Name="Uzytkownik_Specjalizacja_Lekarz" Member="Specjalizacja_Lekarzs" ThisKey="id" OtherKey="idUzytkownik" Type="Specjalizacja_Lekarz" />
       <Association Name="Uzytkownik_Pacjent" Member="Pacjents" ThisKey="id" OtherKey="id_lek" Type="Pacjent" />
+      <Association Name="Uzytkownik_Godziny_przyj" Member="Godziny_przyjs" ThisKey="id" OtherKey="id_uzytkownik" Type="Godziny_przyj" />
       <Type Name="Administrator" InheritanceCode="3">
         <Column Name="email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       </Type>
@@ -86,6 +87,24 @@
         <Column Name="ubezpieczenie" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
         <Association Name="Uzytkownik_Pacjent" Member="Uzytkownik" ThisKey="id_lek" OtherKey="id" Type="Uzytkownik" IsForeignKey="true" />
       </Type>
+    </Type>
+  </Table>
+  <Table Name="yasio1_superuser.Godziny_przyj" Member="Godziny_przyjs">
+    <Type Name="Godziny_przyj">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_uzytkownik" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="godz_od" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="godz_do" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="dzien" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Uzytkownik_Godziny_przyj" Member="Uzytkownik" ThisKey="id_uzytkownik" OtherKey="id" Type="Uzytkownik" IsForeignKey="true" />
+      <Association Name="Dzien_Godziny_przyj" Member="Dzien1" ThisKey="dzien" OtherKey="id" Type="Dzien" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="yasio1_superuser.Dzien" Member="Dziens">
+    <Type Name="Dzien">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="dzien" Member="dzien1" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Dzien_Godziny_przyj" Member="Godziny_przyjs" ThisKey="id" OtherKey="dzien" Type="Godziny_przyj" />
     </Type>
   </Table>
 </Database>
