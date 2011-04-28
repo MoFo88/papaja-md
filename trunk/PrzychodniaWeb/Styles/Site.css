@@ -304,3 +304,20 @@ div.accountInfo
     text-align: right;
     padding-right: 10px;
 }
+
+
+/* My Account */
+.myImage
+{
+    border: 1px solid #ddd;
+    float: right;
+}
+
+.panelMySpec
+{
+    padding-top: 20px;
+}
+
+.panelMySpec table th
+{
+    font-weight:bold;

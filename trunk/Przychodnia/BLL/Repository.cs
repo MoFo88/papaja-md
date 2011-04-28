@@ -158,5 +158,17 @@ namespace BLL
 
             return query.SingleOrDefault();
         }
+
+        public static List<Specjalizacja> GetAllDrSpecjalizations(Lekarz dr)
+        {
+            List<Specjalizacja> specList = new List<Specjalizacja>();
+
+            foreach (Specjalizacja_Lekarz sl in dr.Specjalizacja_Lekarzs)
+            {
+                specList.Add(Repository.GetSpecializationById(sl.idSpecjalizacja));
+            }
+
+            return specList;
+        }
     }
 }

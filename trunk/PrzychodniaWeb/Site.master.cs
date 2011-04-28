@@ -14,10 +14,19 @@ public partial class SiteMaster : System.Web.UI.MasterPage
     private Pacjent patient = null;
     private Administrator admin = null;
     private Lekarz dr = null;
+    private String message;
 
+    public String Message { get { return message; } set { message = value; lblMessage.Text = value; } }
+
+    public void SetMessageColor(Color color)
+    {
+        lblMessage.ForeColor = color;
+    }
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        Message = "";
+
         if (Session["userId"] != null)
         {
             int id = Int32.Parse(Session["userId"].ToString() );
@@ -27,6 +36,9 @@ public partial class SiteMaster : System.Web.UI.MasterPage
         }   
     }
 
+    /// <summary>
+    /// Tworzenie manu w zależności od teo, kto jest zalogowany
+    /// </summary>
     protected void CreateMenu()
     {
         MenuItem miAddNewDoctor = new MenuItem();
@@ -72,24 +84,29 @@ public partial class SiteMaster : System.Web.UI.MasterPage
     }
 
 
-    public string GetItemStyle(MenuItemTemplateContainer container)
-    {
-        
-        
-        MenuItem item = (MenuItem)container.DataItem;
+    /// <summary>
+    /// Funkkcja do dynamicznej zmiany stylu ()gdy nie da się CSS-em
+    /// na razie nie wykorzystywana
+    /// </summary>
+    /// <param name="container"></param>
+    /// <returns></returns>
+    //public string GetItemStyle(MenuItemTemplateContainer container)
+    //{
+  
+    //    MenuItem item = (MenuItem)container.DataItem;
 
-        StateBag sbLeft = new StateBag();
-        sbLeft.Add("flat", "left");
+    //    StateBag sbLeft = new StateBag();
+    //    sbLeft.Add("float", "left");
 
-        StateBag sbRight = new StateBag();
-        sbRight.Add("flat", "right");
+    //    StateBag sbRight = new StateBag();
+    //    sbRight.Add("float", "right");
 
-        //identify based value
-        if (item.Value != "-1")
-        {
-            Control c = (Control)item.DataItem;
-        }
+    //    //identify based value
+    //    if (item.Value != "-1")
+    //    {
+    //        Control c = (Control)item.DataItem;
+    //    }
 
-        return "";
-    }
+    //    return "";
+    //}
 }

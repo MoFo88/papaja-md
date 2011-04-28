@@ -98,6 +98,10 @@
             </div>
         </div>
         <div class="main">
+
+            <asp:Label ID="lblMessage" runat="server" Text="MESSAGE"></asp:Label>
+            <br />
+
             <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
         </div>
         <div class="clear">
