@@ -103,7 +103,7 @@
   <Table Name="yasio1_superuser.Dzien" Member="Dziens">
     <Type Name="Dzien">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="dzien" Member="dzien1" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="dzien" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="Dzien_Godziny_przyj" Member="Godziny_przyjs" ThisKey="id" OtherKey="dzien" Type="Godziny_przyj" />
     </Type>
   </Table>

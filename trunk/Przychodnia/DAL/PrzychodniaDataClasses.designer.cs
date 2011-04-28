@@ -2196,7 +2196,7 @@ namespace DAL
 		
 		private int _id;
 		
-		private string _dzien1;
+		private string _dzien;
 		
 		private EntitySet<Godziny_przyj> _Godziny_przyjs;
 		
@@ -2206,8 +2206,8 @@ namespace DAL
     partial void OnCreated();
     partial void OnidChanging(int value);
     partial void OnidChanged();
-    partial void Ondzien1Changing(string value);
-    partial void Ondzien1Changed();
+    partial void OndzienChanging(string value);
+    partial void OndzienChanged();
     #endregion
 		
 		public Dzien()
@@ -2236,22 +2236,22 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="dzien", Storage="_dzien1", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string dzien1
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dzien", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string dzien
 		{
 			get
 			{
-				return this._dzien1;
+				return this._dzien;
 			}
 			set
 			{
-				if ((this._dzien1 != value))
+				if ((this._dzien != value))
 				{
-					this.Ondzien1Changing(value);
+					this.OndzienChanging(value);
 					this.SendPropertyChanging();
-					this._dzien1 = value;
-					this.SendPropertyChanged("dzien1");
-					this.Ondzien1Changed();
+					this._dzien = value;
+					this.SendPropertyChanged("dzien");
+					this.OndzienChanged();
 				}
 			}
 		}
