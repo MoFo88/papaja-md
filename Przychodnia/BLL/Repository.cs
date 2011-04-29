@@ -50,6 +50,14 @@ namespace BLL
 
             PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
 
+            var query = from u in ctx.Uzytkowniks where u.login == login select u;
+
+            Uzytkownik user = query.SingleOrDefault();
+
+            if (user != null)
+            {
+                throw new UserExistException();
+            }
 
             String passSHA1 = CalculateSHA1(password, Encoding.ASCII);
 
@@ -169,6 +177,52 @@ namespace BLL
             }
 
             return specList;
+        }
+
+        public static void UpdateDrData(Lekarz dr, String imie, String nazwisko, String email, String kodPocztowy, String miasto, string nrDomu, decimal pesel, string telefon, string ulica, List<int> idsSpecjalizacja, String login)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+
+            if (login != dr.login)
+            {
+                var query = from u in ctx.Uzytkowniks where u.login == login select u;
+
+                Uzytkownik user = query.SingleOrDefault();
+
+                if (user != null)
+                {
+                    throw new UserExistException();
+                }
+            }
+
+            dr.imie = imie;
+            dr.nazwisko = nazwisko;
+            dr.email = email;
+            dr.kod_pocztowy = kodPocztowy;
+            dr.miasto = miasto;
+            dr.nr_domu = nrDomu;
+            dr.telefon = telefon;
+            dr.ulica = ulica;
+            dr.login = login;
+
+            ctx.SubmitChanges();
+        }
+
+        public static void ChangeUserPassword(Uzytkownik user, String password)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+            String pass = CalculateSHA1(password, Encoding.ASCII);
+            user.password = pass;
+            ctx.SubmitChanges();
+        }
+
+        public static void AddSpecjalization(Lekarz dr, int idSpec)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+            Specjalizacja_Lekarz sp = new Specjalizacja_Lekarz();
+            sp.idSpecjalizacja = idSpec;
+            dr.Specjalizacja_Lekarzs.Add(sp);
+            ctx.SubmitChanges();
         }
     }
 }

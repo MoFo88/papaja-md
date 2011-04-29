@@ -330,3 +330,56 @@ div.accountInfo
     overflow: hidden;
     border: 1px, solid, #fefefe;
 }
+
+.imageArrow
+{
+    font-weight: bold;
+    height: 20px;
+    margin: -3px;
+    padding-right: 10px;
+}
+
+.hours table
+{
+    padding: 5px, 0px, 10px, 0px;
+    width: 850px;
+}
+
+.hours table th
+{
+    text-align: left;
+}
+
+.hours table tb
+{
+    font-weight:bold;
+}
+
+.hours
+{
+    padding-top: 25px;
+    padding-bottom: 45px;
+}
+
+.hours h2
+{
+    padding-bottom: 5px;
+}
+
+.showPanel
+{
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+
+.cbList fieldset
+{
+    width: 600px;
+}
+.cbSpec
+{
+    padding-left: 10px;
+    padding-right: 20px;
+    margin-top: 25px;
+    width: 600px;
+}
