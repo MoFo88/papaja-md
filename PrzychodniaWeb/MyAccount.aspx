@@ -63,7 +63,7 @@
         </div>
 
         <asp:Panel ID="panelShowEdidPassword" runat="server" CssClass="showPanel">
-            <div class="imageArrow" ><asp:Image  ToolTip="Zmień hasło" runat="server" CssClass="imageArrow" id="arrow2" ImageUrl="~/images/arrowDown2.jpg"/><asp:Label runat="server" ID="Label1" Text="Zmień hasło"></asp:Label></div>
+            <div class="iimageArrowContainer" ><asp:Image  ToolTip="Zmień hasło" runat="server" CssClass="imageArrow" id="arrow2" ImageUrl="~/images/arrowDown2.jpg"/><asp:Label runat="server" ID="Label1" Text="Zmień hasło"></asp:Label></div>
         </asp:Panel>
         
         <asp:CollapsiblePanelExtender ID="CollapsiblePanelExtender1" runat="server" ImageControlID="arrow2" CollapsedImage="~/images/arrowDown2.jpg" ExpandedImage="~/images/arrowUp2.jpg" TargetControlID="panelEditPassword" Collapsed="true" CollapseControlID="panelShowEdidPassword"  ExpandControlID="panelShowEdidPassword">
@@ -113,7 +113,7 @@
 
 
         <asp:Panel ID="panelShowEdit" runat="server" CssClass="showPanel" >
-           <div class="imageArrow" ><asp:Image  ToolTip="Edytuj Dane" runat="server" CssClass="imageArrow" id="arrow" ImageUrl="~/images/arrowDown2.jpg"/><asp:Label runat="server" ID="lblEdit" Text="Edytuj dane"></asp:Label></div>
+           <div class="imageArrowContainer" ><asp:Image  ToolTip="Edytuj Dane" runat="server" CssClass="imageArrow" id="arrow" ImageUrl="~/images/arrowDown2.jpg"/><asp:Label runat="server" ID="lblEdit" Text="Edytuj dane"></asp:Label></div>
         </asp:Panel>
         
         <asp:CollapsiblePanelExtender ID="CollapsiblePanelExtenderpanelEdit" runat="server" ImageControlID="arrow" CollapsedImage="~/images/arrowDown2.jpg" ExpandedImage="~/images/arrowUp2.jpg" TargetControlID="panelEdit" Collapsed="true" CollapseControlID="panelShowEdit"  ExpandControlID="panelShowEdit" SuppressPostBack="true">
@@ -223,18 +223,25 @@
 
 
         <asp:Panel ID="panelShowSpec" runat="server" CssClass="showPanel">
-            <div class="imageArrow" ><asp:Image  ToolTip="Moja specjalizacja" runat="server" CssClass="imageArrow" id="arrow3" ImageUrl="~/images/arrowDown2.jpg"/><asp:Label runat="server" ID="Label2" Text="Zmień specjalizację"></asp:Label></div>
+            <div class="imageArrowContainer" ><asp:Image  ToolTip="Moja specjalizacja" runat="server" CssClass="imageArrow" id="arrow3" ImageUrl="~/images/arrowDown2.jpg"/><asp:Label runat="server" ID="Label2" Text="Zmień specjalizację"></asp:Label></div>
         </asp:Panel>
         
         <asp:CollapsiblePanelExtender ID="CollapsiblePanelExtender2" runat="server" ImageControlID="arrow3" CollapsedImage="~/images/arrowDown2.jpg" ExpandedImage="~/images/arrowUp2.jpg" TargetControlID="panelEditSpec" Collapsed="true" CollapseControlID="panelShowSpec"  ExpandControlID="panelShowSpec">
         </asp:CollapsiblePanelExtender>
 
-        <asp:Panel ID="panelEditSpec" CssClass="collapsePanel" runat="server">
+        <asp:Panel ID="panelEditSpec" CssClass="collapsePanel" runat="server" 
+            Width="420px">
         <div class="cbCpec">
             <fieldset>
                 <legend>Specjalizacje</legend>
-                <asp:Panel ID="panelEditSpec2" runat="server">
-                </asp:Panel>
+                <asp:Panel ID="panelSpecializations" runat="server">
+                <asp:Panel ID="panel1" runat="server">
+                <asp:CheckBoxList ID="cblSpecializations" runat="server"  DataTextField="nazwa" DataValueField="id" 
+                    RepeatColumns="3" RepeatDirection="Horizontal">
+                </asp:CheckBoxList>
+            </asp:Panel>
+
+            </asp:Panel>
                 <p>
                     <asp:Label ID="lblSpecMessage" runat="server" Text=""></asp:Label>
                 </p>

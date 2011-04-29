@@ -325,11 +325,8 @@ div.accountInfo
 
 .collapsePanel
 {
-    width: 640px;
-    height: 0px;
     overflow: hidden;
-    border: 1px, solid, #fefefe;
-}
+    }
 
 .imageArrow
 {
@@ -337,6 +334,12 @@ div.accountInfo
     height: 20px;
     margin: -3px;
     padding-right: 10px;
+}
+
+.imageArrowContainer
+{
+    font-weight: bold;
+    margin-top: 15px;
 }
 
 .hours table
@@ -368,8 +371,8 @@ div.accountInfo
 
 .showPanel
 {
-    padding-top: 5px;
-    padding-bottom: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 
 .cbList fieldset
@@ -382,4 +385,11 @@ div.accountInfo
     padding-right: 20px;
     margin-top: 25px;
     width: 600px;
+}
+
+/*MyAccountAdmin*/
+
+.adminOptions
+{
+    margin-top: 25px;
 }

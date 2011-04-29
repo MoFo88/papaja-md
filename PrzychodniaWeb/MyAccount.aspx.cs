@@ -44,8 +44,11 @@ public partial class MyAccount : System.Web.UI.Page
                 Response.Redirect("~/Login.aspx");
             }
 
-            InitializePanelEditSpec();
-            InitializePanelspec();
+            if (!Page.IsPostBack)
+            {
+                InitializePanelEditSpec();
+                InitializePanelspec();
+            }
         }
         catch (Exception ex)
         {
@@ -108,24 +111,22 @@ public partial class MyAccount : System.Web.UI.Page
     {
         try
         {
-            panelEditSpec2.Controls.Clear();
+            dr = Repository.GetUserByID(Int32.Parse(Session["userId"].ToString())) as Lekarz;
+
+
             List<Specjalizacja> specList = Repository.GetAllSpecjalizations();
 
-            foreach (Specjalizacja s in specList)
+            cblSpecializations.DataSource = specList;
+            cblSpecializations.DataBind();
+
+
+            foreach (ListItem item in cblSpecializations.Items)
             {
-                CheckBox cb = new CheckBox();
-                cb.ID = s.id.ToString();
-                cb.Text = s.nazwa;
-                cb.CssClass = "cbSpec";
-
-                panelEditSpec2.Controls.Add(cb);
-
-                if (dr.Specjalizacja_Lekarzs.FirstOrDefault(sl => sl.idSpecjalizacja == s.id) != null)
+                if (dr.Specjalizacja_Lekarzs.FirstOrDefault(sl => sl.idSpecjalizacja == Int32.Parse( item.Value )) != null)
                 {
-                    cb.Checked = true;
+                    item.Selected = true;
                 }
             }
-
         }
         catch (Exception ex)
         {
@@ -282,17 +283,12 @@ public partial class MyAccount : System.Web.UI.Page
             
             Repository.RemoveAllDrSpecjalizations(dr);
 
-            foreach (Control c in panelEditSpec2.Controls)
+            foreach (ListItem item in cblSpecializations.Items)
             {
-                if (c is CheckBox)
+                if (item.Selected)
                 {
-                    CheckBox checkBox = c as CheckBox;
-
-                    if (checkBox.Checked)
-                    {
-                        int idSpec = Int32.Parse(c.ID);
-                        Repository.AddSpecjalization(dr, idSpec);
-                    }
+                    int idSpec = Int32.Parse(item.Value);
+                    Repository.AddSpecjalization(dr, idSpec);
                 }
             }
 
