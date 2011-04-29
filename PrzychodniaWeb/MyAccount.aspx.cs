@@ -10,12 +10,70 @@ using System.Drawing;
 
 public partial class MyAccount : System.Web.UI.Page
 {
-    protected Uzytkownik user = null;
-    protected Lekarz dr = null;
+    private Uzytkownik user = null;
+    private Lekarz dr = null;
+
     private String editMessage;
     public String EditMessage { get { return editMessage; } set { editMessage = value; lblEditMessage.Text = value; } }
     private String passwordChangeMessage;
     public String PasswordChangeMessage { get { return passwordChangeMessage; } set { passwordChangeMessage = value; lblPasswordChangeMessage.Text = value; } }
+    private String specMessage;
+    public String SpecMessage { get { return specMessage; } set { specMessage = value; lblSpecMessage.Text = value; } }
+    
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        try
+        {
+
+            if (Session["userId"] != null)
+            {
+                user = Repository.GetUserByID(Int32.Parse(Session["userId"].ToString()));
+
+                if (user is Administrator)
+                {
+                    Server.Transfer("~/MyAccountAdmin.aspx");
+                }
+
+                if (user is Lekarz)
+                {
+                    dr = user as Lekarz;
+                }
+            }
+            else
+            {
+                Response.Redirect("~/Login.aspx");
+            }
+
+            InitializePanelEditSpec();
+            InitializePanelspec();
+        }
+        catch (Exception ex)
+        {
+            Master.Message = ex.Message;
+            Master.SetMessageColor( Color.Red );
+        }
+    }
+
+    protected void Page_PreRender(object sender, EventArgs e)
+    {
+        dr = Repository.GetUserByID(Int32.Parse(Session["userId"].ToString())) as Lekarz;
+
+        String lbl = "Dr @NAME @SURNAME";
+        lbl = lbl.Replace("@NAME", dr.imie);
+        lbl = lbl.Replace("@SURNAME", dr.nazwisko);
+
+        lblName.Text = lbl;
+
+        lblPesel.Text = dr.pesel.ToString();
+        lblEmail.Text = dr.email;
+        lblPhone.Text = dr.telefon;
+        lblAdres.Text = "ul. " + dr.ulica + " " + dr.nr_domu + ", " + dr.kod_pocztowy + " " + dr.miasto;
+
+        Root.InitializeEditDataPanel(panelEdit, dr);
+        InitializeTableHours();
+        InitializePanelEditSpec();
+        InitializePanelspec();
+    }
 
     protected void InitializePanelspec()
     {
@@ -108,6 +166,14 @@ public partial class MyAccount : System.Web.UI.Page
         {
             List<Godziny_przyj> hours = dr.Godziny_przyjs.ToList();
 
+            lblDay1.Text = "";
+            lblDay2.Text = "";
+            lblDay3.Text = "";
+            lblDay4.Text = "";
+            lblDay5.Text = "";
+            lblDay6.Text = "";
+            lblDay7.Text = "";
+
             foreach (Godziny_przyj g in hours)
             {
                 switch ( g.dzien )
@@ -145,46 +211,7 @@ public partial class MyAccount : System.Web.UI.Page
         }
     }
 
-    protected void Page_Load(object sender, EventArgs e)
-    {
-        try
-        {
-            if (!Page.IsPostBack)
-            {
-                if (Session["userId"] != null)
-                {
-                    user = Repository.GetUserByID(Int32.Parse(Session["userId"].ToString()));
-                    dr = user as Lekarz;
-
-                    String lbl = "Dr @NAME @SURNAME";
-                    lbl = lbl.Replace("@NAME", dr.imie);
-                    lbl = lbl.Replace("@SURNAME", dr.nazwisko);
-
-                    lblName.Text = lbl;
-
-                    InitializePanelspec();
-
-                    lblPesel.Text = dr.pesel.ToString();
-                    lblEmail.Text = dr.email;
-                    lblPhone.Text = dr.telefon;
-                    lblAdres.Text = "ul. " + dr.ulica + " " + dr.nr_domu + ", " + dr.kod_pocztowy + " " + dr.miasto;
-
-                    InitializePanelEdit();
-                    InitializeTableHours();
-                    InitializePanelEditSpec();
-                }
-                else
-                {
-                    Response.Redirect("~/Login.aspx");
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            Master.Message = ex.Message;
-            Master.SetMessageColor( Color.Red );
-        }
-    }
+    
 
     protected void btnSubmitEdit_Click(object sender, EventArgs e)
     {
@@ -196,7 +223,17 @@ public partial class MyAccount : System.Web.UI.Page
             String city = tbEditCity.Text;
             String email = tbEditEmail.Text;
             String name = tbEditName.Text;
-            Decimal pesel = Decimal.Parse( tbEditPesel.Text );
+            
+            Decimal? pesel = null;
+            try
+            {
+                pesel = Decimal.Parse(tbEditPesel.Text);
+            }
+            catch (Exception ex)
+            {
+                pesel = null;
+            }
+
             String phone =  tbEditPhone.Text;
             String postalCode = tbEditPostalCode.Text;
             String street = tbEditStreet.Text;
@@ -235,6 +272,37 @@ public partial class MyAccount : System.Web.UI.Page
         {
             PasswordChangeMessage = ex.Message;
             lblPasswordChangeMessage.ForeColor = Color.Red;
+        }
+    }
+    protected void btnEditSpec_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            dr = Repository.GetUserByID(Int32.Parse(Session["userId"].ToString())) as Lekarz;
+            
+            Repository.RemoveAllDrSpecjalizations(dr);
+
+            foreach (Control c in panelEditSpec2.Controls)
+            {
+                if (c is CheckBox)
+                {
+                    CheckBox checkBox = c as CheckBox;
+
+                    if (checkBox.Checked)
+                    {
+                        int idSpec = Int32.Parse(c.ID);
+                        Repository.AddSpecjalization(dr, idSpec);
+                    }
+                }
+            }
+
+            SpecMessage = "Lista specjalizacji została zaktualizowana.";
+            lblSpecMessage.ForeColor = Color.Green;
+        }
+        catch (Exception ex)
+        {
+            SpecMessage = ex.Message;
+            lblSpecMessage.ForeColor = Color.Red;
         }
     }
 }

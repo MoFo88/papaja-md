@@ -179,32 +179,63 @@ namespace BLL
             return specList;
         }
 
-        public static void UpdateDrData(Lekarz dr, String imie, String nazwisko, String email, String kodPocztowy, String miasto, string nrDomu, decimal pesel, string telefon, string ulica, List<int> idsSpecjalizacja, String login)
+        public static void UpdateUserData(Uzytkownik user, String imie, String nazwisko, String kodPocztowy, String miasto, string nrDomu, Decimal? pesel, string telefon, string ulica, String login)
         {
             PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
 
-            if (login != dr.login)
+            if (login != null)
             {
-                var query = from u in ctx.Uzytkowniks where u.login == login select u;
-
-                Uzytkownik user = query.SingleOrDefault();
-
-                if (user != null)
+                if (login != user.login)
                 {
-                    throw new UserExistException();
+                    var query = from u in ctx.Uzytkowniks where u.login == login select u;
+
+                    Uzytkownik us = query.SingleOrDefault();
+
+                    if (us != null)
+                    {
+                        throw new UserExistException();
+                    }
                 }
             }
 
-            dr.imie = imie;
-            dr.nazwisko = nazwisko;
-            dr.email = email;
-            dr.kod_pocztowy = kodPocztowy;
-            dr.miasto = miasto;
-            dr.nr_domu = nrDomu;
-            dr.telefon = telefon;
-            dr.ulica = ulica;
-            dr.login = login;
+            var query2 = from u in ctx.Uzytkowniks where u.id == user.id select u;
+            Uzytkownik usr = query2.SingleOrDefault();
 
+            usr.imie = imie;
+            usr.nazwisko = nazwisko;
+            usr.kod_pocztowy = kodPocztowy;
+            usr.miasto = miasto;
+            usr.nr_domu = nrDomu;
+            usr.telefon = telefon;
+            usr.ulica = ulica;
+            usr.login = login;
+            usr.pesel = pesel;
+
+            ctx.SubmitChanges();
+        }
+
+        
+        public static void UpdateDrData(Lekarz dr, String imie, String nazwisko, String email, String kodPocztowy, String miasto, string nrDomu, Decimal? pesel, string telefon, string ulica, List<int> idsSpecjalizacja, String login)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+            Repository.UpdateUserData(dr, imie, nazwisko, kodPocztowy, miasto, nrDomu, pesel, telefon, ulica, login);
+
+            var query = from u in ctx.Uzytkowniks.OfType<Lekarz>() where u.id == dr.id select u;
+            Lekarz usr = query.SingleOrDefault();
+
+            usr.email = email;
+            ctx.SubmitChanges();
+        }
+
+        public static void UpdateAdminData(Administrator admin,String name,String surname,String email,String postalCode,String city,String streetNr,Decimal? pesel,String phone,String street,String login)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+            Repository.UpdateUserData(admin, name, surname, postalCode, city, streetNr, pesel, phone, street, login);
+
+            var query = from u in ctx.Uzytkowniks.OfType<Administrator>() where u.id == admin.id select u;
+            Administrator usr = query.SingleOrDefault();
+            
+            usr.email = email;
             ctx.SubmitChanges();
         }
 
@@ -212,16 +243,47 @@ namespace BLL
         {
             PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
             String pass = CalculateSHA1(password, Encoding.ASCII);
-            user.password = pass;
+
+            var query = from u in ctx.Uzytkowniks where u.id == user.id select u;
+            Uzytkownik usr = query.SingleOrDefault();
+
+            usr.password = pass;
             ctx.SubmitChanges();
         }
 
+        /// <summary>
+        /// Funkcja dodaje specjalizacje dla podanego lekarza
+        /// </summary>
+        /// <param name="dr"></param>
+        /// <param name="idSpec"></param>
         public static void AddSpecjalization(Lekarz dr, int idSpec)
         {
             PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
             Specjalizacja_Lekarz sp = new Specjalizacja_Lekarz();
             sp.idSpecjalizacja = idSpec;
-            dr.Specjalizacja_Lekarzs.Add(sp);
+            sp.idUzytkownik = dr.id;
+            
+            //check, if dh already have those spec
+            var x = from s in ctx.Specjalizacja_Lekarzs where s.idUzytkownik == dr.id && s.idSpecjalizacja == idSpec select s;
+
+            if (x.FirstOrDefault() != null)
+            {
+                return;
+            }
+
+            ctx.Specjalizacja_Lekarzs.InsertOnSubmit(sp);
+            ctx.SubmitChanges();
+        }
+
+        /// <summary>
+        /// Funkcja usuwa wszystkie specjalizacje podanego lekarza
+        /// </summary>
+        /// <param name="dr"></param>
+        public static void RemoveAllDrSpecjalizations(Lekarz dr)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext(); 
+            var x = from sp in ctx.Specjalizacja_Lekarzs where sp.idUzytkownik == dr.id select sp;
+            ctx.Specjalizacja_Lekarzs.DeleteAllOnSubmit(x.ToList());
             ctx.SubmitChanges();
         }
     }
