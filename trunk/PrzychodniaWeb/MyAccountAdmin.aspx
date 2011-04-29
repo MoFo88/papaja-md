@@ -1,71 +1,30 @@
-﻿<%@  Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="MyAccount.aspx.cs" Inherits="MyAccount"    %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="MyAccountAdmin.aspx.cs" Inherits="MyAccountAdmin" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
-<%@ MasterType VirtualPath ="~/Site.master" %>
+<%@ MasterType VirtualPath="~/Site.master" %>
+<%@ PreviousPageType VirtualPath="~/MyAccount.aspx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
-    
+
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
 
-    <div class = "myData">
-        
+    <div class = "myData">    
         <asp:Image id="myImage" CssClass="myImage" ImageUrl ="images/no_user.png" runat="server" />
-        <h1><asp:Label ID="lblName" runat="server" Text=""></asp:Label></h1>  
-        <asp:Panel ID="panelSpec" CssClass="panelMySpec" runat="server"></asp:Panel>
-
+        <h1><asp:Label ID="lblAdmin" runat="server" Text="Administrator"></asp:Label></h1>  
+        
         <br />
-        <h2>Główne informacje:</h2>
-        <p><asp:Label ID="lblPesel_" runat="server" Text="Pesel: "></asp:Label><asp:Label id="lblPesel" runat="server"></asp:Label></p>
+        <p><asp:Label ID="lblName_" runat="server" Text="Imię: "></asp:Label><asp:Label id="lblName" runat="server"></asp:Label></p>
+        <p><asp:Label ID="lblSurname_" runat="server" Text="Nazwisko: "></asp:Label><asp:Label id="lblSurname" runat="server"></asp:Label></p>
         <p><asp:Label ID="lblPhone_" runat="server" Text="Telefon: "></asp:Label><asp:Label id="lblPhone" runat="server"></asp:Label></p>
         <p><asp:Label ID="lblEmail_" runat="server" Text="Email: "></asp:Label><asp:Label id="lblEmail" runat="server"></asp:Label></p>
-        <p><asp:Label ID="lblAdres_" runat="server" Text="Adres: "></asp:Label><asp:Label id="lblAdres" runat="server"></asp:Label></p>
         
-        <div class="hours">
-        <h2>Godziny przyjęć:</h2>
-
-        <table>
-            <tr>
-                <th>Poniedziałek</th>
-                <th>Wtorek</th>
-                <th>środa</th>
-                <th>Czwartek</th>
-                <th>Piątek</th>
-                <th>Sobota</th>
-                <th>Niedziela</th>
-            </tr>
-            <tr>
-                <td>
-                    <asp:Label ID="lblDay1" runat="server" Text=""></asp:Label>
-                </td>
-                <td>
-                    <asp:Label ID="lblDay2" runat="server" Text=""></asp:Label>
-                </td>
-                <td>
-                    <asp:Label ID="lblDay3" runat="server" Text=""></asp:Label>
-                </td>
-                <td>
-                    <asp:Label ID="lblDay4" runat="server" Text=""></asp:Label>
-                </td>
-                <td>
-                    <asp:Label ID="lblDay5" runat="server" Text=""></asp:Label>
-                </td>
-                <td>
-                    <asp:Label ID="lblDay6" runat="server" Text=""></asp:Label>
-                </td>
-                <td>
-                    <asp:Label ID="lblDay7" runat="server" Text=""></asp:Label>
-                </td>
-            </tr>
-        </table>
-        </div>
-
         <asp:Panel ID="panelShowEdidPassword" runat="server" CssClass="showPanel">
             <div class="imageArrow" ><asp:Image  ToolTip="Zmień hasło" runat="server" CssClass="imageArrow" id="arrow2" ImageUrl="~/images/arrowDown2.jpg"/><asp:Label runat="server" ID="Label1" Text="Zmień hasło"></asp:Label></div>
         </asp:Panel>
-        
+
         <asp:CollapsiblePanelExtender ID="CollapsiblePanelExtender1" runat="server" ImageControlID="arrow2" CollapsedImage="~/images/arrowDown2.jpg" ExpandedImage="~/images/arrowUp2.jpg" TargetControlID="panelEditPassword" Collapsed="true" CollapseControlID="panelShowEdidPassword"  ExpandControlID="panelShowEdidPassword">
         </asp:CollapsiblePanelExtender>
         
@@ -111,8 +70,10 @@
             </div>
         </asp:Panel>
 
+    </div>
 
-        <asp:Panel ID="panelShowEdit" runat="server" CssClass="showPanel" >
+
+    <asp:Panel ID="panelShowEdit" runat="server" CssClass="showPanel" >
            <div class="imageArrow" ><asp:Image  ToolTip="Edytuj Dane" runat="server" CssClass="imageArrow" id="arrow" ImageUrl="~/images/arrowDown2.jpg"/><asp:Label runat="server" ID="lblEdit" Text="Edytuj dane"></asp:Label></div>
         </asp:Panel>
         
@@ -220,36 +181,6 @@
         </div>
 
         </asp:Panel>
-
-
-        <asp:Panel ID="panelShowSpec" runat="server" CssClass="showPanel">
-            <div class="imageArrow" ><asp:Image  ToolTip="Moja specjalizacja" runat="server" CssClass="imageArrow" id="arrow3" ImageUrl="~/images/arrowDown2.jpg"/><asp:Label runat="server" ID="Label2" Text="Zmień specjalizację"></asp:Label></div>
-        </asp:Panel>
-        
-        <asp:CollapsiblePanelExtender ID="CollapsiblePanelExtender2" runat="server" ImageControlID="arrow3" CollapsedImage="~/images/arrowDown2.jpg" ExpandedImage="~/images/arrowUp2.jpg" TargetControlID="panelEditSpec" Collapsed="true" CollapseControlID="panelShowSpec"  ExpandControlID="panelShowSpec">
-        </asp:CollapsiblePanelExtender>
-
-        <asp:Panel ID="panelEditSpec" CssClass="collapsePanel" runat="server">
-        <div class="cbCpec">
-            <fieldset>
-                <legend>Specjalizacje</legend>
-                <asp:Panel ID="panelEditSpec2" runat="server">
-                </asp:Panel>
-                <p>
-                    <asp:Label ID="lblSpecMessage" runat="server" Text=""></asp:Label>
-                </p>
-                </fieldset>
-                <p class="submitButton">
-                <asp:Button ID="btnEditSpec" runat="server" Text="Edytuj" 
-                        onclick="btnEditSpec_Click" />
-            </p>
-        </div>
-        </asp:Panel>
-
-        <asp:Panel ID="MyPatients" runat="server">
-        </asp:Panel>
-
-    </div>
 
 </asp:Content>
 
