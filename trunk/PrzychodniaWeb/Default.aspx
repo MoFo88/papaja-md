@@ -33,10 +33,17 @@
     </div>
     <br />
 
-    <div style="float: none; padding-right: 10px; position: relative;">
-    <asp:HyperLink runat="server" >
-       <asp:Image runat="server" ImageUrl="~/images/pielegniarka.jpg" Height="500" />
-    </asp:HyperLink>
-    </div>
+    <asp:Image runat="server" ImageUrl="~/images/pielegniarka.jpg" />
+    <asp:Image ID="Image1" runat="server" ImageUrl="~/images/2868181654755297c8cfe0.jpg"/>
+    <asp:Image ID="Image2" runat="server" ImageUrl="~/images/bp994.jpg"/>
+    <asp:Image ID="Image3" runat="server" ImageUrl="~/images/kaie-kostium-erotyczne-przebranie-pielegniarka-506.jpg"/>
+    <asp:Image ID="Image4" runat="server" ImageUrl="~/images/pieleegniarka.jpg" />
+    <asp:Image ID="Image5" runat="server" ImageUrl="~/images/pielegniarka2.jpg" Width="900" />
+    <asp:Image ID="Image6" runat="server" ImageUrl="~/images/1.jpeg" />
+    <asp:Image ID="Image7" runat="server" ImageUrl="~/images/2.jpg" />
+    <asp:Image ID="Image8" runat="server" ImageUrl="~/images/3.jpg" />
+    <asp:Image ID="Image9" runat="server" ImageUrl="~/images/4.jpg" />
+    <asp:Image ID="Image10" runat="server" ImageUrl="~/images/5.jpg" />
+    <asp:Image ID="Image11" runat="server" ImageUrl="~/images/6.jpg" />
 
 </asp:Content>
