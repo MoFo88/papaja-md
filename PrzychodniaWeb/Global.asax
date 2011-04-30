@@ -15,9 +15,17 @@
     }
         
     void Application_Error(object sender, EventArgs e) 
-    { 
-        // Code that runs when an unhandled error occurs
-
+    {
+        /*Exception objErr = Server.GetLastError().GetBaseException();
+        
+        string err = "Error Caught in Application_Error event\n" +
+                "Error in: " + Request.Url.ToString() +
+                "\nError Message:" + objErr.Message.ToString() +
+                "\nStack Trace:" + objErr.StackTrace.ToString();
+        
+        
+        Server.ClearError();*/
+   
     }
 
     void Session_Start(object sender, EventArgs e) 
@@ -34,6 +42,7 @@
         // or SQLServer, the event is not raised.
 
     }
+
 
        
 </script>

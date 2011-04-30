@@ -1851,6 +1851,8 @@ namespace DAL
 		
 		private string _ubezpieczenie;
 		
+		private System.Nullable<System.DateTime> _ostatnia_wizyta;
+		
 		private EntityRef<Uzytkownik> _Uzytkownik;
 		
     #region Extensibility Method Definitions
@@ -1861,6 +1863,8 @@ namespace DAL
     partial void Onid_lekChanged();
     partial void OnubezpieczenieChanging(string value);
     partial void OnubezpieczenieChanged();
+    partial void Onostatnia_wizytaChanging(System.Nullable<System.DateTime> value);
+    partial void Onostatnia_wizytaChanged();
     #endregion
 		
 		public Pacjent()
@@ -1909,6 +1913,26 @@ namespace DAL
 					this._ubezpieczenie = value;
 					this.SendPropertyChanged("ubezpieczenie");
 					this.OnubezpieczenieChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ostatnia_wizyta", DbType="Date")]
+		public System.Nullable<System.DateTime> ostatnia_wizyta
+		{
+			get
+			{
+				return this._ostatnia_wizyta;
+			}
+			set
+			{
+				if ((this._ostatnia_wizyta != value))
+				{
+					this.Onostatnia_wizytaChanging(value);
+					this.SendPropertyChanging();
+					this._ostatnia_wizyta = value;
+					this.SendPropertyChanged("ostatnia_wizyta");
+					this.Onostatnia_wizytaChanged();
 				}
 			}
 		}

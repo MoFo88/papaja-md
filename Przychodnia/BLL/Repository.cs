@@ -97,6 +97,32 @@ namespace BLL
             return true;
         }
 
+        public static bool AddNewPatient(String imie, String nazwisko, String kodPocztowy, String miasto, string nrDomu, decimal? pesel, string telefon, string ulica,  int? idDr)
+        {
+
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+
+            Pacjent p = new Pacjent()
+            {
+                imie = imie,
+                nazwisko = nazwisko,
+                kod_pocztowy = kodPocztowy,
+                miasto = miasto,
+                nr_domu = nrDomu,
+                pesel = pesel,
+                telefon = telefon,
+                ulica = ulica
+
+            };
+
+            p.id_lek = idDr;
+
+            ctx.Uzytkowniks.InsertOnSubmit(p);
+            ctx.SubmitChanges();
+
+            return true;
+        }
+
         public static bool AddNewSpecialization(string name)
         {
             PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
