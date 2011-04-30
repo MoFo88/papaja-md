@@ -1,8 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="AddNewPatient.aspx.cs" Inherits="AddNewPatient" %>
+<%@ MasterType VirtualPath="~/Site.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>
+
 
 <asp:Panel ID="panelAddPatient" runat="server" CssClass="collapsePanel">
           
@@ -81,18 +86,24 @@
                     </p>
 
                     <p>
-                        <asp:CheckBox ID="cbHasDr" runat="server" Text="Wybierz lekarza" />&nbsp;
+                        &nbsp;<asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <ContentTemplate>
+                        <asp:CheckBox ID="cbHasDr" runat="server" Text="Wybierz lekarza" 
+                            oncheckedchanged="cbHasDr_CheckedChanged" AutoPostBack="true" />&nbsp;
                         <asp:DropDownList ID="ddlDrList" runat="server">
+                        
                         </asp:DropDownList>
-                    </p>
+                        </ContentTemplate>
+                        </asp:UpdatePanel>
 
-                    <p>
-                        <asp:Label ID="lblEditMessage" runat="server" Text=""></asp:Label>
-                    </p>
-                
+                        <p>
+                            <asp:Label ID="lblAddMessage" runat="server" Text=""></asp:Label>
+                        </p>
+
                 </fieldset>
                 <p class="submitButton">
-                    <asp:Button ID="btnSubmitEdit" runat="server" Text="Edytuj" onclick="btnSubmitEdit_Click" ValidationGroup="editDataValidationGroup" />
+                    <asp:Button ID="btnSubmitEdit"  runat="server" Text="Dodaj"  
+                        ValidationGroup="addPatientValidationGroup" onclick="btnSubmitEdit_Click" />
                 </p>
             </div>
 

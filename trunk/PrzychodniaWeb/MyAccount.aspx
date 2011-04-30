@@ -63,7 +63,7 @@
         </div>
 
         <asp:Panel ID="panelShowEdidPassword" runat="server" CssClass="showPanel">
-            <div class="iimageArrowContainer" ><asp:Image  ToolTip="Zmień hasło" runat="server" CssClass="imageArrow" id="arrow2" ImageUrl="~/images/arrowDown2.jpg"/><asp:Label runat="server" ID="Label1" Text="Zmień hasło"></asp:Label></div>
+            <div class="imageArrowContainer" ><asp:Image  ToolTip="Zmień hasło" runat="server" CssClass="imageArrow" id="arrow2" ImageUrl="~/images/arrowDown2.jpg"/><asp:Label runat="server" ID="Label1" Text="Zmień hasło"></asp:Label></div>
         </asp:Panel>
         
         <asp:CollapsiblePanelExtender ID="CollapsiblePanelExtender1" runat="server" ImageControlID="arrow2" CollapsedImage="~/images/arrowDown2.jpg" ExpandedImage="~/images/arrowUp2.jpg" TargetControlID="panelEditPassword" Collapsed="true" CollapseControlID="panelShowEdidPassword"  ExpandControlID="panelShowEdidPassword">
@@ -72,8 +72,11 @@
         <asp:Panel ID="panelEditPassword" runat="server" CssClass="collapsePanel">
             <div class="accountInfo">
 
-            <asp:ValidationSummary ID="editPasswordValidationSummary" runat="server" CssClass="failureNotification" 
-                 ValidationGroup="editPasswordValidationGroup"/>
+            <asp:ValidationSummary 
+                                ID="editPasswordValidationSummary" 
+                                runat="server" 
+                                CssClass="failureNotification" 
+                                ValidationGroup="editPasswordValidationGroup"/>
 
             <fieldset>
                 <legend>Zmień hasło</legend>
@@ -122,8 +125,11 @@
           
         <div class="accountInfo">
 
-        <asp:ValidationSummary ID="editDataValidationSummary" runat="server" CssClass="failureNotification" 
-                 ValidationGroup="editDataValidationGroup"/>
+        <asp:ValidationSummary 
+                            ID="editDataValidationSummary" 
+                            runat="server" 
+                            CssClass="failureNotification" 
+                            ValidationGroup="editDataValidationGroup"/>
 
             <fieldset>
                 <legend>Edytuj dane</legend>
@@ -229,15 +235,19 @@
         <asp:CollapsiblePanelExtender ID="CollapsiblePanelExtender2" runat="server" ImageControlID="arrow3" CollapsedImage="~/images/arrowDown2.jpg" ExpandedImage="~/images/arrowUp2.jpg" TargetControlID="panelEditSpec" Collapsed="true" CollapseControlID="panelShowSpec"  ExpandControlID="panelShowSpec">
         </asp:CollapsiblePanelExtender>
 
-        <asp:Panel ID="panelEditSpec" CssClass="collapsePanel" runat="server" 
-            Width="420px">
+        <asp:Panel ID="panelEditSpec" CssClass="collapsePanel" runat="server" Width="420px">
         <div class="cbCpec">
             <fieldset>
                 <legend>Specjalizacje</legend>
                 <asp:Panel ID="panelSpecializations" runat="server">
                 <asp:Panel ID="panel1" runat="server">
-                <asp:CheckBoxList ID="cblSpecializations" runat="server"  DataTextField="nazwa" DataValueField="id" 
-                    RepeatColumns="3" RepeatDirection="Horizontal">
+                <asp:CheckBoxList 
+                            ID="cblSpecializations" 
+                            runat="server" 
+                            DataTextField="nazwa" 
+                            DataValueField="id" 
+                            RepeatColumns="3" 
+                            RepeatDirection="Horizontal">
                 </asp:CheckBoxList>
             </asp:Panel>
 
@@ -253,8 +263,18 @@
         </div>
         </asp:Panel>
 
-        <asp:Panel ID="MyPatients" runat="server">
-        </asp:Panel>
+
+        <%--Linki--%>
+
+        <asp:DynamicHyperLink ID="dhlAddNewDoctor" runat="server" NavigateUrl="~/MyPatients.aspx" >
+                
+                <div class="imageArrowContainer">
+                <asp:Image ToolTip="Lista zaoptowanych pacjentów"  ID="Image1" runat="server" ImageUrl = "~/images/arrowRight.jpg" CssClass="imageArrow" />
+                <asp:Label ID="lblAddNewDoctor" ToolTip="Lista zaoptowanych pacjentów"  runat="server" Text="Lista pacjentów"></asp:Label>
+                </div>
+
+        </asp:DynamicHyperLink>
+
 
     </div>
 

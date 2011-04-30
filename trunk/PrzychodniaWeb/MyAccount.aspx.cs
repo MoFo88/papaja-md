@@ -24,7 +24,6 @@ public partial class MyAccount : System.Web.UI.Page
     {
         try
         {
-
             if (Session["userId"] != null)
             {
                 user = Repository.GetUserByID(Int32.Parse(Session["userId"].ToString()));
@@ -201,7 +200,7 @@ public partial class MyAccount : System.Web.UI.Page
                         lblDay7.Text += g.godz_od.ToString().Substring(0, 5) + "-" + g.godz_do.ToString().Substring(0, 5) + ", ";
                         break;
                     default:
-                        throw new BadDayInentifyierException();
+                        throw new BadDayIdentifyierException();
                 }
             }          
         }

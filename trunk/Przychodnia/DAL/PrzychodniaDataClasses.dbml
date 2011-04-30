@@ -85,6 +85,7 @@
       <Type Name="Pacjent" InheritanceCode="2">
         <Column Name="id_lek" Type="System.Int32" DbType="Int" CanBeNull="true" />
         <Column Name="ubezpieczenie" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+        <Column Name="ostatnia_wizyta" Type="System.DateTime" DbType="Date" CanBeNull="true" />
         <Association Name="Uzytkownik_Pacjent" Member="Uzytkownik" ThisKey="id_lek" OtherKey="id" Type="Uzytkownik" IsForeignKey="true" />
       </Type>
     </Type>

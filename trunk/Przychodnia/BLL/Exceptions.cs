@@ -23,9 +23,9 @@ namespace BLL
         public UserExistException(string p) : base(p) { }
     }
 
-    public class BadDayInentifyierException : ApplicationException
+    public class BadDayIdentifyierException : ApplicationException
     {
-        public BadDayInentifyierException() : base("Błędny identyfikator!") { }
-        public BadDayInentifyierException(string p) : base(p) { }
+        public BadDayIdentifyierException() : base("Błędny identyfikator!") { }
+        public BadDayIdentifyierException(string p) : base(p) { }
     }
 }
