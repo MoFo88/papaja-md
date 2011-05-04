@@ -13,6 +13,7 @@ public partial class AddNewReservation : System.Web.UI.Page
     }
     protected void btnSearchPatient_Click(object sender, EventArgs e)
     {
-
+        string login = tbLogin.Text;
+        decimal pesel = Decimal.Parse(tbPesel.Text);
     }
 }
