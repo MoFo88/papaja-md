@@ -3,47 +3,28 @@
 <%@ MasterType VirtualPath ="~/Site.master" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
+    <style type="text/css">
+        .style1
+        {
+            text-align: center;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-    
-    <h1>Super przychodnia</h1>
-
-    <h3>papierz jak mozesz to wrzuc tu jakis stały content</h3>
-
-    <h4>bo ja nie wiem co za informacje mogąbyćna tej glupiej stronie tytułowej</h4>
-
-    <br />
-
-    <div style="width: 400px; border :2px solid, gray; padding: 20px 20px 20px 20px; margin: 50px 50px  50px 50px" >
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore 
-    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
-    ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-    Excepteur sint occaecat cupidatat non proident, 
-    sunt in culpa qui officia deserunt mollit anim id est laborum
+    <div style="text-align:center;">
+    <h1>System obsługi Przychodni &quot;Papaja&quot;</h1>
     </div>
-
-    <div style="width: 400px; border :2px solid, black; padding: 20px 20px 20px 20px; margin: 30px 30px  30px 30px" >
-    Zaczyna się już u nastolatek
-
-    Na rozwój raka szyjki macicy wpływa wiele różnych 
-    czynników. Istnieje wyraźny związek między aktywnością seksualną kobiety a ryzykiem powstania stanu przedrakowego lub raka szyjki macicy.
-
-    Wcześnie rozpoczęte współżycie seksualne i zmiany partnerów ułatwiają infekcje wirusem karcinogennym, przenoszonym drogą płciową. W wielu przypadkach jest on właśnie odpowiedzialny za raka szyjki macicy. Niekontrolowany i wielopartnerski seks zwiększa zagrożenie tą chorobą. Częściej występuje ona u prostytutek niż u mężatek. U dziewic w ogóle się jej nie stwierdza.
-    Z reguły ujawnia się w odległym czasie od stosunku seksualnego, podczas którego kobieta została zarażona.
+    <div style="text-align:center;">
+    <div style=" /*width: 400px;*/ border :2px solid, gray; padding: 20px 100px 0px 100px; margin: 0px 50px 20px 50px">
+        <h3 class="style1" align="right">
+        Ninejszy system jest kompletnym systemem obsługi
+            przychodni lekarza rodzinnego.</h3>
+        <p class="style1">
+            Dalsze opcje systemu dostępne są po zalogowaniu.</p>
+        <p class="style1">
+            Życzymy miłego korzystania z Systemu.</p>
     </div>
-    <br />
-
-    <asp:Image runat="server" ImageUrl="~/images/pielegniarka.jpg" />
-    <asp:Image ID="Image1" runat="server" ImageUrl="~/images/2868181654755297c8cfe0.jpg"/>
-    <asp:Image ID="Image2" runat="server" ImageUrl="~/images/bp994.jpg"/>
-    <asp:Image ID="Image3" runat="server" ImageUrl="~/images/kaie-kostium-erotyczne-przebranie-pielegniarka-506.jpg"/>
-    <asp:Image ID="Image4" runat="server" ImageUrl="~/images/pieleegniarka.jpg" />
-    <asp:Image ID="Image5" runat="server" ImageUrl="~/images/pielegniarka2.jpg" Width="900" />
-    <asp:Image ID="Image6" runat="server" ImageUrl="~/images/1.jpeg" />
-    <asp:Image ID="Image7" runat="server" ImageUrl="~/images/2.jpg" />
-    <asp:Image ID="Image8" runat="server" ImageUrl="~/images/3.jpg" />
-    <asp:Image ID="Image9" runat="server" ImageUrl="~/images/4.jpg" />
-    <asp:Image ID="Image10" runat="server" ImageUrl="~/images/5.jpg" />
-    <asp:Image ID="Image11" runat="server" ImageUrl="~/images/6.jpg" />
-
+        <asp:Image ID="Image8" runat="server" ImageUrl="~/images/3.jpg" Width="300" 
+            style="text-align: center" />
+    </div>
 </asp:Content>

@@ -45,10 +45,15 @@ public partial class SiteMaster : System.Web.UI.MasterPage
         miAddNewDoctor.NavigateUrl = "~/AddNewDoctor.aspx";
         miAddNewDoctor.Text = "Dodaj Lekarza";
 
+        MenuItem miAddNewPatient = new MenuItem();
+        miAddNewPatient.NavigateUrl = "~/AddNewPatient.aspx";
+        miAddNewPatient.Text = "Dodaj Pacjenta";
+
 
         if (user is Administrator)
         {
             NavigationMenu.Items.Add(miAddNewDoctor);
+            NavigationMenu.Items.Add(miAddNewPatient);
         }
 
         MenuItem miMyAccount = new MenuItem();
