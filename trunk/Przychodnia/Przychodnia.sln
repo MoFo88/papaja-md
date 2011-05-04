@@ -1,8 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "PrzychodniaWeb", "..\PrzychodniaWeb", "{4C4402D0-A535-49AD-A870-4FF0A616AC71}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "PrzychodniaWeb", "..\PrzychodniaWeb\", "{4C4402D0-A535-49AD-A870-4FF0A616AC71}"
 	ProjectSection(WebsiteProperties) = preProject
+		SccProjectName = "Svn"
+		SccAuxPath = "Svn"
+		SccLocalPath = "Svn"
+		SccProvider = "SubversionScc"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
 		ProjectReferences = "{12940955-4250-4D10-89CB-21024AF8F9E4}|DAL.dll;{E1F0292D-E366-4E3D-8EEF-4EF1B1CC3C3A}|BLL.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/PrzychodniaWeb"
@@ -37,6 +41,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Przychodnia.vsmdi
 	EndGlobalSection

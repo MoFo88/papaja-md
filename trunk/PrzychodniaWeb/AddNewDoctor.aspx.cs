@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BLL;
 using DAL;
+using System.Drawing;
 
 public partial class AddNewDoctor : System.Web.UI.Page
 {
@@ -18,48 +19,92 @@ public partial class AddNewDoctor : System.Web.UI.Page
             Page.Response.Redirect("/PrzychodniaWeb/Login.aspx");
         }
 
-        List<Specjalizacja> specjalizationList = Repository.GetAllSpecjalizations();
-        Specjalizacja specialization = specjalizationList.First();
- 
+        //List<Specjalizacja> specjalizationList = Repository.GetAllSpecjalizations();
+        //Specjalizacja specialization = specjalizationList.First();
+        InitializeCheckBoxSpec();
+
     }
 
     protected void Page_PreRender(object sender, EventArgs e)
     {
-        cblSpecializations.DataBind();
+        //cblSpecializations.DataBind();
+        InitializeCheckBoxSpec();
     }
 
     protected void BtnSubmit_Click(object sender, EventArgs e)
     {
-        //Specjalizacja specjalizacja = Repository.GetSpecializationById( Int32.Parse( ViewState["SpecId"].ToString() ));
+        List<int> specializationsIdList = new List<int>();
 
-        decimal decPesel = decimal.Parse(TbPesel.Text);
-
-        List<int> specializationsIdLst = new List<int>();
-
-        foreach(ListItem item in cblSpecializations.Items)
+        try
         {
-            if (item.Selected)
+            decimal decPesel = decimal.Parse(tbPesel.Text);
+
+            foreach (ListItem item in cblSpecializations.Items)
             {
-                int i = Int32.Parse(item.Value);
-                specializationsIdLst.Add(i);
+                if (item.Selected)
+                {
+                    int i = Int32.Parse(item.Value);
+
+                    specializationsIdList.Add(i);
+                }
             }
+
+            Repository.AddNewDoctor
+            (
+                tbImie.Text,
+                tbNazwisko.Text,
+                tbEmail.Text,
+                tbKodKocztowy.Text,
+                tbMiasto.Text,
+                tbNrDomu.Text,
+                decPesel,
+                tbTelefon.Text,
+                tbUlica.Text,
+                specializationsIdList,
+                tbLogin.Text,
+                tbPassword.Text
+            );
+        }
+        catch (Exception ex)
+        {
+            Master.Message = ex.Message;
+            Master.SetMessageColor(Color.Red);
         }
 
-        Repository.AddNewDoctor
-        (
-            TbImie.Text, 
-            TbNazwisko.Text, 
-            TbEmail.Text, 
-            TbKodKocztowy.Text, 
-            TbMiasto.Text, 
-            TbNrDomu.Text, 
-            decPesel, 
-            TbTelefon.Text, 
-            TbUlica.Text, 
-            specializationsIdLst, 
-            TbLogin.Text, 
-            TbPassword.Text
-        );
+        tbImie.Text = "";
+        tbNazwisko.Text = "";
+        tbEmail.Text = "";
+        tbKodKocztowy.Text = "";
+        tbMiasto.Text = "";
+        tbNrDomu.Text = "";
+
+        tbPesel.Text = "";
+        tbTelefon.Text = "";
+        tbUlica.Text = "";
+
+        cblSpecializations.Items.Clear();
+        tbLogin.Text = "";
+        tbPassword.Text = "";
+
+
+        lblResult.ForeColor = System.Drawing.Color.Green;
+        lblResult.Text = "Lekarz został poprawnie dodany";
+    }
+
+    protected void InitializeCheckBoxSpec()
+    {
+        try
+        {
+            List<Specjalizacja> specList = Repository.GetAllSpecjalizations();
+
+            cblSpecializations.DataSource = specList;
+            cblSpecializations.DataBind();
+        }
+        catch (Exception ex)
+        {
+            Master.Message = ex.Message;
+            Master.SetMessageColor(Color.Red);
+        }
     }
 
     //metoda do wyswietlania wszystkich specjalnosci z bazy - chyba nie potrzebna
@@ -104,7 +149,8 @@ public partial class AddNewDoctor : System.Web.UI.Page
 
     //        i++;
     //    }
-        
+
+
     //}
 
     protected void btnAddSpecialization_Click(object sender, EventArgs e)
@@ -112,6 +158,8 @@ public partial class AddNewDoctor : System.Web.UI.Page
         string name = tbNewSpecialization.Text;
         Repository.AddNewSpecialization(name);
         tbNewSpecialization.Text = "";
-        
+
+        lblResult.ForeColor = System.Drawing.Color.Green;
+        lblResult.Text = "Specjalizacja została poprawnie dodana";
     }
 }
