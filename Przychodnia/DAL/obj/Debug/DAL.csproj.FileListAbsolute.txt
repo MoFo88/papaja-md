@@ -4,3 +4,9 @@ C:\Users\yasio\Desktop\Przychodnia\trunk\Przychodnia\DAL\bin\Debug\DAL.pdb
 C:\Users\yasio\Desktop\Przychodnia\trunk\Przychodnia\DAL\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\yasio\Desktop\Przychodnia\trunk\Przychodnia\DAL\obj\Debug\DAL.dll
 C:\Users\yasio\Desktop\Przychodnia\trunk\Przychodnia\DAL\obj\Debug\DAL.pdb
+D:\Projects\Semestr 8\MedInf\Przychodnia\DAL\bin\Debug\DAL.dll.config
+D:\Projects\Semestr 8\MedInf\Przychodnia\DAL\bin\Debug\DAL.dll
+D:\Projects\Semestr 8\MedInf\Przychodnia\DAL\bin\Debug\DAL.pdb
+D:\Projects\Semestr 8\MedInf\Przychodnia\DAL\obj\Debug\ResolveAssemblyReference.cache
+D:\Projects\Semestr 8\MedInf\Przychodnia\DAL\obj\Debug\DAL.dll
+D:\Projects\Semestr 8\MedInf\Przychodnia\DAL\obj\Debug\DAL.pdb
