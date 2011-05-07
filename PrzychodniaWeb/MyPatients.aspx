@@ -15,7 +15,10 @@
         AllowSorting="True"
         AllowPaging="True" 
         DataKeyNames="id"
-        CssClass="gridView"
+        GridLines="None"  
+        CssClass="gridView"  
+        PagerStyle-CssClass="pgr"  
+        AlternatingRowStyle-CssClass="alt"
         >
         <Columns>
             
@@ -25,15 +28,14 @@
             <asp:BoundField DataField="ostatnia_wizyta" HeaderText="ostatnia_wizyta" SortExpression="ostatnia_wizyta" />
             
             <asp:CommandField SelectImageUrl="~/images/arrowRight.jpg" ButtonType="Image" HeaderText="Zobacz"  ShowSelectButton="True" />
-
-            
+        
         </Columns>
     </asp:GridView>
 
     <asp:LinqDataSource 
         ID="LinqDataSourceMyPatients" 
         runat="server" ContextTypeName="DAL.PrzychodniaDataClassesDataContext" 
-        TableName="Uzytkowniks" onselecting="LinqDataSourceMyPatients_Selecting"
+        TableName="Uzytkowniks" onselecting="LinqDataSourceMyPatients_Selecting"        
         >
 
     </asp:LinqDataSource>

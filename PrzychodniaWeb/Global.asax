@@ -22,10 +22,10 @@
                 "Error in: " + Request.Url.ToString() +
                 "\nError Message:" + objErr.Message.ToString() +
                 "\nStack Trace:" + objErr.StackTrace.ToString();
-        
-        
+            
+       
         Server.ClearError();*/
-   
+  
     }
 
     void Session_Start(object sender, EventArgs e) 

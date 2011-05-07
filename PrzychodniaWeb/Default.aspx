@@ -24,7 +24,7 @@
         <p class="style1">
             Życzymy miłego korzystania z Systemu.</p>
     </div>
-        <asp:Image ID="Image8" runat="server" ImageUrl="~/images/3.jpg" Width="300" 
-            style="text-align: center" />
+        <%--<asp:Image ID="Image5" runat="server" ImageUrl="~/images/3.jpg" Width="300" 
+            style="text-align: center" />--%>
     </div>
 </asp:Content>

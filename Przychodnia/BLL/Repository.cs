@@ -44,6 +44,18 @@ namespace BLL
             return query.ToList();
         }
 
+        public static void DeleteUser(int userId)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+
+            Uzytkownik user = ctx.Uzytkowniks.SingleOrDefault( u => u.id == userId );
+
+            ctx.Uzytkowniks.DeleteOnSubmit(user);
+
+            ctx.SubmitChanges();
+
+        }
+
        
         public static bool AddNewDoctor(String imie, String nazwisko, String email, String kodPocztowy, String miasto, string nrDomu, decimal pesel, string telefon, string ulica, List<int> idsSpecjalizacja, String login, String password)
         {
