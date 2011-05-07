@@ -26,7 +26,7 @@
                             LoginButtonText="Zaloguj" Orientation="Horizontal" 
                             PasswordLabelText="Hasło:"  ToolTip="zaloguj się"
                             RememberMeText=" Pamiętaj mnie"  UserNameLabelText="Login:"  TitleText = ""
-                            DestinationPageUrl="~/Default.aspx" PasswordRecoveryUrl="~/Default.aspx" 
+                            DestinationPageUrl="~/MyAccount.aspx" PasswordRecoveryUrl="~/Default.aspx" 
                             FailureText="próba zalogowania nie powiodła się"
                             CssClass="login" TitleTextStyle-Wrap="true"
                             FailureAction="RedirectToLoginPage" 

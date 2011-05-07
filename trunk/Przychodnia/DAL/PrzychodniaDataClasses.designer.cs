@@ -1400,7 +1400,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_imie", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_imie", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string imie
 		{
 			get
@@ -1420,7 +1420,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nazwisko", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nazwisko", DbType="VarChar(150) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string nazwisko
 		{
 			get
@@ -1440,7 +1440,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pesel", DbType="Decimal(11,0)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pesel", DbType="Decimal(11,0)", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<decimal> pesel
 		{
 			get
@@ -1460,7 +1460,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_typ", DbType="Int NOT NULL", IsDiscriminator=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_typ", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never, IsDiscriminator=true)]
 		public int id_typ
 		{
 			get
@@ -1480,7 +1480,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_kod_pocztowy", DbType="Char(6)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_kod_pocztowy", DbType="Char(6)", UpdateCheck=UpdateCheck.Never)]
 		public string kod_pocztowy
 		{
 			get
@@ -1500,7 +1500,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_miasto", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_miasto", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string miasto
 		{
 			get
@@ -1520,7 +1520,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ulica", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ulica", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string ulica
 		{
 			get
@@ -1540,7 +1540,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nr_domu", DbType="VarChar(10)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nr_domu", DbType="VarChar(10)", UpdateCheck=UpdateCheck.Never)]
 		public string nr_domu
 		{
 			get
@@ -1560,7 +1560,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_telefon", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_telefon", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string telefon
 		{
 			get
@@ -1580,7 +1580,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="Char(160)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="Char(160)", UpdateCheck=UpdateCheck.Never)]
 		public string password
 		{
 			get
@@ -1600,7 +1600,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_login", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_login", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string login
 		{
 			get
@@ -1784,7 +1784,7 @@ namespace DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string email
 		{
 			get
@@ -1823,7 +1823,7 @@ namespace DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string email
 		{
 			get
@@ -1897,7 +1897,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ubezpieczenie", DbType="VarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ubezpieczenie", DbType="VarChar(MAX)", UpdateCheck=UpdateCheck.Never)]
 		public string ubezpieczenie
 		{
 			get
@@ -1917,7 +1917,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ostatnia_wizyta", DbType="Date")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ostatnia_wizyta", DbType="Date", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<System.DateTime> ostatnia_wizyta
 		{
 			get

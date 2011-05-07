@@ -60,32 +60,32 @@
   <Table Name="dbo.Uzytkownik" Member="Uzytkowniks">
     <Type Name="Uzytkownik" InheritanceCode="0" IsInheritanceDefault="true">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="imie" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="nazwisko" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
-      <Column Name="pesel" Type="System.Decimal" DbType="Decimal(11,0)" CanBeNull="true" />
-      <Column Name="id_typ" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" IsDiscriminator="true" />
-      <Column Name="kod_pocztowy" Type="System.String" DbType="Char(6)" CanBeNull="true" />
-      <Column Name="miasto" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="ulica" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="nr_domu" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="telefon" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="password" Type="System.String" DbType="Char(160)" CanBeNull="true" />
-      <Column Name="login" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="imie" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="nazwisko" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="pesel" Type="System.Decimal" DbType="Decimal(11,0)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="id_typ" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" UpdateCheck="Never" IsDiscriminator="true" />
+      <Column Name="kod_pocztowy" Type="System.String" DbType="Char(6)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="miasto" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ulica" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="nr_domu" Type="System.String" DbType="VarChar(10)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="telefon" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="password" Type="System.String" DbType="Char(160)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="login" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="Uzytkownik_Rejestracja" Member="Rejestracjas" ThisKey="id" OtherKey="id_pacj" Type="Rejestracja" />
       <Association Name="Uzytkownik_Wpis_kartotera" Member="Wpis_kartoteras" ThisKey="id" OtherKey="id_pacj" Type="Wpis_kartotera" />
       <Association Name="Uzytkownik_Specjalizacja_Lekarz" Member="Specjalizacja_Lekarzs" ThisKey="id" OtherKey="idUzytkownik" Type="Specjalizacja_Lekarz" />
       <Association Name="Uzytkownik_Pacjent" Member="Pacjents" ThisKey="id" OtherKey="id_lek" Type="Pacjent" />
       <Association Name="Uzytkownik_Godziny_przyj" Member="Godziny_przyjs" ThisKey="id" OtherKey="id_uzytkownik" Type="Godziny_przyj" />
       <Type Name="Administrator" InheritanceCode="3">
-        <Column Name="email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+        <Column Name="email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
       </Type>
       <Type Name="Lekarz" InheritanceCode="1">
-        <Column Name="email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+        <Column Name="email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
       </Type>
       <Type Name="Pacjent" InheritanceCode="2">
         <Column Name="id_lek" Type="System.Int32" DbType="Int" CanBeNull="true" />
-        <Column Name="ubezpieczenie" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-        <Column Name="ostatnia_wizyta" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+        <Column Name="ubezpieczenie" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
+        <Column Name="ostatnia_wizyta" Type="System.DateTime" DbType="Date" CanBeNull="true" UpdateCheck="Never" />
         <Association Name="Uzytkownik_Pacjent" Member="Uzytkownik" ThisKey="id_lek" OtherKey="id" Type="Uzytkownik" IsForeignKey="true" />
       </Type>
     </Type>

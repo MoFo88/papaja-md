@@ -90,7 +90,7 @@ first child of the left and right table columns */
 
 .page
 {
-    width: 960px;
+    width: 1024px;
     background-color: #fff;
     margin: 20px auto 0px auto;
     border: 1px solid #496077;
@@ -403,9 +403,9 @@ div.accountInfo
 
 /* Grid  View */
 
-.gridView 
+.gridView  
 { 
-    width: 90%; 
+    width: 100% !important; 
     background-color: #fff; 
     margin: 5px 0 10px 0; 
     border: solid 1px #525252; 
@@ -414,37 +414,50 @@ div.accountInfo
 
 .gridView td 
 { 
-    text-align:center;
-    padding: 2px 0 0 0px; 
+    /*text-align:center;*/
+    padding: 2px 4px 4px 4px;
     border: solid 1px #c1c1c1; 
     color: #717171; 
 }
 
-.gridView td input , .gridView td img
+.gridView td img
 { 
+    display: block;
+    margin: 0 auto;
     height: 30px;
     max-width: 30px;
+}
+
+.gridView td input
+{
+   width: 95%; 
 }
 
 
 .gridView th 
 { 
     padding: 4px 2px; 
-    color: #222; 
-    background: #efefef url(grd_head.png) repeat-x top; 
+    color: #333; 
+    background: #4b6c9e /*url(../images/grd_pgr.png) repeat-x top*/; 
     border-left: solid 1px #525252; 
     font-size: 0.9em; 
 }
 
-.gridView .alt 
+.gridView th a
+{
+    color: #fefefe;
+}
+
+
+.gridView .alt
 { 
-    background: #fcfcfc url(grd_alt.png) repeat-x top; 
+    background: #fcfcfc url(../images/grd_alt.png) repeat-x top; 
 }
 
 .gridView .pgr 
 { 
    
-    background: #424242 url(grd_pgr.png) repeat-x top; 
+    background: #424242 url../images/grd_pgr.png) repeat-x top; 
 }
 
 .gridView .pgr table 
@@ -458,19 +471,19 @@ div.accountInfo
     padding:0 6px;
     border-left: solid 1px #666; 
     font-weight: bold; 
-    color: #fff; 
+    color: #034af3; 
     line-height: 12px; 
  } 
    
 .gridView .pgr a 
 { 
-    color: #666; 
+    color: #000; 
     text-decoration: none; 
 }
 
 .gridView .pgr a:hover 
 { 
-    color: #000; 
+    color: #496077; 
     text-decoration: none; 
 }
 
