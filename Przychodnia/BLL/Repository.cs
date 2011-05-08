@@ -15,7 +15,6 @@ namespace BLL
             PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
             var query = from u in ctx.Uzytkowniks.OfType<Lekarz>() select u;
 
-
             return query.ToList();
         }
 
@@ -263,6 +262,19 @@ namespace BLL
             Lekarz usr = query.SingleOrDefault();
 
             usr.email = email;
+            ctx.SubmitChanges();
+        }
+
+        public static void UpdateDrData(Lekarz dr)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+            Repository.UpdateUserData(dr, dr.imie, dr.nazwisko, dr.kod_pocztowy,
+                dr.miasto, dr.nr_domu, dr.pesel, dr.telefon, dr.ulica, dr.login);
+
+            var query = from u in ctx.Uzytkowniks.OfType<Lekarz>() where u.id == dr.id select u;
+            Lekarz usr = query.SingleOrDefault();
+            usr.email = dr.email;
+
             ctx.SubmitChanges();
         }
 
