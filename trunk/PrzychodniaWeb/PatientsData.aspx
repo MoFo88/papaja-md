@@ -14,7 +14,6 @@
         AllowPaging="True" 
         AllowSorting="True" 
         AutoGenerateColumns="False" 
-        onselectedindexchanged="gridViewPatients_SelectedIndexChanged" 
         DataKeyNames="id" 
         onrowdeleted="gridViewPatients_RowDeleted"
         CssClass="gridView"  
@@ -46,7 +45,7 @@
                 SortExpression="ubezpieczenie" />
            <asp:TemplateField HeaderText="Lekarz rodzinny"  SortExpression="id_lek" >
                 <ItemTemplate>
-                    <%#  Repository.GetUserByID( Int32.Parse( Eval("id_lek").ToString() )) %>
+                    <%# GetDrFullName( Eval("id_lek") ) %>
                 </ItemTemplate>
                 <EditItemTemplate>
                     <asp:DropDownList ID="ddlEditDr" runat="server" DataSourceID="odsDr" 
@@ -61,8 +60,8 @@
     <PagerStyle CssClass="pgr"></PagerStyle>
     </asp:GridView>
 
-    <asp:ObjectDataSource ID="odsDr" TypeName="BLL.Repository"   runat="server" 
-        SelectMethod="GetAllDoctors" >
+    <asp:ObjectDataSource ID="odsDr" TypeName="Root"   runat="server" 
+        SelectMethod="GetAllDrDdList" >
     </asp:ObjectDataSource>
 
     <asp:LinqDataSource 

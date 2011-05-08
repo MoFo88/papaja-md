@@ -95,4 +95,12 @@ public class Root
         }
     }
 
+    public List<Lekarz> GetAllDrDdList()
+    {
+        List<Lekarz> drList = Repository.GetAllDoctors();
+        drList.Add(new NullObjectDr());
+
+        return drList;
+    }
+
 }

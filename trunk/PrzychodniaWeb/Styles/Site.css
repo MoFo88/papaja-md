@@ -420,17 +420,18 @@ div.accountInfo
     color: #717171; 
 }
 
-.gridView td img
+ .gridView td.selectImage  input
 { 
     display: block;
     margin: 0 auto;
-    height: 30px;
+    max-height: 30px;
     max-width: 30px;
 }
 
 .gridView td input
 {
    width: 95%; 
+   max-height: 30px;
 }
 
 
