@@ -26,8 +26,7 @@
             <asp:BoundField DataField="nazwisko" HeaderText="nazwisko" SortExpression="nazwisko" />
             <asp:BoundField DataField="pesel" HeaderText="pesel" SortExpression="pesel" />
             <asp:BoundField DataField="ostatnia_wizyta" HeaderText="ostatnia_wizyta" SortExpression="ostatnia_wizyta" />
-            
-            <asp:CommandField SelectImageUrl="~/images/arrowRight.png" ButtonType="Image" HeaderText="Zobacz"  ShowSelectButton="True" />
+            <asp:CommandField ItemStyle-CssClass="selectImage" SelectImageUrl="~/images/arrowRight.png" ButtonType="Image" HeaderText="Zobacz"  ShowSelectButton="True" />
         
         </Columns>
     </asp:GridView>
