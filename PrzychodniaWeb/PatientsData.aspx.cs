@@ -230,4 +230,8 @@ public partial class PatientsData : System.Web.UI.Page
 
         
     }
+    protected void gridViewPatients_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }  

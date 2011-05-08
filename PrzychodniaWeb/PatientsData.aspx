@@ -7,6 +7,13 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
 
+
+    <asp:ValidationSummary 
+        ID="editPasswordValidationSummary" 
+        runat="server" 
+        CssClass="failureNotification" 
+        ValidationGroup="editPatientDataValidationGroup"/>
+
     <asp:GridView 
         ID="gridViewPatients" 
         runat="server" 
@@ -26,23 +33,107 @@
         >
     <AlternatingRowStyle CssClass="alt"></AlternatingRowStyle>
         <Columns >
-            <asp:BoundField HeaderText="id" DataField="id" SortExpression="id" 
-                InsertVisible="False" ReadOnly="True"  />
-            <asp:BoundField HeaderText="imie" DataField="imie" SortExpression="imie"  />
-            <asp:BoundField HeaderText="nazwisko" DataField="nazwisko" 
-                SortExpression="nazwisko"  />
-            <asp:BoundField HeaderText="pesel" DataField="pesel" SortExpression="pesel"  />
-            <asp:BoundField HeaderText="kod_pocztowy" DataField="kod_pocztowy" 
-                SortExpression="kod_pocztowy"  />
-            <asp:BoundField HeaderText="miasto" DataField="miasto" 
-                SortExpression="miasto"  />
-            <asp:BoundField DataField="ulica" HeaderText="ulica" SortExpression="ulica" />
-            <asp:BoundField DataField="nr_domu" HeaderText="nr_domu" 
-                SortExpression="nr_domu" />
-            <asp:BoundField DataField="telefon" HeaderText="telefon" 
-                SortExpression="telefon" />
-           <asp:BoundField DataField="ubezpieczenie" HeaderText="ubezpieczenie" 
-                SortExpression="ubezpieczenie" />
+            <%--<asp:BoundField HeaderText="id" DataField="id" SortExpression="id" 
+                InsertVisible="False" ReadOnly="True"  />--%>
+            <asp:TemplateField HeaderText="imie" SortExpression="imie">
+            <ItemTemplate>
+                  <asp:Label ID="Label1" runat="server" Text='<%# Bind("imie") %>'></asp:Label>
+            </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="tbName" runat="server" Text='<%# Bind("imie") %>'></asp:TextBox>
+                    <asp:RequiredFieldValidator 
+                        ID="tbNameRequired" 
+                        runat="server" 
+                        ControlToValidate="tbName" 
+                        CssClass="failureNotification" 
+                        ErrorMessage="Imię jest wymagane." 
+                        ToolTip="Imię jest wymagane." 
+                        ValidationGroup="editPatientDataValidationGroup"
+                        >*</asp:RequiredFieldValidator>
+                </EditItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="nazwisko" SortExpression="nazwisko">
+                <ItemTemplate>
+                    <asp:Label ID="Label2" runat="server" Text='<%# Bind("nazwisko") %>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="tbSurname" runat="server" Text='<%# Bind("nazwisko") %>'></asp:TextBox>
+                    <asp:RequiredFieldValidator 
+                        ID="tbSurnameRequired" 
+                        runat="server" 
+                        ControlToValidate="tbSurname" 
+                        CssClass="failureNotification" 
+                        ErrorMessage="Nazwisko jest wymagane." 
+                        ToolTip="Nazwisko jest wymagane." 
+                        ValidationGroup="editPatientDataValidationGroup"
+                        >*</asp:RequiredFieldValidator>
+                </EditItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="pesel" SortExpression="pesel">
+                <ItemTemplate>
+                    <asp:Label ID="Label3" runat="server" Text='<%# Bind("pesel") %>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="tbPesel" runat="server" Text='<%# Bind("pesel") %>'></asp:TextBox>
+                    <asp:RequiredFieldValidator 
+                        ID="tbPeselRequired" 
+                        runat="server" 
+                        ControlToValidate="tbPesel" 
+                        CssClass="failureNotification" 
+                        ErrorMessage="Pesel jest wymagany." 
+                        ToolTip="Pesel jest wymagany." 
+                        ValidationGroup="editPatientDataValidationGroup"
+                        >*</asp:RequiredFieldValidator>
+                </EditItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="kod_pocztowy" SortExpression="kod_pocztowy">
+                <ItemTemplate>
+                    <asp:Label ID="Label4" runat="server" Text='<%# Bind("kod_pocztowy") %>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("kod_pocztowy") %>'></asp:TextBox>
+                </EditItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="miasto" SortExpression="miasto">
+                <ItemTemplate>
+                    <asp:Label ID="Label5" runat="server" Text='<%# Bind("miasto") %>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("miasto") %>'></asp:TextBox>
+                </EditItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="ulica" SortExpression="ulica">
+                <ItemTemplate>
+                    <asp:Label ID="Label6" runat="server" Text='<%# Bind("ulica") %>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox6" runat="server" Text='<%# Bind("ulica") %>'></asp:TextBox>
+                </EditItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="nr_domu" SortExpression="nr_domu">
+                <ItemTemplate>
+                    <asp:Label ID="Label7" runat="server" Text='<%# Bind("nr_domu") %>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox7" runat="server" Text='<%# Bind("nr_domu") %>'></asp:TextBox>
+                </EditItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="telefon" SortExpression="telefon">
+                <ItemTemplate>
+                    <asp:Label ID="Label8" runat="server" Text='<%# Bind("telefon") %>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox8" runat="server" Text='<%# Bind("telefon") %>'></asp:TextBox>
+                </EditItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="ubezpieczenie" SortExpression="ubezpieczenie">
+                <ItemTemplate>
+                    <asp:Label ID="Label9" runat="server" Text='<%# Bind("ubezpieczenie") %>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox9" runat="server" Text='<%# Bind("ubezpieczenie") %>'></asp:TextBox>
+                </EditItemTemplate>
+            </asp:TemplateField>
            <asp:TemplateField HeaderText="Lekarz rodzinny"  SortExpression="id_lek" >
                 <ItemTemplate>
                     <%# GetDrFullName( Eval("id_lek") ) %>
@@ -54,7 +145,7 @@
                 </EditItemTemplate>
            </asp:TemplateField>
             <asp:CommandField ShowDeleteButton="True" />
-            <asp:CommandField ShowEditButton="True" />
+            <asp:CommandField ShowEditButton="True" ValidationGroup="editPatientDataValidationGroup" />
         </Columns>
 
     <PagerStyle CssClass="pgr"></PagerStyle>
