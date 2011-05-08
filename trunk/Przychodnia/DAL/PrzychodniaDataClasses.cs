@@ -2,7 +2,6 @@ namespace DAL
 {
     partial class PrzychodniaDataClassesDataContext
     {
-
     }
 
     partial class Uzytkownik
@@ -14,4 +13,5 @@ namespace DAL
 
         public string Name { get { return this.imie + " " + this.nazwisko; } }
     }
+
 }

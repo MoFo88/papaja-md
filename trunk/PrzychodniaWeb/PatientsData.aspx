@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="PatientsData.aspx.cs" Inherits="PatientsData" %>
 <%@ MasterType VirtualPath="~/Site.master" %>
+<%@ Import Namespace="BLL" %>
+<%@ Import Namespace="DAL" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 </asp:Content>
@@ -17,10 +19,14 @@
         onrowdeleted="gridViewPatients_RowDeleted"
         CssClass="gridView"  
         PagerStyle-CssClass="pgr"  
-        AlternatingRowStyle-CssClass="alt" onrowupdated="gridViewPatients_RowUpdated"
+        AlternatingRowStyle-CssClass="alt" 
+        onrowupdated="gridViewPatients_RowUpdated" 
+        onrowdatabound="gridViewPatients_RowDataBound" 
+        onrowupdating="gridViewPatients_RowUpdating"
+        
         >
-<AlternatingRowStyle CssClass="alt"></AlternatingRowStyle>
-        <Columns>
+    <AlternatingRowStyle CssClass="alt"></AlternatingRowStyle>
+        <Columns >
             <asp:BoundField HeaderText="id" DataField="id" SortExpression="id" 
                 InsertVisible="False" ReadOnly="True"  />
             <asp:BoundField HeaderText="imie" DataField="imie" SortExpression="imie"  />
@@ -36,26 +42,43 @@
                 SortExpression="nr_domu" />
             <asp:BoundField DataField="telefon" HeaderText="telefon" 
                 SortExpression="telefon" />
+           <asp:BoundField DataField="ubezpieczenie" HeaderText="ubezpieczenie" 
+                SortExpression="ubezpieczenie" />
+           <asp:TemplateField HeaderText="Lekarz rodzinny"  SortExpression="id_lek" >
+                <ItemTemplate>
+                    <%#  Repository.GetUserByID( Int32.Parse( Eval("id_lek").ToString() )) %>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:DropDownList ID="ddlEditDr" runat="server" DataSourceID="odsDr" 
+                        DataTextField="Name" DataValueField="id">
+                    </asp:DropDownList>
+                </EditItemTemplate>
+           </asp:TemplateField>
             <asp:CommandField ShowDeleteButton="True" />
             <asp:CommandField ShowEditButton="True" />
         </Columns>
 
-<PagerStyle CssClass="pgr"></PagerStyle>
+    <PagerStyle CssClass="pgr"></PagerStyle>
     </asp:GridView>
+
+    <asp:ObjectDataSource ID="odsDr" TypeName="BLL.Repository"   runat="server" 
+        SelectMethod="GetAllDoctors" >
+    </asp:ObjectDataSource>
 
     <asp:LinqDataSource 
         ID="LinqDataSource1"  
         runat="server" 
         onselecting="LinqDataSource1_Selecting"
-        AutoSort = "true"
-        ContextTypeName="DAL.PrzychodniaDataClassesDataContext" 
+        ContextTypeName="DAL.PrzychodniaDataClassesDataContext"
+        TableName="Uzytkowniks"
+        EntityTypeName="Pacjent" 
         EnableDelete="true"
-        TableName="Uzytkowniks" 
+        EnableUpdate="true"
         ondeleting="LinqDataSource1_Deleting" 
-        EnableUpdate="True" onupdating="LinqDataSource1_Updating"
-        
+        onupdating="LinqDataSource1_Updating"
         >
     </asp:LinqDataSource>
+    
 
 </asp:Content>
 
