@@ -54,7 +54,7 @@ public partial class AddNewDoctor : System.Web.UI.Page
                 tbImie.Text,
                 tbNazwisko.Text,
                 tbEmail.Text,
-                tbKodKocztowy.Text,
+                tbKodPocztowy.Text,
                 tbMiasto.Text,
                 tbNrDomu.Text,
                 decPesel,
@@ -74,7 +74,7 @@ public partial class AddNewDoctor : System.Web.UI.Page
         tbImie.Text = "";
         tbNazwisko.Text = "";
         tbEmail.Text = "";
-        tbKodKocztowy.Text = "";
+        tbKodPocztowy.Text = "";
         tbMiasto.Text = "";
         tbNrDomu.Text = "";
 
