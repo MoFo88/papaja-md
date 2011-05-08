@@ -15,7 +15,8 @@
         PagerStyle-CssClass="pgr"  
         AlternatingRowStyle-CssClass="alt" 
         DataSourceID="LinqDataSource1"
-        AutoGenerateColumns="False"
+        AutoGenerateColumns="False" 
+        onrowdeleted="gridViewDrs_RowDeleted" onrowupdated="gridViewDrs_RowUpdated"
         >
 <AlternatingRowStyle CssClass="alt"></AlternatingRowStyle>
 
@@ -39,6 +40,10 @@
             <asp:BoundField DataField="email" HeaderText="email" 
                 SortExpression="email" />
             
+            <asp:CommandField ShowDeleteButton="True" />
+            <asp:CommandField ShowSelectButton="True" />
+            <asp:CommandField ShowEditButton="True" />
+            
         </Columns>
 
 <PagerStyle CssClass="pgr"></PagerStyle>
@@ -50,7 +55,8 @@
         TableName="Uzytkowniks"
         EntityTypeName="Lekarz" 
         onselecting="LinqDataSource1_Selecting" 
-        ContextTypeName="DAL.PrzychodniaDataClassesDataContext"
+        ContextTypeName="DAL.PrzychodniaDataClassesDataContext" 
+        EnableDelete="True" EnableUpdate="True" ondeleting="LinqDataSource1_Deleting"
         >
     </asp:LinqDataSource>
 
