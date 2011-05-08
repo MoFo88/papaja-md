@@ -54,17 +54,26 @@ public partial class PatientsData : System.Web.UI.Page
 
     protected void LinqDataSource1_Deleting(object sender, LinqDataSourceDeleteEventArgs e)
     {
-        if (e.Exception != null)
+        try
+        {
+            if (e.Exception != null)
+            {
+                Master.Message = e.Exception.Message;
+                Master.SetMessageColor(Color.Red);
+                e.ExceptionHandled = true;
+            }
+
+            int id = ((Uzytkownik)e.OriginalObject).id;
+            Repository.DeleteUser(id);
+
+        }
+        catch (Exception ex)
         {
             Master.Message = e.Exception.Message;
             Master.SetMessageColor(Color.Red);
-            e.ExceptionHandled = true;
         }
-
-        int id = ((Uzytkownik)e.OriginalObject).id;
-        Repository.DeleteUser(id);
-
     }
+
     protected void gridViewPatients_RowDeleted(object sender, GridViewDeletedEventArgs e)
     {
         if (e.Exception != null)
@@ -74,22 +83,115 @@ public partial class PatientsData : System.Web.UI.Page
             e.ExceptionHandled = true;
         }
     }
+
     protected void gridViewPatients_RowUpdated(object sender, GridViewUpdatedEventArgs e)
     {
-        if (e.Exception != null)
+        try
+        {
+
+            Pacjent  p = Repository.GetUserByID( Int32.Parse( e.Keys["id"].ToString() )) as Pacjent;
+
+            GridView gv = (GridView)sender;
+            GridViewRow gvr = gv.Rows[ gv.EditIndex ];
+
+
+            //String imie = (e.NewValues["imie"] == null ) ? null : e.NewValues["imie"].ToString();
+            //String nazwisko = (e.NewValues["nazwisko"] == null) ? null : e.NewValues["nazwisko"].ToString();
+            //Decimal? pesel = Decimal.Parse( (e.NewValues["pesel"] == null) ? null : e.NewValues["pesel"].ToString() );
+            //String kod_pocztowy = (e.NewValues["kod_pocztowy"] == null) ? null : e.NewValues["kod_pocztowy"].ToString() ;
+            //String miasto = (e.NewValues["miasto"] == null) ? null : e.NewValues["miasto"].ToString() ;
+            //String ulica = (e.NewValues["ulica"] == null) ? null : e.NewValues["ulica"].ToString(); 
+            //String nr_domu = (e.NewValues["nr_domu"] == null) ? null : e.NewValues["nr_domu"].ToString() ;
+            //String telefon = (e.NewValues["telefon"] == null) ? null : e.NewValues["telefon"].ToString() ;
+            
+            String ubezpieczenie = (e.NewValues["ubezpieczenie"] == null) ? null : e.NewValues["ubezpieczenie"].ToString();
+            
+            GridViewRow grv = gridViewPatients.Rows[ gridViewPatients.EditIndex ];
+            DropDownList ddl = (DropDownList)gridViewPatients.Rows[gridViewPatients.EditIndex].FindControl("ddlEditDr");
+            int? id_lek = Int32.Parse( ddl.SelectedValue );
+
+            p.ubezpieczenie = ubezpieczenie;
+            p.id_lek = id_lek;
+
+            Repository.UpdatePacjentData(p);
+
+            if (e.Exception != null)
+            {
+                Master.Message = e.Exception.Message;
+                Master.SetMessageColor(Color.Red);
+                e.ExceptionHandled = true;
+            }
+
+        }
+        catch(Exception ex)
         {
             Master.Message = e.Exception.Message;
             Master.SetMessageColor(Color.Red);
-            e.ExceptionHandled = true;
         }
+        
     }
+
     protected void LinqDataSource1_Updating(object sender, LinqDataSourceUpdateEventArgs e)
     {
-        if (e.Exception != null)
+        try
+        {
+            if (e.Exception != null)
+            {
+                Master.Message = e.Exception.Message;
+                Master.SetMessageColor(Color.Red);
+                e.ExceptionHandled = true;
+            }
+        }
+        catch (Exception ex)
         {
             Master.Message = e.Exception.Message;
             Master.SetMessageColor(Color.Red);
-            e.ExceptionHandled = true;
+        }
+
+     
+         
+    }
+    protected void gridViewPatients_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+
+        try
+        {
+            if (e.Row.RowState == DataControlRowState.Edit
+            || (e.Row.RowState == (DataControlRowState.Edit | DataControlRowState.Alternate)))
+            {
+
+                int? id= ((Pacjent)e.Row.DataItem).id_lek;
+
+                DropDownList ddl = (DropDownList)e.Row.FindControl("ddlEditDr");
+                String st = ddl.SelectedValue;
+
+                ListItem li2 = ddl.Items.FindByValue(st);
+                li2.Selected = false;
+
+                ListItem li = ddl.Items.FindByValue(id.ToString());
+                li.Selected = true;
+            }
+        }
+        catch(Exception ex)
+        {
+            Master.Message = ex.Message;
+            Master.SetMessageColor(Color.Red);
+        }
+
+    }
+
+    protected void gridViewPatients_RowUpdating(object sender, GridViewUpdateEventArgs e)
+    {
+        try
+        {
+            GridViewRow grv = gridViewPatients.Rows[ gridViewPatients.EditIndex ];
+            DropDownList ddl = (DropDownList)gridViewPatients.Rows[gridViewPatients.EditIndex].FindControl("ddlEditDr");
+            e.NewValues["id_lek "] = ddl.SelectedValue;
+        }
+        catch (Exception ex)
+        {
+            Master.Message = ex.Message;
+            Master.SetMessageColor(Color.Red);
         }
     }
 }  

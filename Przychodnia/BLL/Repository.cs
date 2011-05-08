@@ -15,6 +15,7 @@ namespace BLL
             PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
             var query = from u in ctx.Uzytkowniks.OfType<Lekarz>() select u;
 
+
             return query.ToList();
         }
 
@@ -274,6 +275,33 @@ namespace BLL
             Administrator usr = query.SingleOrDefault();
             
             usr.email = email;
+            ctx.SubmitChanges();
+        }
+
+        public static void UpdatePacjentData(Pacjent patjent, String name, String surname,  String postalCode, String city, String streetNr, Decimal? pesel, String phone, String street, String ubezpieczenie, int id_lek)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+            Repository.UpdateUserData(patjent, name, surname, postalCode, city, streetNr, pesel, phone, street, null);
+
+            var query = from u in ctx.Uzytkowniks.OfType<Pacjent>() where u.id == patjent.id select u;
+            Pacjent usr = query.SingleOrDefault();
+
+            usr.id_lek = id_lek;
+            usr.ubezpieczenie = ubezpieczenie;
+            ctx.SubmitChanges();
+        }
+
+        public static void UpdatePacjentData(Pacjent patjent)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+            Repository.UpdateUserData(patjent, patjent.imie, patjent.nazwisko, patjent.kod_pocztowy,
+                patjent.miasto, patjent.nr_domu, patjent.pesel, patjent.telefon, patjent.ulica, null);
+
+            var query = from u in ctx.Uzytkowniks.OfType<Pacjent>() where u.id == patjent.id select u;
+            Pacjent usr = query.SingleOrDefault();
+            usr.ubezpieczenie = patjent.ubezpieczenie;
+            usr.id_lek = patjent.id_lek;
+
             ctx.SubmitChanges();
         }
 
