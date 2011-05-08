@@ -90,7 +90,7 @@ first child of the left and right table columns */
 
 .page
 {
-    width: 1024px;
+    width: 1034px;
     background-color: #fff;
     margin: 20px auto 0px auto;
     border: 1px solid #496077;
@@ -292,7 +292,7 @@ div.accountInfo
 
 .failureNotification
 {
-    font-size: 1.2em;
+    font-size: 1em;
     color: Red;
 }
 
@@ -430,7 +430,8 @@ div.accountInfo
 
 .gridView td input
 {
-   width: 95%; 
+    
+   width: 75%; 
    max-height: 30px;
 }
 
