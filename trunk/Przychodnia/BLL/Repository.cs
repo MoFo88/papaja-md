@@ -19,7 +19,7 @@ namespace BLL
             return query.ToList();
         }
 
-
+        
         public static List<Pacjent> GetAllPatients()
         {
             PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
