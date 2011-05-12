@@ -19,7 +19,7 @@ namespace BLL
 
     public class UserExistException : ApplicationException
     {
-        public UserExistException() : base("Użytkownik o podanym haśle juz istnieje!") { }
+        public UserExistException() : base("Użytkownik o podanym loginie juz istnieje!") { }
         public UserExistException(string p) : base(p) { }
     }
 
