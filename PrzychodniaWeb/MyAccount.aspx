@@ -240,7 +240,6 @@
             <fieldset>
                 <legend>Specjalizacje</legend>
                 <asp:Panel ID="panelSpecializations" runat="server">
-                <asp:Panel ID="panel1" runat="server">
                 <asp:CheckBoxList 
                             ID="cblSpecializations" 
                             runat="server" 
@@ -249,9 +248,8 @@
                             RepeatColumns="3" 
                             RepeatDirection="Horizontal">
                 </asp:CheckBoxList>
-            </asp:Panel>
+                </asp:Panel>
 
-            </asp:Panel>
                 <p>
                     <asp:Label ID="lblSpecMessage" runat="server" Text=""></asp:Label>
                 </p>

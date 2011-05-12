@@ -112,12 +112,10 @@ public partial class MyAccount : System.Web.UI.Page
         {
             dr = Repository.GetUserByID(Int32.Parse(Session["userId"].ToString())) as Lekarz;
 
-
             List<Specjalizacja> specList = Repository.GetAllSpecjalizations();
 
             cblSpecializations.DataSource = specList;
             cblSpecializations.DataBind();
-
 
             foreach (ListItem item in cblSpecializations.Items)
             {
@@ -251,6 +249,7 @@ public partial class MyAccount : System.Web.UI.Page
             lblEditMessage.ForeColor = Color.Red;
         }
     }
+
     protected void btnChangePassword_Click(object sender, EventArgs e)
     {
         try
@@ -274,6 +273,7 @@ public partial class MyAccount : System.Web.UI.Page
             lblPasswordChangeMessage.ForeColor = Color.Red;
         }
     }
+    
     protected void btnEditSpec_Click(object sender, EventArgs e)
     {
         try

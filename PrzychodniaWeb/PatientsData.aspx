@@ -91,7 +91,16 @@
                     <asp:Label ID="Label4" runat="server" Text='<%# Bind("kod_pocztowy") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("kod_pocztowy") %>'></asp:TextBox>
+                    <asp:TextBox ID="tbPostalCode" runat="server" Text='<%# Bind("kod_pocztowy") %>'></asp:TextBox>
+                    <asp:RegularExpressionValidator 
+                                        ID="tbEditPostalCodeRegularExpressionValidator" 
+                                        runat="server" 
+                                        ToolTip="Błedny kod pocztowy"
+                                        ControlToValidate="tbPostalCode" 
+                                        CssClass="failureNotification"
+                                        ValidationGroup="editPatientDataValidationGroup"
+                                        ErrorMessage="Błedny kod pocztowy." 
+                                        ValidationExpression="\d{2}-\d{3}">*</asp:RegularExpressionValidator>
                 </EditItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="miasto" SortExpression="miasto">

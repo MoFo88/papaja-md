@@ -50,6 +50,15 @@ namespace BLL
 
             Uzytkownik user = ctx.Uzytkowniks.SingleOrDefault( u => u.id == userId );
 
+            //gdy lekarz, edytuj dane jego pacjętów
+            if (user is Lekarz)
+            {
+                foreach (Pacjent p in user.Pacjents)
+                {
+                    p.id_lek = null;
+                }
+            }
+
             ctx.Uzytkowniks.DeleteOnSubmit(user);
 
             ctx.SubmitChanges();
@@ -221,19 +230,18 @@ namespace BLL
         {
             PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
 
-            if (login != null)
+            if (!String.IsNullOrEmpty(login))
             {
-                if (login != user.login)
+                
+                var query = from u in ctx.Uzytkowniks where u.login == login && u.id != user.id select u;
+
+                Uzytkownik us = query.SingleOrDefault();
+
+                if (us != null)
                 {
-                    var query = from u in ctx.Uzytkowniks where u.login == login select u;
-
-                    Uzytkownik us = query.SingleOrDefault();
-
-                    if (us != null)
-                    {
-                        throw new UserExistException();
-                    }
+                    throw new UserExistException();
                 }
+               
             }
 
             var query2 = from u in ctx.Uzytkowniks where u.id == user.id select u;
@@ -252,6 +260,11 @@ namespace BLL
             ctx.SubmitChanges();
         }
 
+        public static void UpdateUserData(Uzytkownik u)
+        {
+            Repository.UpdateUserData(u, u.imie, u.nazwisko, u.kod_pocztowy,
+                u.miasto, u.nr_domu, u.pesel, u.telefon, u.ulica, u.login);
+        }
         
         public static void UpdateDrData(Lekarz dr, String imie, String nazwisko, String email, String kodPocztowy, String miasto, string nrDomu, Decimal? pesel, string telefon, string ulica, List<int> idsSpecjalizacja, String login)
         {
@@ -290,7 +303,7 @@ namespace BLL
             ctx.SubmitChanges();
         }
 
-        public static void UpdatePacjentData(Pacjent patjent, String name, String surname,  String postalCode, String city, String streetNr, Decimal? pesel, String phone, String street, String ubezpieczenie, int id_lek)
+        public static void UpdatePatjentData(Pacjent patjent, String name, String surname,  String postalCode, String city, String streetNr, Decimal? pesel, String phone, String street, String ubezpieczenie, int id_lek)
         {
             PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
             Repository.UpdateUserData(patjent, name, surname, postalCode, city, streetNr, pesel, phone, street, null);
@@ -303,7 +316,7 @@ namespace BLL
             ctx.SubmitChanges();
         }
 
-        public static void UpdatePacjentData(Pacjent patjent)
+        public static void UpdatePatjentData(Pacjent patjent)
         {
             PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
             Repository.UpdateUserData(patjent, patjent.imie, patjent.nazwisko, patjent.kod_pocztowy,

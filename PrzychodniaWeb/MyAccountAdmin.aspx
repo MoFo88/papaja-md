@@ -210,6 +210,15 @@
 
             </asp:DynamicHyperLink>
 
+            <asp:DynamicHyperLink ID="dhlEditDrData" runat="server" NavigateUrl="~/DrData.aspx" >
+                
+                <div class="imageArrowContainer">
+                <asp:Image  ID="Image4" runat="server" ImageUrl = "~/images/arrowRight.jpg" CssClass="imageArrow" />
+                <asp:Label ID="lblEditDrData"  runat="server" Text="Edytuj dane lekarza"></asp:Label>
+                </div>
+
+            </asp:DynamicHyperLink>
+
         </div>
 
 </asp:Content>

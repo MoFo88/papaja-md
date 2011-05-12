@@ -138,7 +138,7 @@ public partial class PatientsData : System.Web.UI.Page
             p.ubezpieczenie = ubezpieczenie;
             p.id_lek = id_lek;
 
-            Repository.UpdatePacjentData(p);
+            Repository.UpdatePatjentData(p);
 
             if (e.Exception != null)
             {

@@ -12,7 +12,13 @@
         Podaj login i hasło.
         <asp:HyperLink ID="RegisterHyperLink" runat="server" EnableViewState="false">Zarejestruj się</asp:HyperLink> jeśli nie masz konta.
     </p>
-    <asp:Login ID="LoginUser" DestinationPageUrl="~/MyAccount.aspx" runat="server" onauthenticate="LoginUser_Authenticate">
+    <asp:Login 
+        ID="LoginUser" 
+        DestinationPageUrl="~/MyAccount.aspx" 
+        runat="server" 
+        onauthenticate="LoginUser_Authenticate"
+        FailureText="Próba zalogowania nie powiodła się"
+        >
         <LayoutTemplate>
             <span class="failureNotification">
                 <asp:Literal ID="FailureText" runat="server"></asp:Literal>
