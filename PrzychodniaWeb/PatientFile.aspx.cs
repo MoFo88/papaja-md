@@ -62,12 +62,14 @@ public partial class PatientFile : System.Web.UI.Page
             if (!Page.IsPostBack)
             {
                 lblEnsurance.Text = patient.ubezpieczenie;
-                lblLastVisite.Text = patient.ostatnia_wizyta.ToString();
+                if (patient.ostatnia_wizyta != null ) lblLastVisite.Text = patient.ostatnia_wizyta.ToString().Substring(0, 10);
                 lblPatientName.Text = patient.Name;
                 lblPesel.Text = patient.pesel.ToString();
                 lblPhone.Text = patient.telefon;
                 KJError = "";
             }
+
+            
 
 
         }

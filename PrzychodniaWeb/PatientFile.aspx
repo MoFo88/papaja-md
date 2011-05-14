@@ -274,7 +274,6 @@
                         HeaderStyle-CssClass="header"
                         PagerStyle-CssClass="pgr"
                         AlternatingRowStyle-CssClass="alt"
-                        AllowSorting="true"
                         >
             <Columns>
                 <asp:TemplateField HeaderText="Kartoteka" SortExpression="data">
