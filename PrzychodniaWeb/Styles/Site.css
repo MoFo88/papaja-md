@@ -238,6 +238,11 @@ div.accountInfo
     width: 390px;
 }
 
+div.name
+{
+    margin: 0 0 25px 0;
+}
+
 /* MISC  
 ----------------------------------------------------------*/
 
@@ -421,8 +426,8 @@ div.accountInfo
 { 
     display: block;
     margin: 0 auto;
-    max-height: 30px;
-    max-width: 30px;
+    max-height: 25px;
+    max-width: 23px;
 }
 
 .gridView td input
@@ -486,3 +491,84 @@ div.accountInfo
     text-decoration: none; 
 }
 
+/* Patient Field */
+
+.tab1
+{
+    height: 100px;
+}
+
+.tbResize
+{
+    margin: 35px 0 35px 0;
+    display: block;
+    margin: 0 auto;
+    width: 95%;
+    border-color: #ddd;
+}
+
+.panelField
+{
+    margin-top: 45px; 
+}
+
+.button
+{
+    -webkit-appearance: none;
+    -webkit-box-align: center;
+    -webkit-box-shadow: none;
+    -webkit-rtl-ordering: logical;
+    -webkit-user-select: text;
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: transparent;
+    background-image: none;
+    background-origin: padding-box;
+    border-bottom-color: #333;
+    border-width: thin;
+    border-left-color: #333;
+    border-right-color: #333;
+    border-top-color: #333;
+    border-bottom-style: solid;
+    box-shadow: none;
+    box-sizing: border-box;
+    color: #333;
+    cursor: pointer;
+    direction: ltr;
+    display: inline-block;
+    font-family: 'Lucida Grande', Tahoma, Verdana, Arial, sans-serif;
+    font-size: 11px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    height: 16px;
+    letter-spacing: normal;
+    line-height: normal;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    outline-color: #333;
+    outline-style: none;
+    outline-width: 0px;
+    overflow-y: visible;
+    padding-bottom: 2px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 1px;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0px;
+    text-shadow: none;
+    text-transform: none;
+    unicode-bidi: normal;
+    vertical-align: baseline;
+    white-space: nowrap;
+    width: 103px;
+    word-spacing: 0px;
+}
+
+.button a hover
+{
+    background-color: Aqua;
+}

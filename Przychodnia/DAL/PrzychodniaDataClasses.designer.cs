@@ -30,9 +30,6 @@ namespace DAL
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertKod_jednostki(Kod_jednostki instance);
-    partial void UpdateKod_jednostki(Kod_jednostki instance);
-    partial void DeleteKod_jednostki(Kod_jednostki instance);
     partial void InsertRejestracja(Rejestracja instance);
     partial void UpdateRejestracja(Rejestracja instance);
     partial void DeleteRejestracja(Rejestracja instance);
@@ -57,6 +54,15 @@ namespace DAL
     partial void InsertWpis_kartoteka(Wpis_kartoteka instance);
     partial void UpdateWpis_kartoteka(Wpis_kartoteka instance);
     partial void DeleteWpis_kartoteka(Wpis_kartoteka instance);
+    partial void InsertKod_jednostki_grupa(Kod_jednostki_grupa instance);
+    partial void UpdateKod_jednostki_grupa(Kod_jednostki_grupa instance);
+    partial void DeleteKod_jednostki_grupa(Kod_jednostki_grupa instance);
+    partial void InsertKod_jednostki_podgrupa(Kod_jednostki_podgrupa instance);
+    partial void UpdateKod_jednostki_podgrupa(Kod_jednostki_podgrupa instance);
+    partial void DeleteKod_jednostki_podgrupa(Kod_jednostki_podgrupa instance);
+    partial void InsertKod_jednostki(Kod_jednostki instance);
+    partial void UpdateKod_jednostki(Kod_jednostki instance);
+    partial void DeleteKod_jednostki(Kod_jednostki instance);
     #endregion
 		
 		public PrzychodniaDataClassesDataContext() : 
@@ -87,14 +93,6 @@ namespace DAL
 				base(connection, mappingSource)
 		{
 			OnCreated();
-		}
-		
-		public System.Data.Linq.Table<Kod_jednostki> Kod_jednostkis
-		{
-			get
-			{
-				return this.GetTable<Kod_jednostki>();
-			}
 		}
 		
 		public System.Data.Linq.Table<Rejestracja> Rejestracjas
@@ -160,191 +158,29 @@ namespace DAL
 				return this.GetTable<Wpis_kartoteka>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Kod_jednostki")]
-	public partial class Kod_jednostki : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _kod;
-		
-		private string _nazwa;
-		
-		private string _grupa;
-		
-		private string _podgrupa;
-		
-		private EntitySet<Wpis_kartoteka> _Wpis_kartotekas;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OnkodChanging(string value);
-    partial void OnkodChanged();
-    partial void OnnazwaChanging(string value);
-    partial void OnnazwaChanged();
-    partial void OngrupaChanging(string value);
-    partial void OngrupaChanged();
-    partial void OnpodgrupaChanging(string value);
-    partial void OnpodgrupaChanged();
-    #endregion
-		
-		public Kod_jednostki()
-		{
-			this._Wpis_kartotekas = new EntitySet<Wpis_kartoteka>(new Action<Wpis_kartoteka>(this.attach_Wpis_kartotekas), new Action<Wpis_kartoteka>(this.detach_Wpis_kartotekas));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
+		public System.Data.Linq.Table<Kod_jednostki_grupa> Kod_jednostki_grupas
 		{
 			get
 			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
+				return this.GetTable<Kod_jednostki_grupa>();
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_kod", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
-		public string kod
+		public System.Data.Linq.Table<Kod_jednostki_podgrupa> Kod_jednostki_podgrupas
 		{
 			get
 			{
-				return this._kod;
-			}
-			set
-			{
-				if ((this._kod != value))
-				{
-					this.OnkodChanging(value);
-					this.SendPropertyChanging();
-					this._kod = value;
-					this.SendPropertyChanged("kod");
-					this.OnkodChanged();
-				}
+				return this.GetTable<Kod_jednostki_podgrupa>();
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nazwa", DbType="Char(100) NOT NULL", CanBeNull=false)]
-		public string nazwa
+		public System.Data.Linq.Table<Kod_jednostki> Kod_jednostkis
 		{
 			get
 			{
-				return this._nazwa;
+				return this.GetTable<Kod_jednostki>();
 			}
-			set
-			{
-				if ((this._nazwa != value))
-				{
-					this.OnnazwaChanging(value);
-					this.SendPropertyChanging();
-					this._nazwa = value;
-					this.SendPropertyChanged("nazwa");
-					this.OnnazwaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_grupa", DbType="VarChar(150)")]
-		public string grupa
-		{
-			get
-			{
-				return this._grupa;
-			}
-			set
-			{
-				if ((this._grupa != value))
-				{
-					this.OngrupaChanging(value);
-					this.SendPropertyChanging();
-					this._grupa = value;
-					this.SendPropertyChanged("grupa");
-					this.OngrupaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_podgrupa", DbType="VarChar(150)")]
-		public string podgrupa
-		{
-			get
-			{
-				return this._podgrupa;
-			}
-			set
-			{
-				if ((this._podgrupa != value))
-				{
-					this.OnpodgrupaChanging(value);
-					this.SendPropertyChanging();
-					this._podgrupa = value;
-					this.SendPropertyChanged("podgrupa");
-					this.OnpodgrupaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Kod_jednostki_Wpis_kartoteka", Storage="_Wpis_kartotekas", ThisKey="id", OtherKey="id_kod_jedn")]
-		public EntitySet<Wpis_kartoteka> Wpis_kartotekas
-		{
-			get
-			{
-				return this._Wpis_kartotekas;
-			}
-			set
-			{
-				this._Wpis_kartotekas.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Wpis_kartotekas(Wpis_kartoteka entity)
-		{
-			this.SendPropertyChanging();
-			entity.Kod_jednostki = this;
-		}
-		
-		private void detach_Wpis_kartotekas(Wpis_kartoteka entity)
-		{
-			this.SendPropertyChanging();
-			entity.Kod_jednostki = null;
 		}
 	}
 	
@@ -2060,9 +1896,9 @@ namespace DAL
 		
 		private System.Nullable<System.DateTime> _data;
 		
-		private EntityRef<Kod_jednostki> _Kod_jednostki;
-		
 		private EntityRef<Uzytkownik> _Uzytkownik;
+		
+		private EntityRef<Kod_jednostki> _Kod_jednostki;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2088,8 +1924,8 @@ namespace DAL
 		
 		public Wpis_kartoteka()
 		{
-			this._Kod_jednostki = default(EntityRef<Kod_jednostki>);
 			this._Uzytkownik = default(EntityRef<Uzytkownik>);
+			this._Kod_jednostki = default(EntityRef<Kod_jednostki>);
 			OnCreated();
 		}
 		
@@ -2261,40 +2097,6 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Kod_jednostki_Wpis_kartoteka", Storage="_Kod_jednostki", ThisKey="id_kod_jedn", OtherKey="id", IsForeignKey=true)]
-		public Kod_jednostki Kod_jednostki
-		{
-			get
-			{
-				return this._Kod_jednostki.Entity;
-			}
-			set
-			{
-				Kod_jednostki previousValue = this._Kod_jednostki.Entity;
-				if (((previousValue != value) 
-							|| (this._Kod_jednostki.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Kod_jednostki.Entity = null;
-						previousValue.Wpis_kartotekas.Remove(this);
-					}
-					this._Kod_jednostki.Entity = value;
-					if ((value != null))
-					{
-						value.Wpis_kartotekas.Add(this);
-						this._id_kod_jedn = value.id;
-					}
-					else
-					{
-						this._id_kod_jedn = default(int);
-					}
-					this.SendPropertyChanged("Kod_jednostki");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Uzytkownik_Wpis_kartoteka", Storage="_Uzytkownik", ThisKey="id_pacj", OtherKey="id", IsForeignKey=true)]
 		public Uzytkownik Uzytkownik
 		{
@@ -2329,6 +2131,40 @@ namespace DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Kod_jednostki_Wpis_kartoteka", Storage="_Kod_jednostki", ThisKey="id_kod_jedn", OtherKey="id", IsForeignKey=true)]
+		public Kod_jednostki Kod_jednostki
+		{
+			get
+			{
+				return this._Kod_jednostki.Entity;
+			}
+			set
+			{
+				Kod_jednostki previousValue = this._Kod_jednostki.Entity;
+				if (((previousValue != value) 
+							|| (this._Kod_jednostki.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Kod_jednostki.Entity = null;
+						previousValue.Wpis_kartotekas.Remove(this);
+					}
+					this._Kod_jednostki.Entity = value;
+					if ((value != null))
+					{
+						value.Wpis_kartotekas.Add(this);
+						this._id_kod_jedn = value.id;
+					}
+					else
+					{
+						this._id_kod_jedn = default(int);
+					}
+					this.SendPropertyChanged("Kod_jednostki");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -2347,6 +2183,550 @@ namespace DAL
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="yasio1_superuser.Kod_jednostki_grupa")]
+	public partial class Kod_jednostki_grupa : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private System.Nullable<char> _kod;
+		
+		private string _opis;
+		
+		private EntitySet<Kod_jednostki_podgrupa> _Kod_jednostki_podgrupas;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnkodChanging(System.Nullable<char> value);
+    partial void OnkodChanged();
+    partial void OnopisChanging(string value);
+    partial void OnopisChanged();
+    #endregion
+		
+		public Kod_jednostki_grupa()
+		{
+			this._Kod_jednostki_podgrupas = new EntitySet<Kod_jednostki_podgrupa>(new Action<Kod_jednostki_podgrupa>(this.attach_Kod_jednostki_podgrupas), new Action<Kod_jednostki_podgrupa>(this.detach_Kod_jednostki_podgrupas));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_kod", DbType="Char(1)")]
+		public System.Nullable<char> kod
+		{
+			get
+			{
+				return this._kod;
+			}
+			set
+			{
+				if ((this._kod != value))
+				{
+					this.OnkodChanging(value);
+					this.SendPropertyChanging();
+					this._kod = value;
+					this.SendPropertyChanged("kod");
+					this.OnkodChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_opis", DbType="VarChar(250)")]
+		public string opis
+		{
+			get
+			{
+				return this._opis;
+			}
+			set
+			{
+				if ((this._opis != value))
+				{
+					this.OnopisChanging(value);
+					this.SendPropertyChanging();
+					this._opis = value;
+					this.SendPropertyChanged("opis");
+					this.OnopisChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Kod_jednostki_grupa_Kod_jednostki_podgrupa", Storage="_Kod_jednostki_podgrupas", ThisKey="id", OtherKey="id_grupa")]
+		public EntitySet<Kod_jednostki_podgrupa> Kod_jednostki_podgrupas
+		{
+			get
+			{
+				return this._Kod_jednostki_podgrupas;
+			}
+			set
+			{
+				this._Kod_jednostki_podgrupas.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Kod_jednostki_podgrupas(Kod_jednostki_podgrupa entity)
+		{
+			this.SendPropertyChanging();
+			entity.Kod_jednostki_grupa = this;
+		}
+		
+		private void detach_Kod_jednostki_podgrupas(Kod_jednostki_podgrupa entity)
+		{
+			this.SendPropertyChanging();
+			entity.Kod_jednostki_grupa = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="yasio1_superuser.Kod_jednostki_podgrupa")]
+	public partial class Kod_jednostki_podgrupa : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _kod;
+		
+		private string _opis;
+		
+		private System.Nullable<int> _id_grupa;
+		
+		private EntitySet<Kod_jednostki> _Kod_jednostkis;
+		
+		private EntityRef<Kod_jednostki_grupa> _Kod_jednostki_grupa;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnkodChanging(string value);
+    partial void OnkodChanged();
+    partial void OnopisChanging(string value);
+    partial void OnopisChanged();
+    partial void Onid_grupaChanging(System.Nullable<int> value);
+    partial void Onid_grupaChanged();
+    #endregion
+		
+		public Kod_jednostki_podgrupa()
+		{
+			this._Kod_jednostkis = new EntitySet<Kod_jednostki>(new Action<Kod_jednostki>(this.attach_Kod_jednostkis), new Action<Kod_jednostki>(this.detach_Kod_jednostkis));
+			this._Kod_jednostki_grupa = default(EntityRef<Kod_jednostki_grupa>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_kod", DbType="Char(3) NOT NULL", CanBeNull=false)]
+		public string kod
+		{
+			get
+			{
+				return this._kod;
+			}
+			set
+			{
+				if ((this._kod != value))
+				{
+					this.OnkodChanging(value);
+					this.SendPropertyChanging();
+					this._kod = value;
+					this.SendPropertyChanged("kod");
+					this.OnkodChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_opis", DbType="VarChar(250) NOT NULL", CanBeNull=false)]
+		public string opis
+		{
+			get
+			{
+				return this._opis;
+			}
+			set
+			{
+				if ((this._opis != value))
+				{
+					this.OnopisChanging(value);
+					this.SendPropertyChanging();
+					this._opis = value;
+					this.SendPropertyChanged("opis");
+					this.OnopisChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_grupa", DbType="Int")]
+		public System.Nullable<int> id_grupa
+		{
+			get
+			{
+				return this._id_grupa;
+			}
+			set
+			{
+				if ((this._id_grupa != value))
+				{
+					if (this._Kod_jednostki_grupa.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_grupaChanging(value);
+					this.SendPropertyChanging();
+					this._id_grupa = value;
+					this.SendPropertyChanged("id_grupa");
+					this.Onid_grupaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Kod_jednostki_podgrupa_Kod_jednostki", Storage="_Kod_jednostkis", ThisKey="id", OtherKey="id_pogdrupa")]
+		public EntitySet<Kod_jednostki> Kod_jednostkis
+		{
+			get
+			{
+				return this._Kod_jednostkis;
+			}
+			set
+			{
+				this._Kod_jednostkis.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Kod_jednostki_grupa_Kod_jednostki_podgrupa", Storage="_Kod_jednostki_grupa", ThisKey="id_grupa", OtherKey="id", IsForeignKey=true, DeleteRule="CASCADE")]
+		public Kod_jednostki_grupa Kod_jednostki_grupa
+		{
+			get
+			{
+				return this._Kod_jednostki_grupa.Entity;
+			}
+			set
+			{
+				Kod_jednostki_grupa previousValue = this._Kod_jednostki_grupa.Entity;
+				if (((previousValue != value) 
+							|| (this._Kod_jednostki_grupa.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Kod_jednostki_grupa.Entity = null;
+						previousValue.Kod_jednostki_podgrupas.Remove(this);
+					}
+					this._Kod_jednostki_grupa.Entity = value;
+					if ((value != null))
+					{
+						value.Kod_jednostki_podgrupas.Add(this);
+						this._id_grupa = value.id;
+					}
+					else
+					{
+						this._id_grupa = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Kod_jednostki_grupa");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Kod_jednostkis(Kod_jednostki entity)
+		{
+			this.SendPropertyChanging();
+			entity.Kod_jednostki_podgrupa = this;
+		}
+		
+		private void detach_Kod_jednostkis(Kod_jednostki entity)
+		{
+			this.SendPropertyChanging();
+			entity.Kod_jednostki_podgrupa = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Kod_jednostki")]
+	public partial class Kod_jednostki : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _kod;
+		
+		private string _opis;
+		
+		private System.Nullable<int> _id_pogdrupa;
+		
+		private EntitySet<Wpis_kartoteka> _Wpis_kartotekas;
+		
+		private EntityRef<Kod_jednostki_podgrupa> _Kod_jednostki_podgrupa;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnkodChanging(string value);
+    partial void OnkodChanged();
+    partial void OnopisChanging(string value);
+    partial void OnopisChanged();
+    partial void Onid_pogdrupaChanging(System.Nullable<int> value);
+    partial void Onid_pogdrupaChanged();
+    #endregion
+		
+		public Kod_jednostki()
+		{
+			this._Wpis_kartotekas = new EntitySet<Wpis_kartoteka>(new Action<Wpis_kartoteka>(this.attach_Wpis_kartotekas), new Action<Wpis_kartoteka>(this.detach_Wpis_kartotekas));
+			this._Kod_jednostki_podgrupa = default(EntityRef<Kod_jednostki_podgrupa>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_kod", DbType="Char(5) NOT NULL", CanBeNull=false)]
+		public string kod
+		{
+			get
+			{
+				return this._kod;
+			}
+			set
+			{
+				if ((this._kod != value))
+				{
+					this.OnkodChanging(value);
+					this.SendPropertyChanging();
+					this._kod = value;
+					this.SendPropertyChanged("kod");
+					this.OnkodChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_opis", DbType="VarChar(250) NOT NULL", CanBeNull=false)]
+		public string opis
+		{
+			get
+			{
+				return this._opis;
+			}
+			set
+			{
+				if ((this._opis != value))
+				{
+					this.OnopisChanging(value);
+					this.SendPropertyChanging();
+					this._opis = value;
+					this.SendPropertyChanged("opis");
+					this.OnopisChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_pogdrupa", DbType="Int")]
+		public System.Nullable<int> id_pogdrupa
+		{
+			get
+			{
+				return this._id_pogdrupa;
+			}
+			set
+			{
+				if ((this._id_pogdrupa != value))
+				{
+					if (this._Kod_jednostki_podgrupa.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_pogdrupaChanging(value);
+					this.SendPropertyChanging();
+					this._id_pogdrupa = value;
+					this.SendPropertyChanged("id_pogdrupa");
+					this.Onid_pogdrupaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Kod_jednostki_Wpis_kartoteka", Storage="_Wpis_kartotekas", ThisKey="id", OtherKey="id_kod_jedn")]
+		public EntitySet<Wpis_kartoteka> Wpis_kartotekas
+		{
+			get
+			{
+				return this._Wpis_kartotekas;
+			}
+			set
+			{
+				this._Wpis_kartotekas.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Kod_jednostki_podgrupa_Kod_jednostki", Storage="_Kod_jednostki_podgrupa", ThisKey="id_pogdrupa", OtherKey="id", IsForeignKey=true, DeleteRule="CASCADE")]
+		public Kod_jednostki_podgrupa Kod_jednostki_podgrupa
+		{
+			get
+			{
+				return this._Kod_jednostki_podgrupa.Entity;
+			}
+			set
+			{
+				Kod_jednostki_podgrupa previousValue = this._Kod_jednostki_podgrupa.Entity;
+				if (((previousValue != value) 
+							|| (this._Kod_jednostki_podgrupa.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Kod_jednostki_podgrupa.Entity = null;
+						previousValue.Kod_jednostkis.Remove(this);
+					}
+					this._Kod_jednostki_podgrupa.Entity = value;
+					if ((value != null))
+					{
+						value.Kod_jednostkis.Add(this);
+						this._id_pogdrupa = value.id;
+					}
+					else
+					{
+						this._id_pogdrupa = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Kod_jednostki_podgrupa");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Wpis_kartotekas(Wpis_kartoteka entity)
+		{
+			this.SendPropertyChanging();
+			entity.Kod_jednostki = this;
+		}
+		
+		private void detach_Wpis_kartotekas(Wpis_kartoteka entity)
+		{
+			this.SendPropertyChanging();
+			entity.Kod_jednostki = null;
 		}
 	}
 }

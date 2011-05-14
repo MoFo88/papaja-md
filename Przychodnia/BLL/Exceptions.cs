@@ -28,4 +28,16 @@ namespace BLL
         public BadDayIdentifyierException() : base("Błędny identyfikator!") { }
         public BadDayIdentifyierException(string p) : base(p) { }
     }
+
+    public class PatientNotExistException : ApplicationException
+    {
+        public PatientNotExistException() : base("Pacjent nie istnieje") { }
+        public PatientNotExistException(string p) : base(p) { }
+    }
+
+    public class CodeNotExistException : ApplicationException
+    {
+        public CodeNotExistException() : base("Kod jednostki nie istnieje") { }
+        public CodeNotExistException(string p) : base(p) { } 
+    }
 }

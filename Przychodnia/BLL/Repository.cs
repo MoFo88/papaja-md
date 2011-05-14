@@ -377,5 +377,103 @@ namespace BLL
             ctx.Specjalizacja_Lekarzs.DeleteAllOnSubmit(x.ToList());
             ctx.SubmitChanges();
         }
+
+
+        public static void AddNewField(int idPatient, int idCode, String w, String r, String s, String z)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+
+            Pacjent patient = ctx.Uzytkowniks.OfType<Pacjent>().SingleOrDefault( p => p.id == idPatient );
+
+            if (patient == null) throw new PatientNotExistException();
+   
+            Kod_jednostki code = ctx.Kod_jednostkis.SingleOrDefault( c => c.id == idCode );
+
+            if (code == null) throw new CodeNotExistException();
+
+            Wpis_kartoteka wk = new Wpis_kartoteka();
+
+            wk.wywiad_badania = w;
+            wk.recetpy = r;
+            wk.skierowania = s;
+            wk.zalecenie = z;
+
+            wk.id_pacj = idPatient;
+            wk.id_kod_jedn = idCode;
+
+            wk.data = DateTime.Now;
+
+            ctx.Wpis_kartotekas.InsertOnSubmit(wk);
+            ctx.SubmitChanges();
+        }
+
+        public static List<Wpis_kartoteka> GetAllPatientFields(int idPatient)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+
+            Pacjent patient = ctx.Uzytkowniks.SingleOrDefault(u => u.id == idPatient) as Pacjent;
+
+            if (patient == null) throw new PatientNotExistException();
+
+            List<Wpis_kartoteka> wk = ctx.Wpis_kartotekas.Where(w => w.id_pacj == idPatient).Select(w => w).ToList();
+
+            return wk;
+        }
+
+
+
+
+        public static List<Kod_jednostki_grupa> GetAllKJG()
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+            return ctx.Kod_jednostki_grupas.ToList();
+        }
+
+        public static List<Kod_jednostki_podgrupa> GetAllKJPG()
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+            return ctx.Kod_jednostki_podgrupas.ToList();
+        }
+
+        public static List<Kod_jednostki_podgrupa> GetAllKJPG(int gId)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+            var x = from k in ctx.Kod_jednostki_podgrupas where k.id_grupa == gId select k;
+            return x.ToList();
+        }
+
+        public static List<Kod_jednostki> GetAllKJ()
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+            return ctx.Kod_jednostkis.ToList();
+        }
+
+        public static List<Kod_jednostki> GetAllKJ(int pgId)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+            var x = from k in ctx.Kod_jednostkis where k.id_pogdrupa == pgId select k;
+            return x.ToList();
+        }
+
+        public static int  GegMaxKJid()
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+            return (from x in ctx.Kod_jednostkis select x.id).Max();
+        }
+
+        public static int GegMaxKJGid()
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+            return (from x in ctx.Kod_jednostki_grupas select x.id).Max();
+        }
+
+        public static int GegMaxKJPGid()
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+            return (from x in ctx.Kod_jednostki_podgrupas select x.id).Max();
+        }
+
+        
+
     }
 }
