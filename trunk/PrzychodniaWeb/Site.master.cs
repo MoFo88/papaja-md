@@ -25,15 +25,23 @@ public partial class SiteMaster : System.Web.UI.MasterPage
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        Message = "";
-
-        if (Session["userId"] != null)
+        try
         {
-            int id = Int32.Parse(Session["userId"].ToString() );
-            user = Repository.GetUserByID(id);
+            Message = "";
 
-            CreateMenu();
-        }   
+            if (Session["userId"] != null)
+            {
+                int id = Int32.Parse(Session["userId"].ToString());
+                user = Repository.GetUserByID(id);
+
+                CreateMenu();
+            }
+        }
+        catch (Exception ex)
+        {
+            Message = ex.Message;
+            SetMessageColor(Color.Red);
+        }
     }
 
     /// <summary>

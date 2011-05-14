@@ -1,15 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="yasio1_przychodniaDb" Class="PrzychodniaDataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=mssql3.webio.pl,2401;Initial Catalog=yasio1_przychodniaDb;Persist Security Info=True;User ID=yasio1_superuser" SettingsObjectName="DAL.Properties.Settings" SettingsPropertyName="yasio1_przychodniaDbConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Kod_jednostki" Member="Kod_jednostkis">
-    <Type Name="Kod_jednostki">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="kod" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="nazwa" Type="System.String" DbType="Char(100) NOT NULL" CanBeNull="false" />
-      <Column Name="grupa" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Column Name="podgrupa" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Association Name="Kod_jednostki_Wpis_kartoteka" Member="Wpis_kartotekas" ThisKey="id" OtherKey="id_kod_jedn" Type="Wpis_kartoteka" />
-    </Type>
-  </Table>
   <Table Name="dbo.Rejestracja" Member="Rejestracjas">
     <Type Name="Rejestracja">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -105,8 +95,36 @@
       <Column Name="skierowania" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="zalecenie" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="data" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="Kod_jednostki_Wpis_kartoteka" Member="Kod_jednostki" ThisKey="id_kod_jedn" OtherKey="id" Type="Kod_jednostki" IsForeignKey="true" />
       <Association Name="Uzytkownik_Wpis_kartoteka" Member="Uzytkownik" ThisKey="id_pacj" OtherKey="id" Type="Uzytkownik" IsForeignKey="true" />
+      <Association Name="Kod_jednostki_Wpis_kartoteka" Member="Kod_jednostki" ThisKey="id_kod_jedn" OtherKey="id" Type="Kod_jednostki" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="yasio1_superuser.Kod_jednostki_grupa" Member="Kod_jednostki_grupas">
+    <Type Name="Kod_jednostki_grupa">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="kod" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="opis" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Association Name="Kod_jednostki_grupa_Kod_jednostki_podgrupa" Member="Kod_jednostki_podgrupas" ThisKey="id" OtherKey="id_grupa" Type="Kod_jednostki_podgrupa" />
+    </Type>
+  </Table>
+  <Table Name="yasio1_superuser.Kod_jednostki_podgrupa" Member="Kod_jednostki_podgrupas">
+    <Type Name="Kod_jednostki_podgrupa">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="kod" Type="System.String" DbType="Char(3) NOT NULL" CanBeNull="false" />
+      <Column Name="opis" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="id_grupa" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Kod_jednostki_podgrupa_Kod_jednostki" Member="Kod_jednostkis" ThisKey="id" OtherKey="id_pogdrupa" Type="Kod_jednostki" />
+      <Association Name="Kod_jednostki_grupa_Kod_jednostki_podgrupa" Member="Kod_jednostki_grupa" ThisKey="id_grupa" OtherKey="id" Type="Kod_jednostki_grupa" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Kod_jednostki" Member="Kod_jednostkis">
+    <Type Name="Kod_jednostki">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="kod" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="opis" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="id_pogdrupa" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Kod_jednostki_Wpis_kartoteka" Member="Wpis_kartotekas" ThisKey="id" OtherKey="id_kod_jedn" Type="Wpis_kartoteka" />
+      <Association Name="Kod_jednostki_podgrupa_Kod_jednostki" Member="Kod_jednostki_podgrupa" ThisKey="id_pogdrupa" OtherKey="id" Type="Kod_jednostki_podgrupa" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
 </Database>
