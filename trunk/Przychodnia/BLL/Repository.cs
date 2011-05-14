@@ -403,6 +403,8 @@ namespace BLL
 
             wk.data = DateTime.Now;
 
+            patient.ostatnia_wizyta = DateTime.Now;
+
             ctx.Wpis_kartotekas.InsertOnSubmit(wk);
             ctx.SubmitChanges();
         }
@@ -415,7 +417,7 @@ namespace BLL
 
             if (patient == null) throw new PatientNotExistException();
 
-            List<Wpis_kartoteka> wk = ctx.Wpis_kartotekas.Where(w => w.id_pacj == idPatient).Select(w => w).ToList();
+            List<Wpis_kartoteka> wk = ctx.Wpis_kartotekas.Where(w => w.id_pacj == idPatient).OrderByDescending(w => w.data).Select(w => w).ToList();
 
             return wk;
         }
