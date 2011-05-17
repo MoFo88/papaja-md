@@ -51,8 +51,8 @@
       <Association Name="Uzytkownik_Rejestracja" Member="Rejestracjas" ThisKey="id" OtherKey="id_pacj" Type="Rejestracja" />
       <Association Name="Uzytkownik_Specjalizacja_Lekarz" Member="Specjalizacja_Lekarzs" ThisKey="id" OtherKey="idUzytkownik" Type="Specjalizacja_Lekarz" />
       <Association Name="Uzytkownik_Pacjent" Member="Pacjents" ThisKey="id" OtherKey="id_lek" Type="Pacjent" />
-      <Association Name="Uzytkownik_Godziny_przyj" Member="Godziny_przyjs" ThisKey="id" OtherKey="id_uzytkownik" Type="Godziny_przyj" />
       <Association Name="Uzytkownik_Wpis_kartoteka" Member="Wpis_kartotekas" ThisKey="id" OtherKey="id_pacj" Type="Wpis_kartoteka" />
+      <Association Name="Uzytkownik_Godziny_przyj" Member="Godziny_przyjs" ThisKey="id" OtherKey="id_uzytkownik" Type="Godziny_przyj" />
       <Type Name="Administrator" InheritanceCode="3">
         <Column Name="email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
       </Type>
@@ -65,17 +65,6 @@
         <Column Name="ostatnia_wizyta" Type="System.DateTime" DbType="Date" CanBeNull="true" UpdateCheck="Never" />
         <Association Name="Uzytkownik_Pacjent" Member="Uzytkownik" ThisKey="id_lek" OtherKey="id" Type="Uzytkownik" IsForeignKey="true" />
       </Type>
-    </Type>
-  </Table>
-  <Table Name="yasio1_superuser.Godziny_przyj" Member="Godziny_przyjs">
-    <Type Name="Godziny_przyj">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="id_uzytkownik" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="godz_od" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
-      <Column Name="godz_do" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
-      <Column Name="dzien" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Uzytkownik_Godziny_przyj" Member="Uzytkownik" ThisKey="id_uzytkownik" OtherKey="id" Type="Uzytkownik" IsForeignKey="true" />
-      <Association Name="Dzien_Godziny_przyj" Member="Dzien1" ThisKey="dzien" OtherKey="id" Type="Dzien" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="yasio1_superuser.Dzien" Member="Dziens">
@@ -125,6 +114,17 @@
       <Column Name="id_pogdrupa" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Kod_jednostki_Wpis_kartoteka" Member="Wpis_kartotekas" ThisKey="id" OtherKey="id_kod_jedn" Type="Wpis_kartoteka" />
       <Association Name="Kod_jednostki_podgrupa_Kod_jednostki" Member="Kod_jednostki_podgrupa" ThisKey="id_pogdrupa" OtherKey="id" Type="Kod_jednostki_podgrupa" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="yasio1_superuser.Godziny_przyj" Member="Godziny_przyjs">
+    <Type Name="Godziny_przyj">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_uzytkownik" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="godz_od" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="godz_do" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dzien" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Dzien_Godziny_przyj" Member="Dzien1" ThisKey="dzien" OtherKey="id" Type="Dzien" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Uzytkownik_Godziny_przyj" Member="Uzytkownik" ThisKey="id_uzytkownik" OtherKey="id" Type="Uzytkownik" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
 </Database>

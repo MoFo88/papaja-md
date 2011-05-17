@@ -45,9 +45,6 @@ namespace DAL
     partial void InsertUzytkownik(Uzytkownik instance);
     partial void UpdateUzytkownik(Uzytkownik instance);
     partial void DeleteUzytkownik(Uzytkownik instance);
-    partial void InsertGodziny_przyj(Godziny_przyj instance);
-    partial void UpdateGodziny_przyj(Godziny_przyj instance);
-    partial void DeleteGodziny_przyj(Godziny_przyj instance);
     partial void InsertDzien(Dzien instance);
     partial void UpdateDzien(Dzien instance);
     partial void DeleteDzien(Dzien instance);
@@ -63,6 +60,9 @@ namespace DAL
     partial void InsertKod_jednostki(Kod_jednostki instance);
     partial void UpdateKod_jednostki(Kod_jednostki instance);
     partial void DeleteKod_jednostki(Kod_jednostki instance);
+    partial void InsertGodziny_przyj(Godziny_przyj instance);
+    partial void UpdateGodziny_przyj(Godziny_przyj instance);
+    partial void DeleteGodziny_przyj(Godziny_przyj instance);
     #endregion
 		
 		public PrzychodniaDataClassesDataContext() : 
@@ -135,14 +135,6 @@ namespace DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<Godziny_przyj> Godziny_przyjs
-		{
-			get
-			{
-				return this.GetTable<Godziny_przyj>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Dzien> Dziens
 		{
 			get
@@ -180,6 +172,14 @@ namespace DAL
 			get
 			{
 				return this.GetTable<Kod_jednostki>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Godziny_przyj> Godziny_przyjs
+		{
+			get
+			{
+				return this.GetTable<Godziny_przyj>();
 			}
 		}
 	}
@@ -884,9 +884,9 @@ namespace DAL
 		
 		private EntitySet<Pacjent> _Pacjents;
 		
-		private EntitySet<Godziny_przyj> _Godziny_przyjs;
-		
 		private EntitySet<Wpis_kartoteka> _Wpis_kartotekas;
+		
+		private EntitySet<Godziny_przyj> _Godziny_przyjs;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -923,8 +923,8 @@ namespace DAL
 			this._Rejestracjas = new EntitySet<Rejestracja>(new Action<Rejestracja>(this.attach_Rejestracjas), new Action<Rejestracja>(this.detach_Rejestracjas));
 			this._Specjalizacja_Lekarzs = new EntitySet<Specjalizacja_Lekarz>(new Action<Specjalizacja_Lekarz>(this.attach_Specjalizacja_Lekarzs), new Action<Specjalizacja_Lekarz>(this.detach_Specjalizacja_Lekarzs));
 			this._Pacjents = new EntitySet<Pacjent>(new Action<Pacjent>(this.attach_Pacjents), new Action<Pacjent>(this.detach_Pacjents));
-			this._Godziny_przyjs = new EntitySet<Godziny_przyj>(new Action<Godziny_przyj>(this.attach_Godziny_przyjs), new Action<Godziny_przyj>(this.detach_Godziny_przyjs));
 			this._Wpis_kartotekas = new EntitySet<Wpis_kartoteka>(new Action<Wpis_kartoteka>(this.attach_Wpis_kartotekas), new Action<Wpis_kartoteka>(this.detach_Wpis_kartotekas));
+			this._Godziny_przyjs = new EntitySet<Godziny_przyj>(new Action<Godziny_przyj>(this.attach_Godziny_przyjs), new Action<Godziny_przyj>(this.detach_Godziny_przyjs));
 			OnCreated();
 		}
 		
@@ -1207,19 +1207,6 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Uzytkownik_Godziny_przyj", Storage="_Godziny_przyjs", ThisKey="id", OtherKey="id_uzytkownik")]
-		public EntitySet<Godziny_przyj> Godziny_przyjs
-		{
-			get
-			{
-				return this._Godziny_przyjs;
-			}
-			set
-			{
-				this._Godziny_przyjs.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Uzytkownik_Wpis_kartoteka", Storage="_Wpis_kartotekas", ThisKey="id", OtherKey="id_pacj")]
 		public EntitySet<Wpis_kartoteka> Wpis_kartotekas
 		{
@@ -1230,6 +1217,19 @@ namespace DAL
 			set
 			{
 				this._Wpis_kartotekas.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Uzytkownik_Godziny_przyj", Storage="_Godziny_przyjs", ThisKey="id", OtherKey="id_uzytkownik")]
+		public EntitySet<Godziny_przyj> Godziny_przyjs
+		{
+			get
+			{
+				return this._Godziny_przyjs;
+			}
+			set
+			{
+				this._Godziny_przyjs.Assign(value);
 			}
 		}
 		
@@ -1289,18 +1289,6 @@ namespace DAL
 			entity.Uzytkownik = null;
 		}
 		
-		private void attach_Godziny_przyjs(Godziny_przyj entity)
-		{
-			this.SendPropertyChanging();
-			entity.Uzytkownik = this;
-		}
-		
-		private void detach_Godziny_przyjs(Godziny_przyj entity)
-		{
-			this.SendPropertyChanging();
-			entity.Uzytkownik = null;
-		}
-		
 		private void attach_Wpis_kartotekas(Wpis_kartoteka entity)
 		{
 			this.SendPropertyChanging();
@@ -1308,6 +1296,18 @@ namespace DAL
 		}
 		
 		private void detach_Wpis_kartotekas(Wpis_kartoteka entity)
+		{
+			this.SendPropertyChanging();
+			entity.Uzytkownik = null;
+		}
+		
+		private void attach_Godziny_przyjs(Godziny_przyj entity)
+		{
+			this.SendPropertyChanging();
+			entity.Uzytkownik = this;
+		}
+		
+		private void detach_Godziny_przyjs(Godziny_przyj entity)
 		{
 			this.SendPropertyChanging();
 			entity.Uzytkownik = null;
@@ -1516,246 +1516,6 @@ namespace DAL
 					}
 					this.SendPropertyChanged("Uzytkownik");
 				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="yasio1_superuser.Godziny_przyj")]
-	public partial class Godziny_przyj : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private int _id_uzytkownik;
-		
-		private System.Nullable<System.TimeSpan> _godz_od;
-		
-		private System.Nullable<System.TimeSpan> _godz_do;
-		
-		private int _dzien;
-		
-		private EntityRef<Uzytkownik> _Uzytkownik;
-		
-		private EntityRef<Dzien> _Dzien1;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void Onid_uzytkownikChanging(int value);
-    partial void Onid_uzytkownikChanged();
-    partial void Ongodz_odChanging(System.Nullable<System.TimeSpan> value);
-    partial void Ongodz_odChanged();
-    partial void Ongodz_doChanging(System.Nullable<System.TimeSpan> value);
-    partial void Ongodz_doChanged();
-    partial void OndzienChanging(int value);
-    partial void OndzienChanged();
-    #endregion
-		
-		public Godziny_przyj()
-		{
-			this._Uzytkownik = default(EntityRef<Uzytkownik>);
-			this._Dzien1 = default(EntityRef<Dzien>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_uzytkownik", DbType="Int NOT NULL")]
-		public int id_uzytkownik
-		{
-			get
-			{
-				return this._id_uzytkownik;
-			}
-			set
-			{
-				if ((this._id_uzytkownik != value))
-				{
-					if (this._Uzytkownik.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onid_uzytkownikChanging(value);
-					this.SendPropertyChanging();
-					this._id_uzytkownik = value;
-					this.SendPropertyChanged("id_uzytkownik");
-					this.Onid_uzytkownikChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_godz_od", DbType="Time")]
-		public System.Nullable<System.TimeSpan> godz_od
-		{
-			get
-			{
-				return this._godz_od;
-			}
-			set
-			{
-				if ((this._godz_od != value))
-				{
-					this.Ongodz_odChanging(value);
-					this.SendPropertyChanging();
-					this._godz_od = value;
-					this.SendPropertyChanged("godz_od");
-					this.Ongodz_odChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_godz_do", DbType="Time")]
-		public System.Nullable<System.TimeSpan> godz_do
-		{
-			get
-			{
-				return this._godz_do;
-			}
-			set
-			{
-				if ((this._godz_do != value))
-				{
-					this.Ongodz_doChanging(value);
-					this.SendPropertyChanging();
-					this._godz_do = value;
-					this.SendPropertyChanged("godz_do");
-					this.Ongodz_doChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dzien", DbType="Int NOT NULL")]
-		public int dzien
-		{
-			get
-			{
-				return this._dzien;
-			}
-			set
-			{
-				if ((this._dzien != value))
-				{
-					if (this._Dzien1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OndzienChanging(value);
-					this.SendPropertyChanging();
-					this._dzien = value;
-					this.SendPropertyChanged("dzien");
-					this.OndzienChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Uzytkownik_Godziny_przyj", Storage="_Uzytkownik", ThisKey="id_uzytkownik", OtherKey="id", IsForeignKey=true)]
-		public Uzytkownik Uzytkownik
-		{
-			get
-			{
-				return this._Uzytkownik.Entity;
-			}
-			set
-			{
-				Uzytkownik previousValue = this._Uzytkownik.Entity;
-				if (((previousValue != value) 
-							|| (this._Uzytkownik.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Uzytkownik.Entity = null;
-						previousValue.Godziny_przyjs.Remove(this);
-					}
-					this._Uzytkownik.Entity = value;
-					if ((value != null))
-					{
-						value.Godziny_przyjs.Add(this);
-						this._id_uzytkownik = value.id;
-					}
-					else
-					{
-						this._id_uzytkownik = default(int);
-					}
-					this.SendPropertyChanged("Uzytkownik");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Dzien_Godziny_przyj", Storage="_Dzien1", ThisKey="dzien", OtherKey="id", IsForeignKey=true)]
-		public Dzien Dzien1
-		{
-			get
-			{
-				return this._Dzien1.Entity;
-			}
-			set
-			{
-				Dzien previousValue = this._Dzien1.Entity;
-				if (((previousValue != value) 
-							|| (this._Dzien1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Dzien1.Entity = null;
-						previousValue.Godziny_przyjs.Remove(this);
-					}
-					this._Dzien1.Entity = value;
-					if ((value != null))
-					{
-						value.Godziny_przyjs.Add(this);
-						this._dzien = value.id;
-					}
-					else
-					{
-						this._dzien = default(int);
-					}
-					this.SendPropertyChanged("Dzien1");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -2727,6 +2487,246 @@ namespace DAL
 		{
 			this.SendPropertyChanging();
 			entity.Kod_jednostki = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="yasio1_superuser.Godziny_przyj")]
+	public partial class Godziny_przyj : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _id_uzytkownik;
+		
+		private System.Nullable<System.DateTime> _godz_od;
+		
+		private System.Nullable<System.DateTime> _godz_do;
+		
+		private int _dzien;
+		
+		private EntityRef<Dzien> _Dzien1;
+		
+		private EntityRef<Uzytkownik> _Uzytkownik;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onid_uzytkownikChanging(int value);
+    partial void Onid_uzytkownikChanged();
+    partial void Ongodz_odChanging(System.Nullable<System.DateTime> value);
+    partial void Ongodz_odChanged();
+    partial void Ongodz_doChanging(System.Nullable<System.DateTime> value);
+    partial void Ongodz_doChanged();
+    partial void OndzienChanging(int value);
+    partial void OndzienChanged();
+    #endregion
+		
+		public Godziny_przyj()
+		{
+			this._Dzien1 = default(EntityRef<Dzien>);
+			this._Uzytkownik = default(EntityRef<Uzytkownik>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_uzytkownik", DbType="Int NOT NULL")]
+		public int id_uzytkownik
+		{
+			get
+			{
+				return this._id_uzytkownik;
+			}
+			set
+			{
+				if ((this._id_uzytkownik != value))
+				{
+					if (this._Uzytkownik.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_uzytkownikChanging(value);
+					this.SendPropertyChanging();
+					this._id_uzytkownik = value;
+					this.SendPropertyChanged("id_uzytkownik");
+					this.Onid_uzytkownikChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_godz_od", DbType="DateTime")]
+		public System.Nullable<System.DateTime> godz_od
+		{
+			get
+			{
+				return this._godz_od;
+			}
+			set
+			{
+				if ((this._godz_od != value))
+				{
+					this.Ongodz_odChanging(value);
+					this.SendPropertyChanging();
+					this._godz_od = value;
+					this.SendPropertyChanged("godz_od");
+					this.Ongodz_odChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_godz_do", DbType="DateTime")]
+		public System.Nullable<System.DateTime> godz_do
+		{
+			get
+			{
+				return this._godz_do;
+			}
+			set
+			{
+				if ((this._godz_do != value))
+				{
+					this.Ongodz_doChanging(value);
+					this.SendPropertyChanging();
+					this._godz_do = value;
+					this.SendPropertyChanged("godz_do");
+					this.Ongodz_doChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dzien", DbType="Int NOT NULL")]
+		public int dzien
+		{
+			get
+			{
+				return this._dzien;
+			}
+			set
+			{
+				if ((this._dzien != value))
+				{
+					if (this._Dzien1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OndzienChanging(value);
+					this.SendPropertyChanging();
+					this._dzien = value;
+					this.SendPropertyChanged("dzien");
+					this.OndzienChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Dzien_Godziny_przyj", Storage="_Dzien1", ThisKey="dzien", OtherKey="id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Dzien Dzien1
+		{
+			get
+			{
+				return this._Dzien1.Entity;
+			}
+			set
+			{
+				Dzien previousValue = this._Dzien1.Entity;
+				if (((previousValue != value) 
+							|| (this._Dzien1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Dzien1.Entity = null;
+						previousValue.Godziny_przyjs.Remove(this);
+					}
+					this._Dzien1.Entity = value;
+					if ((value != null))
+					{
+						value.Godziny_przyjs.Add(this);
+						this._dzien = value.id;
+					}
+					else
+					{
+						this._dzien = default(int);
+					}
+					this.SendPropertyChanged("Dzien1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Uzytkownik_Godziny_przyj", Storage="_Uzytkownik", ThisKey="id_uzytkownik", OtherKey="id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Uzytkownik Uzytkownik
+		{
+			get
+			{
+				return this._Uzytkownik.Entity;
+			}
+			set
+			{
+				Uzytkownik previousValue = this._Uzytkownik.Entity;
+				if (((previousValue != value) 
+							|| (this._Uzytkownik.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Uzytkownik.Entity = null;
+						previousValue.Godziny_przyjs.Remove(this);
+					}
+					this._Uzytkownik.Entity = value;
+					if ((value != null))
+					{
+						value.Godziny_przyjs.Add(this);
+						this._id_uzytkownik = value.id;
+					}
+					else
+					{
+						this._id_uzytkownik = default(int);
+					}
+					this.SendPropertyChanged("Uzytkownik");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

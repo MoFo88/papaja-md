@@ -172,24 +172,27 @@ public partial class MyAccount : System.Web.UI.Page
             lblDay6.Text = "";
             lblDay7.Text = "";
 
+
+            int sp = 11;
+
             foreach (Godziny_przyj g in hours)
             {
                 switch ( g.dzien )
                 {
                     case 1:
-                        lblDay1.Text += g.godz_od.ToString().Substring(0, 5) + "-" + g.godz_do.ToString().Substring(0, 5) + ", ";
+                        lblDay1.Text += g.godz_od.ToString().Substring(sp, 5) + "-" + g.godz_do.ToString().Substring(sp, 5) + ", ";
                         break;
                     case 2:
-                        lblDay2.Text += g.godz_od.ToString().Substring(0, 5) + "-" + g.godz_do.ToString().Substring(0, 5) + ", ";
+                        lblDay2.Text += g.godz_od.ToString().Substring(sp, 5) + "-" + g.godz_do.ToString().Substring(sp, 5) + ", ";
                         break;
                     case 3:
-                        lblDay3.Text += g.godz_od.ToString().Substring(0, 5) + "-" + g.godz_do.ToString().Substring(0, 5) + ", ";
+                        lblDay3.Text += g.godz_od.ToString().Substring(sp, 5) + "-" + g.godz_do.ToString().Substring(sp, 5) + ", ";
                         break;
                     case 4:
-                        lblDay4.Text += g.godz_od.ToString().Substring(0, 5) + "-" + g.godz_do.ToString().Substring(0, 5) + ", ";
+                        lblDay4.Text += g.godz_od.ToString().Substring(sp, 5) + "-" + g.godz_do.ToString().Substring(sp, 5) + ", ";
                         break;
                     case 5:
-                        lblDay5.Text += g.godz_od.ToString().Substring(0, 5) + "-" + g.godz_do.ToString().Substring(0, 5) + ", ";
+                        lblDay5.Text += g.godz_od.ToString().Substring(sp, 5) + "-" + g.godz_do.ToString().Substring(sp, 5) + ", ";
                         break;
                     case 6:
                         lblDay6.Text += g.godz_od.ToString().Substring(0, 5) + "-" + g.godz_do.ToString().Substring(0, 5) + ", ";

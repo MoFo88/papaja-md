@@ -416,7 +416,6 @@ div.name
 
 .gridView td 
 { 
-    /*text-align:center;*/
     padding: 2px 4px 4px 4px;
     border: solid 1px #c1c1c1; 
     color: #717171; 
@@ -461,7 +460,7 @@ div.name
 .gridView .pgr 
 { 
    
-    background: #424242 url../images/grd_pgr.png) repeat-x top; 
+    background: #424242 url(../images/grd_pgr.png) repeat-x top; 
 }
 
 .gridView .pgr table 
@@ -489,6 +488,30 @@ div.name
 { 
     color: #496077; 
     text-decoration: none; 
+}
+
+
+
+
+.fileGrid .gridView
+{
+    border-color: transparent;
+}
+
+.fileGrid .gridView td 
+{
+    border-color: transparent;
+    border-bottom-color: #eee;
+}
+
+.fileGrid .gridView th 
+{
+    border-color: transparent;
+}
+
+.fileGrid .gridView .alt
+{
+    background: none;
 }
 
 /* Patient Field */
@@ -521,7 +544,7 @@ div.name
     -webkit-user-select: text;
     background-attachment: scroll;
     background-clip: border-box;
-    background-color: transparent;
+    background-color: #ddd;
     background-image: none;
     background-origin: padding-box;
     border-bottom-color: #333;
@@ -530,7 +553,6 @@ div.name
     border-right-color: #333;
     border-top-color: #333;
     border-bottom-style: solid;
-    box-shadow: none;
     box-sizing: border-box;
     color: #333;
     cursor: pointer;
@@ -541,34 +563,21 @@ div.name
     font-style: normal;
     font-variant: normal;
     font-weight: bold;
-    height: 16px;
-    letter-spacing: normal;
-    line-height: normal;
+    height: 20px;
     margin-bottom: 0px;
     margin-left: 0px;
     margin-right: 0px;
     margin-top: 0px;
     outline-color: #333;
-    outline-style: none;
-    outline-width: 0px;
-    overflow-y: visible;
     padding-bottom: 2px;
     padding-left: 0px;
     padding-right: 0px;
     padding-top: 1px;
     text-align: center;
-    text-decoration: none;
-    text-indent: 0px;
-    text-shadow: none;
-    text-transform: none;
-    unicode-bidi: normal;
-    vertical-align: baseline;
-    white-space: nowrap;
-    width: 103px;
-    word-spacing: 0px;
+    width: 80px;
 }
 
-.button a hover
+.button:hover
 {
-    background-color: Aqua;
+    background-color: #eee;
 }

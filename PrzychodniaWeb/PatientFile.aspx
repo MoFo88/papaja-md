@@ -261,9 +261,10 @@
             <asp:Label ID="lblKJError" runat="server" Text=""></asp:Label><br />
         </p>
 
-        <p class="submitButton" >          
-            <asp:Button ID="btnSubmit" runat="server" Text="Ok" onclick="btnSubmit_Click" CssClass="button"  />
+        <p >          
+            <asp:Button ID="btnSubmit" runat="server" Text="Ok" onclick="btnSubmit_Click" CssClass="button"   />
         </p>
+        <div class="fileGrid">
         <asp:GridView   ID="GridViewPatientFields" 
                         runat="server" 
                         AllowPaging="True" 
@@ -274,15 +275,16 @@
                         HeaderStyle-CssClass="header"
                         PagerStyle-CssClass="pgr"
                         AlternatingRowStyle-CssClass="alt"
+                        PageSize="3"
                         >
             <Columns>
                 <asp:TemplateField HeaderText="Kartoteka" SortExpression="data">
                     <EditItemTemplate>
-                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("data") %>'></asp:TextBox><br /><br />
-                        <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("wywiad_badania") %>'></asp:TextBox><br />
-                        <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("recetpy") %>'></asp:TextBox><br />
-                        <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("skierowania") %>'></asp:TextBox><br />
-                        <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("zalecenie") %>'></asp:TextBox><br />
+                        <asp:TextBox CssClass="tbResize" TextMode="MultiLine" ID="TextBox1" runat="server" Text='<%# Bind("data") %>'></asp:TextBox><br /><br />
+                        <asp:TextBox CssClass="tbResize" TextMode="MultiLine" ID="TextBox2" runat="server" Text='<%# Bind("wywiad_badania") %>'></asp:TextBox><br />
+                        <asp:TextBox CssClass="tbResize" TextMode="MultiLine" ID="TextBox3" runat="server" Text='<%# Bind("recetpy") %>'></asp:TextBox><br />
+                        <asp:TextBox CssClass="tbResize" TextMode="MultiLine"  ID="TextBox4" runat="server" Text='<%# Bind("skierowania") %>'></asp:TextBox><br />
+                        <asp:TextBox CssClass="tbResize" TextMode="MultiLine" ID="TextBox5" runat="server" Text='<%# Bind("zalecenie") %>'></asp:TextBox><br />
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="Label1" runat="server" Text='<%# Bind("data") %>'></asp:Label><br /><br />
@@ -294,9 +296,10 @@
                 </asp:TemplateField>
                 
                 <asp:CommandField ShowEditButton="True" />
-                <asp:CommandField ShowDeleteButton="True" />
+                <asp:CommandField ShowDeleteButton="True"  />
             </Columns>
         </asp:GridView>
+        </div>
 
 
         <asp:ObjectDataSource  
