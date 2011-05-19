@@ -14,6 +14,7 @@
         CssClass="failureNotification" 
         ValidationGroup="editPatientDataValidationGroup"/>
 
+    <div class="patientGrid">
     <asp:GridView 
         ID="gridViewPatients" 
         runat="server" 
@@ -153,12 +154,28 @@
                     </asp:DropDownList>
                 </EditItemTemplate>
            </asp:TemplateField>
-            <asp:CommandField ShowDeleteButton="True" />
-            <asp:CommandField ShowEditButton="True" ValidationGroup="editPatientDataValidationGroup" />
+            <asp:CommandField 
+                ShowDeleteButton="True"
+                ButtonType="Image"
+                DeleteImageUrl="~/images/delete.png"
+                ControlStyle-Height="25"
+
+                 />
+            <asp:CommandField 
+                ShowEditButton="True" 
+                ValidationGroup="editPatientDataValidationGroup" 
+                ButtonType="Image"
+                EditImageUrl="~/images/Edit.png"
+                UpdateImageUrl="~/images/update4.png"
+                CancelImageUrl="~/images/cancel.png"
+                ControlStyle-Height="25"
+                
+                />
         </Columns>
 
     <PagerStyle CssClass="pgr"></PagerStyle>
     </asp:GridView>
+    </div>
 
     <asp:ObjectDataSource ID="odsDr" TypeName="Root"   runat="server" 
         SelectMethod="GetAllDrDdList" >

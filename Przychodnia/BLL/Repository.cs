@@ -10,6 +10,9 @@ namespace BLL
 {
     public class Repository
     {
+
+       
+
         public static List<Lekarz> GetAllDoctors()
         {
             PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
@@ -50,7 +53,7 @@ namespace BLL
 
             Uzytkownik user = ctx.Uzytkowniks.SingleOrDefault( u => u.id == userId );
 
-            //gdy lekarz, edytuj dane jego pacjętów
+            //gdy lekarz, edytuj dane jego pacjentów
             if (user is Lekarz)
             {
                 foreach (Pacjent p in user.Pacjents)
@@ -422,8 +425,54 @@ namespace BLL
             return wk;
         }
 
+        public static Wpis_kartoteka GetPatientsFile(int id)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+            Wpis_kartoteka wk = ctx.Wpis_kartotekas.SingleOrDefault( w => w.id == id);
+
+            if (wk == null) throw new NoFileExistException();
+
+            return wk;
+        }
+
+        [System.ComponentModel.DataObjectMethod(System.ComponentModel.DataObjectMethodType.Update, true)]
+        public static void UpdatePatiensField(Wpis_kartoteka wk)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+
+            Wpis_kartoteka wkOriginal = ctx.Wpis_kartotekas.SingleOrDefault( w => w.id == wk.id);
+
+            wkOriginal.data = wk.data;
+            wkOriginal.skierowania = wk.skierowania;
+            wkOriginal.wywiad_badania = wk.wywiad_badania;
+            wkOriginal.zalecenie = wk.zalecenie;
+            wkOriginal.recetpy = wk.recetpy;
+
+            wkOriginal.id_kod_jedn = wk.id_kod_jedn;
+
+            ctx.SubmitChanges();
+        }
+
+        [System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public static void DeletePatientsField(Int32 id)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+
+            Wpis_kartoteka wk = ctx.Wpis_kartotekas.SingleOrDefault(w => w.id == id);
+            ctx.Wpis_kartotekas.DeleteOnSubmit(wk);
+            ctx.SubmitChanges();
+        }
 
 
+        [System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public static void DeletePatientsField(Wpis_kartoteka wk)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+
+            Wpis_kartoteka w = ctx.Wpis_kartotekas.SingleOrDefault(ww => ww.id == wk.id);
+            ctx.Wpis_kartotekas.DeleteOnSubmit(w);
+            ctx.SubmitChanges();
+        }
 
         public static List<Kod_jednostki_grupa> GetAllKJG()
         {
@@ -475,7 +524,12 @@ namespace BLL
             return (from x in ctx.Kod_jednostki_podgrupas select x.id).Max();
         }
 
-        
+        public static Kod_jednostki GetKJById(int id)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+            return ctx.Kod_jednostkis.SingleOrDefault( kj=> kj.id == id ); 
+        }
 
+        
     }
 }

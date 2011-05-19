@@ -262,57 +262,193 @@
         </p>
 
         <p >          
-            <asp:Button ID="btnSubmit" runat="server" Text="Ok" onclick="btnSubmit_Click" CssClass="button"   />
+            <asp:Button ID="btnSubmit" runat="server" Text="Ok" onclick="btnSubmit_Click" CssClass="button"   /><br />
+            <asp:Label ID="lblSucces" runat="server" Text=""></asp:Label>
         </p>
+
+        <asp:Label ID="lblEditDeleteMessage" runat="server" Text="" />
+
         <div class="fileGrid">
         <asp:GridView   ID="GridViewPatientFields" 
                         runat="server" 
                         AllowPaging="True" 
                         AutoGenerateColumns="False" 
-                        DataSourceID="ObjectDataSourcePatirntField"
+                        DataSourceID="ObjectDataSourcePatientField"
                         CssClass="gridView"
                         DataKeyNames="id"
                         HeaderStyle-CssClass="header"
                         PagerStyle-CssClass="pgr"
-                        AlternatingRowStyle-CssClass="alt"
-                        PageSize="3"
+                        AlternatingRowStyle-CssClass="alt" 
+                        onrowupdating="GridViewPatientFields_RowUpdating" 
+                        onrowupdated="GridViewPatientFields_RowUpdated"
+                   
                         >
+            <AlternatingRowStyle CssClass="alt" />
             <Columns>
-                <asp:TemplateField HeaderText="Kartoteka" SortExpression="data">
+                <asp:TemplateField HeaderStyle-Height="0" SortExpression="data">
                     <EditItemTemplate>
-                        <asp:TextBox CssClass="tbResize" TextMode="MultiLine" ID="TextBox1" runat="server" Text='<%# Bind("data") %>'></asp:TextBox><br /><br />
-                        <asp:TextBox CssClass="tbResize" TextMode="MultiLine" ID="TextBox2" runat="server" Text='<%# Bind("wywiad_badania") %>'></asp:TextBox><br />
-                        <asp:TextBox CssClass="tbResize" TextMode="MultiLine" ID="TextBox3" runat="server" Text='<%# Bind("recetpy") %>'></asp:TextBox><br />
-                        <asp:TextBox CssClass="tbResize" TextMode="MultiLine"  ID="TextBox4" runat="server" Text='<%# Bind("skierowania") %>'></asp:TextBox><br />
-                        <asp:TextBox CssClass="tbResize" TextMode="MultiLine" ID="TextBox5" runat="server" Text='<%# Bind("zalecenie") %>'></asp:TextBox><br />
+                        <div class="panelEditTemplate">
+                            <br />
+                            <asp:Label ID="Label1" runat="server" CssClass="bold_u" 
+                                Text='<%# Bind("data") %>'></asp:Label>
+                            <br />
+                            <br />
+                            <br />
+                            <div class="wywiad">
+                                <asp:Label ID="lblWywiad" runat="server" CssClass="bold" 
+                                    Text="Wywiad i badania przedmiotowe:"></asp:Label>
+                                <br />
+                                <asp:TextBox ID="TextBox1" runat="server" CssClass="tbResize" 
+                                    Text='<%# Bind("wywiad_badania") %>' TextMode="MultiLine"></asp:TextBox>
+                                <br />
+                            </div>
+                            <div class="recepty">
+                                <asp:Label ID="lblRecepty" runat="server" CssClass="bold" Text="Recepty:"></asp:Label>
+                                <br />
+                                <asp:TextBox ID="TextBox3" runat="server" CssClass="tbResize" 
+                                    Text='<%# Bind("recetpy") %>' TextMode="MultiLine"></asp:TextBox>
+                                <br />
+                            </div>
+                            <div class="skierowania">
+                                <asp:Label ID="lblSkierowania" runat="server" CssClass="bold" 
+                                    Text="Skierowania:"></asp:Label>
+                                <br />
+                                <asp:TextBox ID="TextBox4" runat="server" CssClass="tbResize" 
+                                    Text='<%# Bind("skierowania") %>' TextMode="MultiLine"></asp:TextBox>
+                                <br />
+                            </div>
+                            <div class="zalecenie">
+                                <asp:Label ID="lblZalecenie" runat="server" CssClass="bold" Text="Zalecenie:"></asp:Label>
+                                <br />
+                                <asp:TextBox ID="TextBox5" runat="server" CssClass="tbResize" 
+                                    Text='<%# Bind("zalecenie") %>' TextMode="MultiLine"></asp:TextBox>
+                                <br />
+                            </div>
+
+                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">    
+                            <ContentTemplate>                       
+                            
+                                <asp:CascadingDropDown ID="CascadingDropDown4" runat="server" Category="KJG" 
+                                    PromptText="Wybierz kod jednostki:" ServiceMethod="GetKjgContent" 
+                                    ServicePath="~/JKWebService.asmx" TargetControlID="ddlKJg2" />
+                                <asp:CascadingDropDown ID="CascadingDropDown5" runat="server" Category="KJPG" 
+                                    ParentControlID="ddlKJg2" PromptText="Wybierz kod jednostki:" 
+                                    ServiceMethod="GetKjpgContent" ServicePath="~/JKWebService.asmx" 
+                                    TargetControlID="ddlKJpg2" />
+                                <asp:CascadingDropDown ID="CascadingDropDown6" runat="server" Category="KJ" 
+                                    ParentControlID="ddlKJpg2" PromptText="Wybierz kod jednostki:" 
+                                    ServiceMethod="GetKjContent" ServicePath="~/JKWebService.asmx" 
+                                    TargetControlID="ddlKJ2" />
+                                <p>
+                                    <asp:Label ID="lblKJ2" runat="server" Text="Kod jednostki ICD-10: "></asp:Label>
+                                    <br />
+                                    <asp:DropDownList ID="ddlKJg2" runat="server" >
+                                    </asp:DropDownList>
+                                    <br />
+                                    <asp:DropDownList ID="ddlKJpg2" runat="server">
+                                    </asp:DropDownList>
+                                    <br />
+                                    <asp:DropDownList OnSelectedIndexChanged="ddlKJ2_SelectedIndexChanged" ID="ddlKJ2" runat="server" AutoPostBack="true">
+                                    </asp:DropDownList>
+                                    <br />
+                                    <asp:Label ID="lblKJError2" runat="server" Text=""></asp:Label>
+                                    <br />
+                                </p>
+                            
+                            </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("data") %>'></asp:Label><br /><br />
-                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("wywiad_badania") %>'></asp:Label><br />
-                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("recetpy") %>'></asp:Label><br />
-                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("skierowania") %>'></asp:Label><br />
-                        <asp:Label ID="Label5" runat="server" Text='<%# Bind("zalecenie") %>'></asp:Label><br />
+                        <div class="panelItemTemplate">
+                            <br />
+                            <asp:Label ID="Label1" runat="server" CssClass="bold_u" 
+                                Text='<%# Bind("data") %>'></asp:Label>
+                            <br />
+                            <br />
+                            <br />
+                            <div class="wywiad">
+                                <asp:Label ID="lblWywiad" runat="server" CssClass="bold" 
+                                    Text="Wywiad i badania przedmiotowe:"></asp:Label>
+                                <br />
+                                <asp:Label ID="Label2" runat="server" Text='<%# Bind("wywiad_badania") %>'></asp:Label>
+                                <br />
+                                <br />
+                            </div>
+                            <div class="recepty">
+                                <asp:Label ID="lblRecepty" runat="server" CssClass="bold" Text="Recepty:"></asp:Label>
+                                <br />
+                                <asp:Label ID="Label3" runat="server" Text='<%# Bind("recetpy") %>'></asp:Label>
+                                <br />
+                                <br />
+                            </div>
+                            <div class="skierowania">
+                                <asp:Label ID="lblSkierowania" runat="server" CssClass="bold" 
+                                    Text="Skierowania:"></asp:Label>
+                                <br />
+                                <asp:Label ID="Label4" runat="server" Text='<%# Bind("skierowania") %>'></asp:Label>
+                                <br />
+                                <br />
+                            </div>
+                            <div class="zalecenie">
+                                <asp:Label ID="lblZalecenie" runat="server" CssClass="bold" Text="Zalecenie:"></asp:Label>
+                                <br />
+                                <asp:Label ID="Label5" runat="server" Text='<%# Bind("zalecenie") %>'></asp:Label>
+                                <br />
+                                <br />
+                            </div>
+                            <div class="kodJednostki">
+                                <asp:Label ID="Label6" runat="server" CssClass="bold" Text="Kod jednostki:"></asp:Label>
+                                <br />
+                                <asp:Label ID="Label7" runat="server" Text='<%# GetKJ( Eval("id_kod_jedn") ) %>'></asp:Label>
+                                <br />
+                                <asp:Label ID="lblFieldUpdated" runat="server" Text=""></asp:Label>
+                            </div>
+                        </div>
                     </ItemTemplate>
                 </asp:TemplateField>
-                
-                <asp:CommandField ShowEditButton="True" />
-                <asp:CommandField ShowDeleteButton="True"  />
+                <asp:CommandField 
+                    ShowEditButton="True" 
+                    ButtonType="Image" 
+                    EditImageUrl="~/images/Edit.png"
+                    UpdateImageUrl="~/images/update4.png"
+                    CancelImageUrl="~/images/cancel.png"
+                    
+                    ControlStyle-Width = "35"
+                    />
+                <asp:CommandField 
+                    ShowDeleteButton="True"
+                    ButtonType="Image"
+                    DeleteImageUrl="~/images/delete.png"
+                    ControlStyle-Width="35"
+                    />
             </Columns>
+            <HeaderStyle CssClass="header" />
+            <PagerStyle CssClass="pgr" />
         </asp:GridView>
         </div>
 
 
         <asp:ObjectDataSource  
-            ID="ObjectDataSourcePatirntField" 
+            
+            ID="ObjectDataSourcePatientField" 
             runat="server" 
             SelectMethod="GetAllPatientFields" 
             TypeName="BLL.Repository"
+            onupdating="ObjectDataSourcePatirntField_Updating"
+            DeleteMethod="DeletePatientsField" DataObjectTypeName="DAL.Wpis_kartoteka" 
+            UpdateMethod="UpdatePatiensField" ondeleted="ObjectDataSourcePatientField_Deleted" 
             
             >
+
+            <DeleteParameters>
+                <asp:Parameter Name="id" Type="Int32" />
+            </DeleteParameters>
+
             <SelectParameters>
-                <asp:SessionParameter  SessionField="patientId" Type="Int32" DefaultValue="-1" 
-                    Name="idPatient" />
+                <asp:SessionParameter  SessionField="patientId" Type="Int32" DefaultValue="-1" Name="idPatient" />
             </SelectParameters>
+           
         </asp:ObjectDataSource>
 
     </asp:Panel>

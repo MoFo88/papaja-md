@@ -17,23 +17,23 @@ public partial class PatientsData : System.Web.UI.Page
     {
         try
         {
-        //    if (Session["userId"] != null)
-        //    {
-        //        user = Repository.GetUserByID(Int32.Parse(Session["userId"].ToString()));
+            if (Session["userId"] != null)
+            {
+                user = Repository.GetUserByID(Int32.Parse(Session["userId"].ToString()));
 
-        //        if (user is Administrator)
-        //        {
-        //            admin = user as Administrator;
-        //        }
-        //        else
-        //        {
-        //            Response.Redirect("~/Login.aspx");
-        //        }
-        //    }
-        //    else
-        //    {
-        //        Response.Redirect("~/Login.aspx");
-        //    }
+                if (user is Administrator)
+                {
+                    admin = user as Administrator;
+                }
+                else
+                {
+                    Response.Redirect("~/Login.aspx");
+                }
+            }
+            else
+            {
+                Response.Redirect("~/Login.aspx");
+            }
 
         }
         catch (Exception ex)
