@@ -22,23 +22,23 @@ public partial class DrData : System.Web.UI.Page
     
     protected void Page_Load(object sender, EventArgs e)
     {
-            //if (Session["userId"] != null)
-            //{
-            //    user = Repository.GetUserByID(Int32.Parse(Session["userId"].ToString()));
+        if (Session["userId"] != null)
+        {
+            user = Repository.GetUserByID(Int32.Parse(Session["userId"].ToString()));
 
-            //    if (user is Administrator)
-            //    {
-            //        admin = user as Administrator;
-            //    }
-            //    else
-            //    {
-            //        Response.Redirect("~/Login.aspx");
-            //    }
-            //}
-            //else
-            //{
-            //    Response.Redirect("~/Login.aspx");
-            //}
+            if (user is Administrator)
+            {
+                admin = user as Administrator;
+            }
+            else
+            {
+                Response.Redirect("~/Login.aspx");
+            }
+        }
+        else
+        {
+            Response.Redirect("~/Login.aspx");
+        }
 
 
         panelEditPassword.Visible = false;

@@ -40,4 +40,15 @@ namespace BLL
         public CodeNotExistException() : base("Kod jednostki nie istnieje") { }
         public CodeNotExistException(string p) : base(p) { } 
     }
+
+    public class NoFileExistException : ApplicationException
+    {
+        public NoFileExistException() : base("Wpis kartoteki nie istnieje"){}
+        public NoFileExistException(string p) : base(p){}
+    }
+
+    public class NoKJException : ApplicationException
+    {
+        public NoKJException() : base("Wybierz kod jednostki.") { }
+    }
 }

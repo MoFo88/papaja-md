@@ -14,7 +14,7 @@
         <div class="header">
             <div class="title">
                 <h1>
-                    Przychodnia u Ryśka
+                    Przychodnia Papaja
                 </h1>
             </div>
             <div class="loginDisplay">
@@ -109,6 +109,8 @@
     </div>
     <div class="footer">
         
+        
+
     </div>
     </form>
 </body>

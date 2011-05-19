@@ -119,6 +119,7 @@ first child of the left and right table columns */
 .main
 {
     padding: 0px 12px;
+    padding-bottom: 50px;
     margin: 12px 8px 8px 8px;
     min-height: 420px;
 }
@@ -134,10 +135,11 @@ first child of the left and right table columns */
 .footer
 {
     color: #4e5766;
-    padding: 8px 0px 0px 0px;
+    padding: 50px 0 0 0;
     margin: 0px auto;
     text-align: center;
     line-height: normal;
+
 }
 
 
@@ -306,6 +308,12 @@ div.name
     font-weight: bold;
 }
 
+.bold_u
+{
+    font-weight: bold;
+    text-decoration: underline;
+}
+
 .submitButton
 {
     text-align: right;
@@ -421,12 +429,14 @@ div.name
     color: #717171; 
 }
 
+
+
  .gridView td.selectImage  input
 { 
     display: block;
     margin: 0 auto;
-    max-height: 25px;
-    max-width: 23px;
+    max-height: 30px;
+    max-width: 25px;
 }
 
 .gridView td input
@@ -498,6 +508,12 @@ div.name
     border-color: transparent;
 }
 
+.fileGrid .gridView  th 
+{
+    width : 0;
+    background-color: #fff;
+} 
+
 .fileGrid .gridView td 
 {
     border-color: transparent;
@@ -512,6 +528,12 @@ div.name
 .fileGrid .gridView .alt
 {
     background: none;
+}
+
+
+.patientGrid .gridView td input, .drGrid .gridView td input , .fileGrid .gridView td input
+{
+    max-height: 80px;
 }
 
 /* Patient Field */
@@ -530,10 +552,22 @@ div.name
     border-color: #ddd;
 }
 
+
+
 .panelField
 {
     margin-top: 45px; 
 }
+
+
+.panelEditTemplate, .panelItemTemplate
+{
+    width:  820px;
+}
+
+
+
+/*--------------------------*/
 
 .button
 {
@@ -581,3 +615,4 @@ div.name
 {
     background-color: #eee;
 }
+

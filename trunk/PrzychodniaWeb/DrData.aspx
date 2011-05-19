@@ -10,7 +10,8 @@
         runat="server" 
         CssClass="failureNotification" 
         ValidationGroup="editDrDataValidationGroup"/>
-
+    
+    <div class="drGrid">    
     <asp:GridView 
         ID="gridViewDrs" 
         runat="server"
@@ -142,15 +143,27 @@
                 </ItemTemplate>
             </asp:TemplateField>
             
-            <asp:CommandField ShowDeleteButton="True" />
-            <asp:CommandField ShowSelectButton="True" />
-            <asp:CommandField ShowEditButton="True" ValidationGroup="editDrDataValidationGroup" />
+            <asp:CommandField 
+                ShowDeleteButton="True"
+                ButtonType="Image"
+                DeleteImageUrl="~/images/delete.png"
+                ControlStyle-Width="25"
+                 />
+
+            <asp:CommandField 
+                ShowEditButton="True" 
+                ButtonType="Image"
+                EditImageUrl="~/images/Edit.png"
+                UpdateImageUrl="~/images/update4.png"
+                CancelImageUrl="~/images/cancel.png"
+                ControlStyle-Width="25"
+                ValidationGroup="editDrDataValidationGroup" />
             
         </Columns>
 
 <PagerStyle CssClass="pgr"></PagerStyle>
     </asp:GridView>
-
+    </div>
     <asp:LinqDataSource 
         ID="LinqDataSource1" 
         runat="server"

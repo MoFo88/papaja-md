@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using BLL;
 using DAL;
 using System.Drawing;
+using System.Runtime.Serialization;
+using System.Xml;
 
 public partial class PatientFile : System.Web.UI.Page
 {
@@ -17,6 +19,10 @@ public partial class PatientFile : System.Web.UI.Page
 
     private string kJError;
     public string KJError { get { return kJError; } set { lblKJError.Text = value; kJError = value; lblKJError.ForeColor = Color.Red; } }
+
+    private string kJErrorEdit;
+    public string KJErrorEdit { get { return kJErrorEdit; } set { lblKJError2.Text = value; kJErrorEdit = value; lblKJError2.ForeColor = Color.Red; } }
+
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -59,6 +65,12 @@ public partial class PatientFile : System.Web.UI.Page
                 Response.Redirect("~/Login.aspx");
             }
 
+            lblKJError.Text = "";
+            lblKJError2.Text = "";
+            lblSucces.Text = "";
+            Master.Message = "";
+            lblEditDeleteMessage.Text = "";
+
             if (!Page.IsPostBack)
             {
                 lblEnsurance.Text = patient.ubezpieczenie;
@@ -67,11 +79,8 @@ public partial class PatientFile : System.Web.UI.Page
                 lblPesel.Text = patient.pesel.ToString();
                 lblPhone.Text = patient.telefon;
                 KJError = "";
+                ViewState["kjId"] = null;
             }
-
-            
-
-
         }
         catch (Exception ex)
         {
@@ -107,24 +116,10 @@ public partial class PatientFile : System.Web.UI.Page
     }
 
 
-    protected void Page_PreRender(object sender, EventArgs e)
-    {
-        try
-        {
-            
-        }
-        catch (Exception ex)
-        {
-            Master.Message = ex.Message;
-            Master.SetMessageColor(Color.Red);
-        }
-    }
-
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         try
         {
-
             int patientId = Int32.Parse(Session["patientId"].ToString());
 
             String r = tbRecepty.Text;
@@ -144,12 +139,128 @@ public partial class PatientFile : System.Web.UI.Page
             KJError = "";
 
 
-            Repository.AddNewField(patientId, kjId , w, r, s, z); 
+            Repository.AddNewField(patientId, kjId , w, r, s, z);
             
+            lblSucces.Text = "Wpis do kartoteki poprawnie dodany.";
+            lblSucces.ForeColor = Color.Green;
+
+            GridViewPatientFields.DataBind();
         }
         catch (Exception ex)
         {
             KJError = ex.Message;
+        }
+    }
+
+    //for gridViec
+    protected String GetKJ( object idKj )
+    {
+        try
+        {
+            int idKodJednostki = (int)idKj;
+
+            return Repository.GetKJById(idKodJednostki).Name;
+        }
+        catch (Exception ex)
+        {
+            return  ex.Message;
+        }
+    }
+
+   
+
+
+    protected void GridViewPatientFields_RowUpdating(object sender, GridViewUpdateEventArgs e)
+    {
+        try
+        {
+            if (ViewState["kjId"] == null || ViewState["kjId"].ToString() == "" || !char.IsDigit(ViewState["kjId"].ToString()[0]))
+            {
+                e.Cancel = true;
+                throw new NoKJException();
+            }
+        }
+        catch(NoKJException ex)
+        {
+            KJErrorEdit = ex.Message;
+            
+        }
+        catch(Exception ex)
+        {
+            Master.Message = ex.Message;
+            Master.SetMessageColor(Color.Red);
+        }
+    }
+
+    protected void ObjectDataSourcePatirntField_Updating(object sender, ObjectDataSourceMethodEventArgs e)
+    {
+        try
+        {
+            Wpis_kartoteka wk = (Wpis_kartoteka)(e.InputParameters["wk"]);
+
+            if (ViewState["kjId"] == null || ViewState["kjId"].ToString() ==  "" || !char.IsDigit(ViewState["kjId"].ToString()[0]))
+            {
+                e.Cancel = true;
+                throw new NoKJException();
+            }
+            else
+            {
+                int kjId = Int32.Parse(ViewState["kjId"].ToString());
+                wk.id_kod_jedn = kjId;
+            }
+        }
+        catch (NoKJException ex)
+        {
+            KJErrorEdit = ex.Message;
+        }
+        catch (Exception ex)
+        {
+            Master.Message = ex.Message;
+            Master.SetMessageColor(Color.Red);
+        }
+    }
+
+    protected void GridViewPatientFields_RowUpdated(object sender, GridViewUpdatedEventArgs e)
+    {
+        try
+        {
+
+            ViewState["kjId"] = null;
+            lblEditDeleteMessage.Text = "Kartoteka została uaktualniona." ;
+            lblEditDeleteMessage.ForeColor = Color.Green;
+        }
+        catch (Exception ex)
+        {
+            lblEditDeleteMessage.Text = ex.Message;
+            lblEditDeleteMessage.ForeColor = Color.Red;
+        }
+    }
+
+
+    protected void ddlKJ2_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            ViewState["kjId"] = ddlKJ2.SelectedValue.ToString();
+        }
+        catch (Exception ex)
+        {
+            Master.Message = ex.Message;
+            Master.SetMessageColor( Color.Red );
+        }
+    }
+
+    protected void ObjectDataSourcePatientField_Deleted(object sender, ObjectDataSourceStatusEventArgs e)
+    {
+        try
+        {
+            lblEditDeleteMessage.Text = "Kartoteka została uaktualniona.";
+            lblEditDeleteMessage.ForeColor = Color.Green;
+        }
+        catch (Exception ex)
+        {
+            lblEditDeleteMessage.Text = ex.Message;
+            lblEditDeleteMessage.ForeColor = Color.Red;
         }
     }
 }
