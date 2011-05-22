@@ -66,21 +66,19 @@ public partial class PatientFile : System.Web.UI.Page
             }
 
             lblKJError.Text = "";
-            lblKJError2.Text = "";
             lblSucces.Text = "";
             Master.Message = "";
             lblEditDeleteMessage.Text = "";
 
-            if (!Page.IsPostBack)
-            {
-                lblEnsurance.Text = patient.ubezpieczenie;
-                if (patient.ostatnia_wizyta != null ) lblLastVisite.Text = patient.ostatnia_wizyta.ToString().Substring(0, 10);
-                lblPatientName.Text = patient.Name;
-                lblPesel.Text = patient.pesel.ToString();
-                lblPhone.Text = patient.telefon;
-                KJError = "";
-                ViewState["kjId"] = null;
-            }
+
+            lblEnsurance.Text = patient.ubezpieczenie;
+            if (patient.ostatnia_wizyta != null ) lblLastVisite.Text = patient.ostatnia_wizyta.ToString().Substring(0, 10);
+            lblPatientName.Text = patient.Name;
+            lblPesel.Text = patient.pesel.ToString();
+            lblPhone.Text = patient.telefon;
+            KJError = "";
+            ViewState["kjId"] = null;
+
         }
         catch (Exception ex)
         {
