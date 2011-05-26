@@ -25,7 +25,7 @@
         AutoGenerateColumns="False" 
         onrowdeleted="gridViewDrs_RowDeleted" 
         onrowupdated="gridViewDrs_RowUpdated" 
-        onrowediting="gridViewDrs_RowEditing"
+        onrowediting="gridViewDrs_RowEditing" onrowdatabound="gridViewDrs_RowDataBound"
         >
     <AlternatingRowStyle CssClass="alt"></AlternatingRowStyle>
 

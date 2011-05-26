@@ -238,4 +238,29 @@ public partial class DrData : System.Web.UI.Page
             lblSpecMessage.ForeColor = Color.Red;
         }
     }
+    protected void gridViewDrs_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        try
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                foreach (DataControlFieldCell cell in e.Row.Cells)
+                {
+                    foreach (Control control in cell.Controls)
+                    {
+                        ImageButton button = control as ImageButton;
+                        if (button != null && button.CommandName == "Delete")
+
+                            button.OnClientClick =
+                                    "if (!confirm('Jesteś pewien że chcesz usunąć tego lekarza?')) return;";
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Master.Message = ex.Message;
+            Master.SetMessageColor(Color.Red);
+        }
+    }
 }
