@@ -280,7 +280,9 @@
                         PagerStyle-CssClass="pgr"
                         AlternatingRowStyle-CssClass="alt" 
                         onrowupdating="GridViewPatientFields_RowUpdating" 
-                        onrowupdated="GridViewPatientFields_RowUpdated"
+                        onrowupdated="GridViewPatientFields_RowUpdated"  
+                        onrowdatabound="GridViewPatientFields_RowDataBound"
+
                    
                         >
             <AlternatingRowStyle CssClass="alt" />
@@ -414,6 +416,7 @@
                     UpdateImageUrl="~/images/update4.png"
                     CancelImageUrl="~/images/cancel.png"
                     
+                    
                     ControlStyle-Width = "35"
                     />
                 <asp:CommandField 
@@ -421,6 +424,7 @@
                     ButtonType="Image"
                     DeleteImageUrl="~/images/delete.png"
                     ControlStyle-Width="35"
+                    
                     />
             </Columns>
             <HeaderStyle CssClass="header" />

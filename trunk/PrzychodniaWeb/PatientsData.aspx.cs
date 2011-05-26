@@ -185,6 +185,24 @@ public partial class PatientsData : System.Web.UI.Page
                     li.Selected = true;
                 }
             }
+
+
+            
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                foreach (DataControlFieldCell cell in e.Row.Cells)
+                {
+                    foreach (Control control in cell.Controls)
+                    {
+                        ImageButton button = control as ImageButton;
+                        if (button != null && button.CommandName == "Delete")
+
+                            button.OnClientClick =
+                                    "if (!confirm('Jesteś pewien że chcesz usunąć tego pacjenta?')) return;";
+                    }
+                }
+            }
+           
         }
         catch(Exception ex)
         {

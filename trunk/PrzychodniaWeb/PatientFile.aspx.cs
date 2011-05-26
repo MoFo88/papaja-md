@@ -80,6 +80,8 @@ public partial class PatientFile : System.Web.UI.Page
                 lblPhone.Text = patient.telefon;
                 KJError = "";
                 ViewState["kjId"] = null;
+
+                GridViewPatientFields.Attributes.Add("rowdeleting", "javascript:if(confirm('Czy na pewno chcesz usunąć tego użytkownika?')== false) return false;");
             }
 
         }
@@ -257,6 +259,33 @@ public partial class PatientFile : System.Web.UI.Page
         {
             lblEditDeleteMessage.Text = "Wpis kartoterki został usunięty.";
             lblEditDeleteMessage.ForeColor = Color.Green;
+        }
+        catch (Exception ex)
+        {
+            lblEditDeleteMessage.Text = ex.Message;
+            lblEditDeleteMessage.ForeColor = Color.Red;
+        }
+    }
+
+
+    protected void GridViewPatientFields_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        try
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                foreach (DataControlFieldCell cell in e.Row.Cells)
+                {
+                    foreach (Control control in cell.Controls)
+                    {
+                        ImageButton button = control as ImageButton;
+                        if (button != null && button.CommandName == "Delete")
+
+                            button.OnClientClick = 
+                                    "if (!confirm('Jesteś pewien że chcesz usunąć ten wpis?')) return;";
+                    }
+                }
+            }
         }
         catch (Exception ex)
         {
