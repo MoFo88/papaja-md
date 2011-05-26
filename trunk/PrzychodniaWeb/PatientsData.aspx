@@ -158,7 +158,7 @@
                 ShowDeleteButton="True"
                 ButtonType="Image"
                 DeleteImageUrl="~/images/delete.png"
-                ControlStyle-Height="25"
+                ControlStyle-Width="25"
 
                  />
             <asp:CommandField 
@@ -168,7 +168,7 @@
                 EditImageUrl="~/images/Edit.png"
                 UpdateImageUrl="~/images/update4.png"
                 CancelImageUrl="~/images/cancel.png"
-                ControlStyle-Height="25"
+                ControlStyle-Width="25"
                 
                 />
         </Columns>

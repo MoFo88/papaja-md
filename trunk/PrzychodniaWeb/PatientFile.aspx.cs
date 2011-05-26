@@ -65,19 +65,22 @@ public partial class PatientFile : System.Web.UI.Page
                 Response.Redirect("~/Login.aspx");
             }
 
-            lblKJError.Text = "";
-            lblSucces.Text = "";
-            Master.Message = "";
-            lblEditDeleteMessage.Text = "";
+            if (!Page.IsPostBack)
+            {
+                lblKJError.Text = "";
+                lblSucces.Text = "";
+                Master.Message = "";
+                lblEditDeleteMessage.Text = "";
 
 
-            lblEnsurance.Text = patient.ubezpieczenie;
-            if (patient.ostatnia_wizyta != null ) lblLastVisite.Text = patient.ostatnia_wizyta.ToString().Substring(0, 10);
-            lblPatientName.Text = patient.Name;
-            lblPesel.Text = patient.pesel.ToString();
-            lblPhone.Text = patient.telefon;
-            KJError = "";
-            ViewState["kjId"] = null;
+                lblEnsurance.Text = patient.ubezpieczenie;
+                if (patient.ostatnia_wizyta != null) lblLastVisite.Text = patient.ostatnia_wizyta.ToString().Substring(0, 10);
+                lblPatientName.Text = patient.Name;
+                lblPesel.Text = patient.pesel.ToString();
+                lblPhone.Text = patient.telefon;
+                KJError = "";
+                ViewState["kjId"] = null;
+            }
 
         }
         catch (Exception ex)
@@ -252,7 +255,7 @@ public partial class PatientFile : System.Web.UI.Page
     {
         try
         {
-            lblEditDeleteMessage.Text = "Kartoteka została uaktualniona.";
+            lblEditDeleteMessage.Text = "Wpis kartoterki został usunięty.";
             lblEditDeleteMessage.ForeColor = Color.Green;
         }
         catch (Exception ex)

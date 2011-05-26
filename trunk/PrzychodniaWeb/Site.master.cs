@@ -45,7 +45,7 @@ public partial class SiteMaster : System.Web.UI.MasterPage
     }
 
     /// <summary>
-    /// Tworzenie manu w zależności od teo, kto jest zalogowany
+    /// Tworzenie menu w zależności od teo, kto jest zalogowany
     /// </summary>
     protected void CreateMenu()
     {
@@ -85,9 +85,10 @@ public partial class SiteMaster : System.Web.UI.MasterPage
             Session["userId"] = u.id;
             Session["type"] = u.id_typ;
         }
-        catch (NoUserException ex)
+        catch (Exception ex)
         {
-
+            Message = ex.Message;
+            SetMessageColor(Color.Red);
         }
 
     }
