@@ -348,7 +348,7 @@
                                     <asp:DropDownList ID="ddlKJpg2" runat="server">
                                     </asp:DropDownList>
                                     <br />
-                                    <asp:DropDownList OnSelectedIndexChanged="ddlKJ2_SelectedIndexChanged" ID="ddlKJ2" runat="server" AutoPostBack="true">
+                                    <asp:DropDownList OnSelectedIndexChanged="ddlKJ2_SelectedIndexChanged" ID="ddlKJ2" runat="server">
                                     </asp:DropDownList>
                                     <br />
                                     <asp:Label ID="lblKJError2" runat="server" Text=""></asp:Label>

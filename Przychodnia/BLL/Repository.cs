@@ -502,7 +502,7 @@ namespace BLL
         public static List<Kod_jednostki> GetAllKJ(int pgId)
         {
             PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
-            var x = from k in ctx.Kod_jednostkis where k.id_pogdrupa == pgId select k;
+            var x = from k in ctx.Kod_jednostkis where k.id_podgrupa == pgId select k;
             return x.ToList();
         }
 
