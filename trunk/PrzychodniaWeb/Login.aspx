@@ -10,7 +10,6 @@
     </h2>
     <p>
         Podaj login i hasło.
-        <asp:HyperLink ID="RegisterHyperLink" runat="server" EnableViewState="false">Zarejestruj się</asp:HyperLink> jeśli nie masz konta.
     </p>
     <asp:Login 
         ID="LoginUser" 

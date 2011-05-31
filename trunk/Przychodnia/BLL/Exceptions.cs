@@ -37,7 +37,7 @@ namespace BLL
 
     public class CodeNotExistException : ApplicationException
     {
-        public CodeNotExistException() : base("Kod jednostki nie istnieje") { }
+        public CodeNotExistException() : base("Wybierz kod jednostki") { }
         public CodeNotExistException(string p) : base(p) { } 
     }
 
