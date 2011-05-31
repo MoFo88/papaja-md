@@ -204,6 +204,7 @@ fieldset
 fieldset p 
 {
     margin: 2px 12px 10px 10px;
+    font-size: larger;
 }
 
 fieldset.login label, fieldset.register label, fieldset.changePassword label
@@ -646,4 +647,10 @@ div.name
     width: 550px;
     text-align: center;
     font-size: 4em;
+}
+
+/* Żebym miał równe fieldsety w AddNewReservation */
+.fieldsetReservation
+{
+    height: 124px;
 }
