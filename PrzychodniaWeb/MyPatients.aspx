@@ -26,7 +26,7 @@
             <asp:BoundField DataField="imie" HeaderText="imie" SortExpression="imie" />
             <asp:BoundField DataField="nazwisko" HeaderText="nazwisko" SortExpression="nazwisko" />
             <asp:BoundField DataField="pesel" HeaderText="pesel" SortExpression="pesel" />
-            <asp:BoundField DataField="ostatnia_wizyta" HeaderText="ostatnia_wizyta" SortExpression="ostatnia_wizyta" />
+            <asp:BoundField DataField="ostatnia_wizyta" HeaderText="ostatnia_wizyta" SortExpression="ostatnia_wizyta" DataFormatString="{0:d}" />
             <asp:CommandField 
                 ItemStyle-CssClass="selectImage" 
                 SelectImageUrl="~/images/arrowRight.png" 
