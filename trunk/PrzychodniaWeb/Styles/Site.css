@@ -639,3 +639,11 @@ div.name
 {
     background-color: #EED5D2;
 }
+
+.mainText
+{
+    display: inline-block;
+    width: 550px;
+    text-align: center;
+    font-size: 4em;
+}
