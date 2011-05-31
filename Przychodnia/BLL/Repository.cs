@@ -11,7 +11,7 @@ namespace BLL
     public class Repository
     {
 
-       
+        
 
         public static List<Lekarz> GetAllDoctors()
         {
