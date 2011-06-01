@@ -643,10 +643,14 @@ div.name
 
 .mainText
 {
-    display: inline-block;
-    width: 550px;
+    color: #666666;
+    font-variant: small-caps;
+    text-transform: none;
+    font-weight: 200;
+    font-size: 3em;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
     text-align: center;
-    font-size: 4em;
 }
 
 /* Żebym miał równe fieldsety w AddNewReservation */
