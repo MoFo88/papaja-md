@@ -219,6 +219,15 @@
 
             </asp:DynamicHyperLink>
 
+                        <asp:DynamicHyperLink ID="dhlAddNewReservation" runat="server" NavigateUrl="~/AddNewReservation.aspx" >
+                
+                <div class="imageArrowContainer">
+                <asp:Image  ID="Image5" runat="server" ImageUrl = "~/images/arrowRight.jpg" CssClass="imageArrow" />
+                <asp:Label ID="lblAddNewReservation"  runat="server" Text="Zarejestruj pacjenta"></asp:Label>
+                </div>
+
+            </asp:DynamicHyperLink>
+
         </div>
 
 </asp:Content>

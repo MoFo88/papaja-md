@@ -12,14 +12,15 @@ using System.Drawing;
 
 public partial class AddNewReservation : System.Web.UI.Page
 {
-
+    Uzytkownik user = null;
+    Administrator admin = null;
 
     private DateTime[] reservationDates;
     private LinkButton[] reservationLinks;
     const string LOAD_CONTROLS = "LoadControls";
 
     const string VIEWSTATEKEY_DYNCONTROL = "DynamicControlSelection";
-    //store property value in viewstate so that it will survive postbacks
+    //przechwuje wartość własciwosci we ViewState pomiedzy PostBackami
     private string DynamicControlSelection
     {
         get
@@ -27,8 +28,7 @@ public partial class AddNewReservation : System.Web.UI.Page
             string result = (string)ViewState[VIEWSTATEKEY_DYNCONTROL];
             if (result == null)
             {
-                //doing things like this lets us access this property without
-                //worrying about this property returning null/Nothing
+                //zapobieganie zwracaniu nulli przez wlasnosc
                 return string.Empty;
             }
             else
@@ -44,21 +44,36 @@ public partial class AddNewReservation : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        if (Session["userId"] != null)
+        {
+            user = Repository.GetUserByID(Int32.Parse(Session["userId"].ToString()));
+
+            if (user is Administrator)
+            {
+                admin = user as Administrator;
+            }
+            else
+            {
+                Response.Redirect("~/Login.aspx");
+            }
+        }
+        else
+        {
+            Response.Redirect("~/Login.aspx");
+        }
+
         if (!Page.IsPostBack)
         {
             InitializeDateTextBoxDefaultData();
             ViewState[VIEWSTATEKEY_DYNCONTROL] = "";
         }
-        //if (Session["UserId"] == null)
-        //{
-        //    Page.Response.Redirect("/PrzychodniaWeb/Login.aspx");
-        //}
 
         if (this.DynamicControlSelection == LOAD_CONTROLS)
         {
             InitializeDateTable();
         }
-        tbPesel.Text = "82345312345";//--------------------------------TESTS------------------------------------------
+        //tbPesel.Text = "82345312345";//--------------------------------TESTS------------------------------------------
         InitializeDDL();
     }
 
