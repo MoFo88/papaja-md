@@ -57,11 +57,15 @@ public partial class SiteMaster : System.Web.UI.MasterPage
         miAddNewPatient.NavigateUrl = "~/AddNewPatient.aspx";
         miAddNewPatient.Text = "Dodaj Pacjenta";
 
+        MenuItem miAddNewReservation = new MenuItem();
+        miAddNewReservation.NavigateUrl = "~/AddNewReservation.aspx";
+        miAddNewReservation.Text = "Zarejestruj pacjenta";
 
         if (user is Administrator)
         {
             NavigationMenu.Items.Add(miAddNewDoctor);
             NavigationMenu.Items.Add(miAddNewPatient);
+            NavigationMenu.Items.Add(miAddNewReservation);
         }
 
         MenuItem miMyAccount = new MenuItem();

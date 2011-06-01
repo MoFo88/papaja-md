@@ -110,8 +110,9 @@
             </fieldset>
         </asp:Panel>
     </div>
-    <asp:Panel ID="panelDateChoose" runat="server" Visible="False">
-        <div class="hours">
+    <asp:Panel ID="panelDateChoose" runat="server" Visible="False" 
+        CssClass="hoursReservation">
+
             <h3>
                 Wybór terminu wizyty:</h3>
             <p>
@@ -122,7 +123,7 @@
                 <asp:Button ID="btnNextWeek" runat="server" Font-Bold="False" OnClick="btnNextWeek_Click"
                     Text="&gt;&gt;" ToolTip="Następny tydzień" />
             </p>
-        </div>
+
         <asp:Panel ID="panelDatesTable" Style="float: left;" runat="server">
         </asp:Panel>
         <asp:Panel ID="panelReservationData" Style="float: left; padding-left: 40px; padding-top: 45px"
