@@ -226,7 +226,7 @@ public partial class DrData : System.Web.UI.Page
                 }
             }
 
-            SpecMessage = "Lista specjalizacji została zaktualizowana.";
+            SpecMessage = "Lista specjalizacji została zaktualizowana.";                                    
             lblSpecMessage.ForeColor = Color.Green;
 
             panelEditPassword.Visible = true;

@@ -142,7 +142,6 @@ namespace BLL
                 pesel = pesel,
                 telefon = telefon,
                 ulica = ulica
-
             };
 
             p.id_lek = idDr;

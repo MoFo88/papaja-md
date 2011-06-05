@@ -113,16 +113,6 @@ public partial class SpecializationsData : System.Web.UI.Page
     }
     protected void ldsSpec_Updating(object sender, LinqDataSourceUpdateEventArgs e)
     {
-        //try
-        //{
-        //    Specjalizacja s = e.NewObject as Specjalizacja;
-        //    Repository.UpdateSpecializationData(s);
-        //}
-        //catch (Exception ex)
-        //{
-        //    e.Cancel = true;
-        //    Master.Message = ex.Message;
-        //    Master.SetMessageColor(Color.Red);
-        //}
+       
     }
 }
