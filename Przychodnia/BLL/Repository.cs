@@ -631,5 +631,34 @@ namespace BLL
 
             return true;
         }
+
+        /// <summary>
+        /// Funkcja  uaktualnia dane specializacji w bazie.
+        /// </summary>
+        /// <param name="spec"></param>
+        public static void UpdateSpecializationData(Specjalizacja spec)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+            
+            var query = from s in ctx.Specjalizacjas
+                        where s.id == spec.id
+                        select s;
+
+            Specjalizacja ss = query.SingleOrDefault();
+            ss.nazwa = spec.nazwa;
+
+            ctx.SubmitChanges();
+        }
+
+        public static void DeleteSpecialization(int id)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+
+            Specjalizacja user = ctx.Specjalizacjas.SingleOrDefault(s => s.id == id);
+
+            ctx.Specjalizacjas.DeleteOnSubmit(user);
+
+            ctx.SubmitChanges();
+        }
     }
 }
