@@ -167,14 +167,14 @@
         <elementListCompartment Id="4e917804-6583-4192-971d-b5f24b7c801e" absoluteBounds="1.8900000000000001, 5.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(3.875 : 6.16429768880208); (4.5 : 6.16429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(3.875 : 6.16429768880208); (4.5 : 6.16429768880208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/PrzychodniaDataClassesDataContext/Kod_jednostki/Kod_jednostki_Wpis_kartoteka" />
       <nodes>
         <classShapeMoniker Id="124cd74d-0942-41af-9452-579d75e2575e" />
         <classShapeMoniker Id="1e2cd19d-b79b-4484-815d-4a2a2a9f85a9" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 7.375); (2.75 : 6.95359537760417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 7.375); (2.75 : 6.95359537760417)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/PrzychodniaDataClassesDataContext/Kod_jednostki_podgrupa/Kod_jednostki_podgrupa_Kod_jednostki" />
       <nodes>
         <classShapeMoniker Id="8bc3912e-8d88-44de-8fe6-41f04a06d90a" />
