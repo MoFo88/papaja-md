@@ -11,18 +11,41 @@ using System.Drawing;
 public partial class AddNewDoctor : System.Web.UI.Page
 {
 
+    private Uzytkownik user = null;
+    private Administrator admin = null;
+
     protected void Page_Load(object sender, EventArgs e)
     {
-
-        if (Session["UserId"] == null)
+        try
         {
-            Page.Response.Redirect("/PrzychodniaWeb/Login.aspx");
+            if (Session["userId"] != null)
+            {
+                user = Repository.GetUserByID(Int32.Parse(Session["userId"].ToString()));
+
+                if (user is Administrator)
+                {
+                    admin = user as Administrator;
+                }
+                else
+                {
+                    Response.Redirect("~/Login.aspx");
+                }
+            }
+            else
+            {
+                Response.Redirect("~/Login.aspx");
+            }
+
+            if (!Page.IsPostBack)
+            {
+                InitializeCheckBoxSpec();
+            }
         }
-
-        //List<Specjalizacja> specjalizationList = Repository.GetAllSpecjalizations();
-        //Specjalizacja specialization = specjalizationList.First();
-        InitializeCheckBoxSpec();
-
+        catch (Exception ex)
+        {
+            Master.Message = ex.Message;
+            Master.SetMessageColor(Color.Red);
+        }
     }
 
     protected void Page_PreRender(object sender, EventArgs e)

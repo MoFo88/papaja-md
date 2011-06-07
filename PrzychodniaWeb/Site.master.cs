@@ -45,7 +45,7 @@ public partial class SiteMaster : System.Web.UI.MasterPage
     }
 
     /// <summary>
-    /// Tworzenie menu w zależności od teo, kto jest zalogowany
+    /// Tworzenie menu w zależności od tego, kto jest zalogowany
     /// </summary>
     protected void CreateMenu()
     {
