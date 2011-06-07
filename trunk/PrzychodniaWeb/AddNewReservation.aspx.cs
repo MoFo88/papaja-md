@@ -79,47 +79,76 @@ public partial class AddNewReservation : System.Web.UI.Page
 
     protected void Page_PreRender(object sender, EventArgs e)
     {
-        if (Convert.ToDateTime(tbFirstDayOfWeek.Text) == Repository.GetFirstDayOfWeek(System.DateTime.Now))
+        try
         {
-            btnPrevWeek.Enabled = false;
+            if (Convert.ToDateTime(tbFirstDayOfWeek.Text) == Repository.GetFirstDayOfWeek(System.DateTime.Now))
+            {
+                btnPrevWeek.Enabled = false;
+            }
+            else
+            {
+                btnPrevWeek.Enabled = true;
+            }
+
+            if (this.DynamicControlSelection == LOAD_CONTROLS)
+            {
+                InitializeDateTable();
+            }
         }
-        else
+        catch (Exception ex)
         {
-            btnPrevWeek.Enabled = true;
+            Master.Message = ex.Message;
+            Master.SetMessageColor(System.Drawing.Color.Red);
         }
     }
 
     protected void btnSearchPatient_Click(object sender, EventArgs e)
     {
-        Lekarz lek = null;
-        decimal pesel = Decimal.Parse(tbPesel.Text);
-
-        Pacjent p = Repository.GetPatientByPesel(pesel);
-        ViewState["PacjentId"] = p.id;
-
-        patientDataPanel.Visible = true;
-        lblName.Text = p.imie;
-        lblSurmane.Text = p.nazwisko;
-        lblPesel.Text = p.pesel.ToString();
-        lblPhone.Text = p.telefon;
-        lblAdres.Text = "ul. " + p.ulica + " " + p.nr_domu + ", " + p.kod_pocztowy + " " + p.miasto;
-
-        if (p.id_lek != null)
+        try
         {
-            lek = Repository.GetUserByID((int)p.id_lek) as Lekarz;
-            ViewState["LekarzId"] = lek.id;
+            Lekarz lek = null;
+            decimal pesel = Decimal.Parse(tbPesel.Text);
 
-            lblDrName.Text = lek.imie;
-            lblDrSurname.Text = lek.nazwisko;
-            InitializeTableHours(lek);
-            patientDrDataPanel.Visible = true;
-            panelDateChoose.Visible = true;
-            InitializeDateTable();
+            Pacjent p = Repository.GetPatientByPesel(pesel);
+
+            if (p == null)
+            {
+                lblNoDr.ForeColor = System.Drawing.Color.Red;
+                lblNoDr.Text = "Nie istnieje pacjent o podanym numerze PESEL.";
+                return;
+            }
+
+            ViewState["PacjentId"] = p.id;
+
+            patientDataPanel.Visible = true;
+            lblName.Text = p.imie;
+            lblSurmane.Text = p.nazwisko;
+            lblPesel.Text = p.pesel.ToString();
+            lblPhone.Text = p.telefon;
+            lblAdres.Text = "ul. " + p.ulica + " " + p.nr_domu + ", " + p.kod_pocztowy + " " + p.miasto;
+
+            if (p.id_lek != null)
+            {
+                lek = Repository.GetUserByID((int)p.id_lek) as Lekarz;
+                ViewState["LekarzId"] = lek.id;
+
+                lblDrName.Text = lek.imie;
+                lblDrSurname.Text = lek.nazwisko;
+                InitializeTableHours(lek);
+                patientDrDataPanel.Visible = true;
+                panelDateChoose.Visible = true;
+                InitializeDateTable();
+            }
+            else
+            {
+                lblNoDr.ForeColor = System.Drawing.Color.Red;
+                lblNoDr.Text = "Wybrany użytkownik nie ma przypisanego lekarza.";
+            }
         }
-        else
+        catch (Exception ex)
         {
-            lblNoDr.ForeColor = System.Drawing.Color.Red;
-            lblNoDr.Text = "Wybrany użytkownik nie ma przypisanego lekarza.";
+            Master.Message = ex.Message;
+            Master.SetMessageColor(System.Drawing.Color.Red);
         }
     }
 
@@ -180,12 +209,20 @@ public partial class AddNewReservation : System.Web.UI.Page
 
     protected void InitializeDateTextBoxDefaultData()
     {
-        DateTime today = System.DateTime.Now;
-        DateTime firstDayOfWeek = Repository.GetFirstDayOfWeek(today);
-        DateTime lastDayOfWeek = firstDayOfWeek.AddDays(6);
+        try
+        {
+            DateTime today = System.DateTime.Now;
+            DateTime firstDayOfWeek = Repository.GetFirstDayOfWeek(today);
+            DateTime lastDayOfWeek = firstDayOfWeek.AddDays(6);
 
-        tbFirstDayOfWeek.Text = firstDayOfWeek.ToShortDateString();
-        tbLastDayOfWeek.Text = lastDayOfWeek.ToShortDateString();
+            tbFirstDayOfWeek.Text = firstDayOfWeek.ToShortDateString();
+            tbLastDayOfWeek.Text = lastDayOfWeek.ToShortDateString();
+        }
+        catch (Exception ex)
+        {
+            Master.Message = ex.Message;
+            Master.SetMessageColor(System.Drawing.Color.Red);
+        }
     }
 
     protected void InitializeDateTable()
@@ -432,39 +469,62 @@ public partial class AddNewReservation : System.Web.UI.Page
 
     protected void lbSignIn_Click(object sender, EventArgs e)
     {
-        LinkButton lb = (LinkButton)sender;
-        string[] idSplit = lb.ID.Split('_');
-        int index = Int32.Parse(idSplit.Last());
+        try
+        {
+            LinkButton lb = (LinkButton)sender;
+            string[] idSplit = lb.ID.Split('_');
+            int index = Int32.Parse(idSplit.Last());
 
-        panelReservationData.Visible = true;
-        tbResDate.Text = reservationDates[index].ToShortDateString();
-        tbResHourStart.Text = reservationDates[index].ToShortTimeString();
-        tbResHourEnd.Text = reservationDates[index].AddMinutes(30.0).ToShortTimeString();
+            panelReservationData.Visible = true;
+            tbResDate.Text = reservationDates[index].ToShortDateString();
+            tbResHourStart.Text = reservationDates[index].ToShortTimeString();
+            tbResHourEnd.Text = reservationDates[index].AddMinutes(30.0).ToShortTimeString();
+        }
+        catch (Exception ex)
+        {
+            Master.Message = ex.Message;
+            Master.SetMessageColor(System.Drawing.Color.Red);
+        }
     }
 
     protected void btnPrevWeek_Click(object sender, EventArgs e)
     {
-        DateTime firstDayOfWeek = Convert.ToDateTime(tbFirstDayOfWeek.Text);
-        DateTime lastDayOfWeek = Convert.ToDateTime(tbLastDayOfWeek.Text);
+        try
+        {
+            DateTime firstDayOfWeek = Convert.ToDateTime(tbFirstDayOfWeek.Text);
+            DateTime lastDayOfWeek = Convert.ToDateTime(tbLastDayOfWeek.Text);
 
-        firstDayOfWeek = firstDayOfWeek.AddDays(-7);
-        lastDayOfWeek = lastDayOfWeek.AddDays(-7);
+            firstDayOfWeek = firstDayOfWeek.AddDays(-7);
+            lastDayOfWeek = lastDayOfWeek.AddDays(-7);
 
-        tbFirstDayOfWeek.Text = firstDayOfWeek.ToShortDateString();
-        tbLastDayOfWeek.Text = lastDayOfWeek.ToShortDateString();
+            tbFirstDayOfWeek.Text = firstDayOfWeek.ToShortDateString();
+            tbLastDayOfWeek.Text = lastDayOfWeek.ToShortDateString();
+        }
+        catch (Exception ex)
+        {
+            Master.Message = ex.Message;
+            Master.SetMessageColor(System.Drawing.Color.Red);
+        }
     }
 
     protected void btnNextWeek_Click(object sender, EventArgs e)
     {
-        DateTime firstDayOfWeek = Convert.ToDateTime(tbFirstDayOfWeek.Text);
-        DateTime lastDayOfWeek = Convert.ToDateTime(tbLastDayOfWeek.Text);
+        try
+        {
+            DateTime firstDayOfWeek = Convert.ToDateTime(tbFirstDayOfWeek.Text);
+            DateTime lastDayOfWeek = Convert.ToDateTime(tbLastDayOfWeek.Text);
 
-        firstDayOfWeek = firstDayOfWeek.AddDays(7);
-        lastDayOfWeek = lastDayOfWeek.AddDays(7);
+            firstDayOfWeek = firstDayOfWeek.AddDays(7);
+            lastDayOfWeek = lastDayOfWeek.AddDays(7);
 
-        tbFirstDayOfWeek.Text = firstDayOfWeek.ToShortDateString();
-        tbLastDayOfWeek.Text = lastDayOfWeek.ToShortDateString();
-
+            tbFirstDayOfWeek.Text = firstDayOfWeek.ToShortDateString();
+            tbLastDayOfWeek.Text = lastDayOfWeek.ToShortDateString();
+        }
+        catch (Exception ex)
+        {
+            Master.Message = ex.Message;
+            Master.SetMessageColor(System.Drawing.Color.Red);
+        }
     }
 
     protected void InitializeDDL()
@@ -499,9 +559,9 @@ public partial class AddNewReservation : System.Web.UI.Page
 
             bool res = Repository.AddNewReservation
             (
-                patientId, 
-                dateBegin, 
-                dateEnd, 
+                patientId,
+                dateBegin,
+                dateEnd,
                 reservationTypeId
             );
 
