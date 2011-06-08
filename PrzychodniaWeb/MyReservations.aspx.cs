@@ -64,8 +64,8 @@ public partial class MyReservations : System.Web.UI.Page
             {
                 btnPrevWeek.Enabled = true;
             }
-InitializeDateTable();
-            
+            InitializeDateTable();
+
         }
         catch (Exception ex)
         {
@@ -364,7 +364,7 @@ InitializeDateTable();
 
         int lekId = Int32.Parse(Session["userId"].ToString());
         Lekarz lek = Repository.GetUserByID(lekId) as Lekarz;
-        
+
 
         for (int i = 0; i < reservationsCount; i++)
         {
