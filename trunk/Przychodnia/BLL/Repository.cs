@@ -6,14 +6,13 @@ using DAL;
 using System.Data.Linq;
 using System.Security.Cryptography;
 using System.Globalization;
+using System.Data;
+using System.Reflection;
 
 namespace BLL
 {
     public class Repository
     {
-
-        
-
         public static List<Lekarz> GetAllDoctors()
         {
             PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
@@ -656,6 +655,35 @@ namespace BLL
             Specjalizacja user = ctx.Specjalizacjas.SingleOrDefault(s => s.id == id);
 
             ctx.Specjalizacjas.DeleteOnSubmit(user);
+
+            ctx.SubmitChanges();
+        }
+
+        public static List<Rejestracja> GetAllPatientReservations(int patientId)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+
+            var rej = ctx.Rejestracjas.Where(r => r.id_pacj == patientId).OrderByDescending(r => r.data_od);
+
+            return rej.ToList();
+        }
+
+        public static Typ_rejestracja GetTypRejestracjaById(int typId)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+
+            var typ = ctx.Typ_rejestracjas.SingleOrDefault(t => t.id == typId);
+
+            return typ;
+        }
+
+        public static void DeleteReservation(int resId)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+
+            Rejestracja res = ctx.Rejestracjas.SingleOrDefault(r => r.id == resId);
+
+            ctx.Rejestracjas.DeleteOnSubmit(res);
 
             ctx.SubmitChanges();
         }
