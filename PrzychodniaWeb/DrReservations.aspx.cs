@@ -455,7 +455,7 @@ public partial class DrReservations : System.Web.UI.Page
         {
             DropDownList ddl = (DropDownList)sender;
 
-            if (ddl.SelectedIndex != -1)
+            if (ddl.SelectedValue != "-1")
             {
                 int drId = Int32.Parse(ddl.SelectedValue);
                 Lekarz dr = Repository.GetUserByID(drId) as Lekarz;
@@ -464,6 +464,11 @@ public partial class DrReservations : System.Web.UI.Page
                 patientDrDataPanel.Visible = true;
                 panelDateChoose.Visible = true;
                 InitializeDateTable();
+            }
+            else
+            {
+                patientDrDataPanel.Visible = false;
+                panelDateChoose.Visible = false;
             }
         }
         catch (Exception ex)
