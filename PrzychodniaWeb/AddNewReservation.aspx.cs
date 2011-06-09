@@ -363,22 +363,13 @@ public partial class AddNewReservation : System.Web.UI.Page
                     for (int j = i; j < linksCount; j = j + arrayLength)
                     {
                         int index = j;
-                        if (reservationDates[index].TimeOfDay < od_.TimeOfDay ||
-                            reservationDates[index].TimeOfDay > do_.TimeOfDay)
+                        if (reservationDates[index].TimeOfDay >= od_.TimeOfDay &&
+                            reservationDates[index].TimeOfDay < do_.TimeOfDay)
                         {
-                            reservationLinks[index].ForeColor = Color.Gray;
-                            reservationLinks[index].Attributes.Add("onclick", "javascript:if(confirm('W tym terminie wybrany lekarz nie przyjmuje. Czy na pewno chcesz kontynuować?')== false) return false;");
+                            reservationLinks[index].ForeColor = Color.Green;
+                            reservationLinks[index].Attributes.Remove("onclick");
                         }
                     }
-                }
-            }
-            else
-            {
-                for (int j = 0; j < arrayHeight; j++)
-                {
-                    int index = j * arrayLength + i;
-                    reservationLinks[index].ForeColor = Color.Gray;
-                    reservationLinks[index].Attributes.Add("onclick", "javascript:if(confirm('W tym terminie wybrany lekarz nie przyjmuje. Czy na pewno chcesz kontynuować?')== false) return false;");
                 }
             }
         }
@@ -456,6 +447,8 @@ public partial class AddNewReservation : System.Web.UI.Page
             LinkButton lb = new LinkButton();
             lb.ID = "lbReservation_" + i.ToString();
             lb.Text = "Zapisz";
+            lb.ForeColor = Color.Gray;
+            lb.Attributes.Add("onclick", "javascript:if(confirm('W tym terminie wybrany lekarz nie przyjmuje. Czy na pewno chcesz kontynuować?')== false) return false;");
             lb.Visible = true;
             lb.Click += this.lbSignIn_Click;
             reservationLinks[i] = lb;
