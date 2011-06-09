@@ -48,7 +48,7 @@
                                 Niedziela
                             </th>
                         </tr>
-                        <tr>
+                        <tr style="vertical-align: top;">
                             <td>
                                 <asp:Label ID="lblDay1" runat="server" Text=""></asp:Label>
                             </td>
