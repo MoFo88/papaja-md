@@ -265,22 +265,13 @@ public partial class MyReservations : System.Web.UI.Page
                     for (int j = i; j < reservationsCount; j = j + arrayLength)
                     {
                         int index = j;
-                        if (reservationDates[index].TimeOfDay < od_.TimeOfDay ||
-                            reservationDates[index].TimeOfDay > do_.TimeOfDay)
+                        if (reservationDates[index].TimeOfDay >= od_.TimeOfDay &&
+                            reservationDates[index].TimeOfDay < do_.TimeOfDay)
                         {
-                            ((Label)reservationLabels[index]).ForeColor = Color.Gray;
-                            ((Label)reservationLabels[index]).Text = "Nie przyjmuje";
+                            ((Label)reservationLabels[index]).ForeColor = Color.Green;
+                            ((Label)reservationLabels[index]).Text = "Wolny";
                         }
                     }
-                }
-            }
-            else
-            {
-                for (int j = 0; j < arrayHeight; j++)
-                {
-                    int index = j * arrayLength + i;
-                    ((Label)reservationLabels[index]).ForeColor = Color.Gray;
-                    ((Label)reservationLabels[index]).Text = "Nie przyjmuje";
                 }
             }
         }
@@ -370,8 +361,8 @@ public partial class MyReservations : System.Web.UI.Page
         {
             Label lbl = new Label();
             lbl.ID = "lblReservation_" + i.ToString();
-            lbl.Text = "Wolny";
-            lbl.ForeColor = Color.Green;
+            lbl.Text = "Nie przyjmuje";
+            lbl.ForeColor = Color.Gray;
             lbl.Visible = true;
             reservationLabels[i] = lbl;
             panelDatesTable.Controls.Add(reservationLabels[i]);

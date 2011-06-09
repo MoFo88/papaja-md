@@ -159,6 +159,12 @@
                 <asp:Label ID="lblAddNewDoctor" runat="server" Text="Dodaj lekarza"></asp:Label>
             </div>
         </asp:DynamicHyperLink>
+        <asp:DynamicHyperLink ID="dhlEditHours" runat="server" NavigateUrl="~/WorkHours.aspx">
+            <div class="imageArrowContainer">
+                <asp:Image ID="Image7" runat="server" ImageUrl="~/images/arrowRight.jpg" CssClass="imageArrow" />
+                <asp:Label ID="Label3" runat="server" Text="Zarządzaj godzinami pracy"></asp:Label>
+            </div>
+        </asp:DynamicHyperLink>
         <asp:DynamicHyperLink ID="dhlAddNewPatient" runat="server" NavigateUrl="~/AddNewPatient.aspx">
             <div class="imageArrowContainer">
                 <asp:Image ID="Image2" runat="server" ImageUrl="~/images/arrowRight.jpg" CssClass="imageArrow" />

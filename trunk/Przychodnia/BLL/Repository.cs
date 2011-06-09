@@ -687,5 +687,128 @@ namespace BLL
 
             ctx.SubmitChanges();
         }
+
+        public static List<Dzien> GetAllDays()
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+
+            var days = ctx.Dziens.Select(d => d).OrderBy(d => d.id);
+
+            return days.ToList();
+        }
+
+        public static bool AddNewHours(int lekId, int idDay, string beginHour, string endHour)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+
+            Lekarz lek = ctx.Uzytkowniks.SingleOrDefault(l => l.id == lekId) as Lekarz;
+
+            //1900-01-01 zostaje doklejone, bo tak sa pierwsze rekordy w bazie, wynik jakijs konwersji
+            beginHour = "1900-01-01 " + beginHour;
+            endHour = "1900-01-01 " + endHour;
+            DateTime begin = Convert.ToDateTime(beginHour);
+            DateTime end = Convert.ToDateTime(endHour);
+            
+            Godziny_przyj godzina = new Godziny_przyj
+            {
+                id_uzytkownik = lekId,
+                dzien = idDay,
+                godz_od = begin,
+                godz_do = end
+            };
+
+            lek.Godziny_przyjs.Add(godzina);
+
+            ctx.SubmitChanges();
+
+            return true;
+        }
+
+        public static void UpdateHours(int godzinaId, string beginHour, string endHour)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+            PrzychodniaDataClassesDataContext ctx2 = new PrzychodniaDataClassesDataContext();
+
+            var godz = ctx.Godziny_przyjs.SingleOrDefault(g => g.id == godzinaId);
+            Lekarz lek = ctx2.Uzytkowniks.SingleOrDefault(l => l.id == godz.id_uzytkownik) as Lekarz;
+
+            //1900-01-01 zostaje doklejone, bo tak sa pierwsze rekordy w bazie, wynik jakijs konwersji
+            beginHour = "1900-01-01 " + beginHour;
+            endHour = "1900-01-01 " + endHour;
+            DateTime begin = Convert.ToDateTime(beginHour);
+            DateTime end = Convert.ToDateTime(endHour);
+
+            if (godz.godz_od < begin || godz.godz_do > end)
+            {
+                foreach (Pacjent p in lek.Pacjents)
+                {
+                    foreach (Rejestracja r in p.Rejestracjas)
+                    {
+                        if (godz.dzien == ConvertDayOfWeek(r.data_od) 
+                            && r.data_od > DateTime.Now)
+                        {
+                            if (r.data_od < begin || r.data_do > end)
+                                DeleteReservation(r.id);
+                        }
+                    }
+                }
+            }
+
+            godz.godz_od = begin;
+            godz.godz_do = end;
+
+            ctx.SubmitChanges();
+        }
+
+        public static int ConvertDayOfWeek(DateTime dt)
+        {
+            switch (dt.DayOfWeek)
+            {
+                case DayOfWeek.Monday:
+                    return 1;
+                case DayOfWeek.Tuesday:
+                    return 2;
+                case DayOfWeek.Wednesday:
+                    return 3;
+                case DayOfWeek.Thursday:
+                    return 4;
+                case DayOfWeek.Friday:
+                    return 5;
+                case DayOfWeek.Saturday:
+                    return 6;
+                case DayOfWeek.Sunday:
+                    return 7;
+                default:
+                    throw new BadDayIdentifyierException();
+            }
+        }
+
+        public static void DeleteHours(int godzinaId)
+        {
+            PrzychodniaDataClassesDataContext ctx = new PrzychodniaDataClassesDataContext();
+            PrzychodniaDataClassesDataContext ctx2 = new PrzychodniaDataClassesDataContext();
+
+            var godz = ctx.Godziny_przyjs.SingleOrDefault(g => g.id == godzinaId);
+            Lekarz lek = ctx2.Uzytkowniks.SingleOrDefault(l => l.id == godz.id_uzytkownik) as Lekarz;
+
+            //1900-01-01 zostaje doklejone, bo tak sa pierwsze rekordy w bazie, wynik jakijs konwersji
+
+            foreach (Pacjent p in lek.Pacjents)
+            {
+                foreach (Rejestracja r in p.Rejestracjas)
+                {
+                    if (godz.dzien == ConvertDayOfWeek(r.data_od)
+                        && r.data_od > DateTime.Now)
+                    {
+                        if (r.data_od < godz.godz_od || r.data_do > godz.godz_do)
+                            DeleteReservation(r.id);
+                    }
+                }
+            }
+
+            ctx.Godziny_przyjs.DeleteOnSubmit(godz);
+
+            ctx.SubmitChanges();
+        }
     }
 }
