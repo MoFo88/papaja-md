@@ -408,25 +408,25 @@ public partial class DrReservations : System.Web.UI.Page
                 switch (g.dzien)
                 {
                     case 1:
-                        lblDay1.Text += od_.ToShortTimeString() + "-" + do_.ToShortTimeString() + ", ";
+                        lblDay1.Text += od_.ToShortTimeString() + "-" + do_.ToShortTimeString() + "<br />";
                         break;
                     case 2:
-                        lblDay2.Text += od_.ToShortTimeString() + "-" + do_.ToShortTimeString() + ", ";
+                        lblDay2.Text += od_.ToShortTimeString() + "-" + do_.ToShortTimeString() + "<br />";
                         break;
                     case 3:
-                        lblDay3.Text += od_.ToShortTimeString() + "-" + do_.ToShortTimeString() + ", ";
+                        lblDay3.Text += od_.ToShortTimeString() + "-" + do_.ToShortTimeString() + "<br />";
                         break;
                     case 4:
-                        lblDay4.Text += od_.ToShortTimeString() + "-" + do_.ToShortTimeString() + ", ";
+                        lblDay4.Text += od_.ToShortTimeString() + "-" + do_.ToShortTimeString() + "<br />";
                         break;
                     case 5:
-                        lblDay5.Text += od_.ToShortTimeString() + "-" + do_.ToShortTimeString() + ", ";
+                        lblDay5.Text += od_.ToShortTimeString() + "-" + do_.ToShortTimeString() + "<br />";
                         break;
                     case 6:
-                        lblDay6.Text += od_.ToShortTimeString() + "-" + do_.ToShortTimeString() + ", ";
+                        lblDay6.Text += od_.ToShortTimeString() + "-" + do_.ToShortTimeString() + "<br />";
                         break;
                     case 7:
-                        lblDay7.Text += od_.ToShortTimeString() + "-" + do_.ToShortTimeString();
+                        lblDay7.Text += od_.ToShortTimeString() + "-" + do_.ToShortTimeString() + "<br />";
                         break;
                     default:
                         throw new BadDayIdentifyierException();
